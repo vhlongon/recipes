@@ -1,6 +1,5 @@
-import clsx from 'clsx';
-import React from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
+import React from 'react';
 
 type BaseProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
