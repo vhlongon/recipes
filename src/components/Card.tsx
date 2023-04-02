@@ -1,7 +1,7 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
 
-const buttonClasses = cva(['card', 'w-96', 'shadow-xl'], {
+const buttonClasses = cva(['card', 'w-full', 'shadow-xl'], {
   variants: {
     bg: {
       gray: ['bg-base-100', 'text-slate-100'],

@@ -7,7 +7,6 @@ export default function Home() {
     <main>
       <Card
         title="this is the title"
-        bordered
         actions={<Button variant="secondary">click me</Button>}
       >
         <p>some more description</p>
