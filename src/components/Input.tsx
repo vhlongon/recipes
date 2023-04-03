@@ -71,7 +71,6 @@ export const Input = ({
   ...props
 }: InputProps) => {
   const inputClassname = inputClasses({ variant, color, size });
-  console.log('🚀 ~ inputClassname:', inputClassname);
   const labelTextClassname = labelClasses({ color, class: 'label-text' });
   const labelTextAltClassname = labelClasses({
     color,
