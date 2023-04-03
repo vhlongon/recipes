@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 
 export default function Home() {
   return (
-    <main>
+    <div>
       <Card
         title="this is the title"
         actions={<Button variant="secondary">click me</Button>}
@@ -14,6 +14,6 @@ export default function Home() {
 
         <Input id="text-test" color="secondary" variant="bordered" />
       </Card>
-    </main>
+    </div>
   );
 }

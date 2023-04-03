@@ -8,6 +8,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        sidebar: '200px 1fr',
+      },
+      gridTemplateRows: {
+        sidebar: '200px 1fr',
+      },
       fontFamily: {
         sans: ['var(--font-inter)'],
       },

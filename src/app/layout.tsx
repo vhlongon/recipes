@@ -1,4 +1,5 @@
 import { Panel } from '@/components/Panel';
+import { Sidebar } from '@/components/SideBar';
 import '../styles/globals.css';
 
 export const metadata = {
@@ -10,8 +11,14 @@ const RootPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body>
-        <div className="h-screen w-screen bg-gradient p-6">
-          <Panel className="w-full h-full flex items-center justify-center">
+        <div className="h-screen w-screen bg-gradient p-6 grid grid-rows-sidebar grid-cols-1 md:grid-cols-sidebar md:grid-rows-none gap-8">
+          <Panel as="aside" className="w-full h-full">
+            <Sidebar />
+          </Panel>
+          <Panel
+            as="main"
+            className="w-full h-full flex items-center justify-center"
+          >
             {children}
           </Panel>
         </div>
