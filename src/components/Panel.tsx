@@ -10,7 +10,7 @@ export const Panel = ({ children, className }: PanelProps) => {
   return (
     <div
       className={clsx(
-        'rounded border-solid border-2 border-gray-200 backdrop-blur-lg backdrop-saturate-200 bg-white bg-opacity-30',
+        'rounded-2xl border-solid border-2 border-gray-200 backdrop-blur-lg backdrop-saturate-200 bg-white bg-opacity-40 text-slate-800',
         className
       )}
     >
