@@ -1,7 +1,7 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
 
-const buttonClasses = cva(['card', 'w-full', 'shadow-xl'], {
+const cardClsses = cva(['card', 'w-full', 'shadow-xl'], {
   variants: {
     bg: {
       gray: ['bg-base-100', 'text-slate-100'],
@@ -30,7 +30,7 @@ type CardProps = {
   title?: string;
   actions?: React.ReactNode;
   className?: string;
-} & VariantProps<typeof buttonClasses>;
+} & VariantProps<typeof cardClsses>;
 
 export const Card = ({
   title,
@@ -41,7 +41,7 @@ export const Card = ({
   spacing,
   children,
 }: CardProps) => {
-  const classNames = buttonClasses({ className, bg, bordered, spacing });
+  const classNames = cardClsses({ className, bg, bordered, spacing });
   return (
     <div className={classNames}>
       <div className="card-body">
