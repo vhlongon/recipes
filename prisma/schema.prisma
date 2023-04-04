@@ -35,7 +35,8 @@ model Recipe {
   userId          String
   user            User       @relation(fields: [userId], references: [id])
   hashtags        String[]   
-  portions        Int        
+  portions        Int
+  kcal            Int        
 
   @@unique([userId, title])
   @@index([userId, id])
