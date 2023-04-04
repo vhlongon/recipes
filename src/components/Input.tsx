@@ -1,7 +1,7 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
 
-const inputClasses = cva(['input', ' w-full', 'max-w-xs', 'bg-transparent'], {
+const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
   variants: {
     variant: {
       bordered: ['input-bordered'],

@@ -54,8 +54,31 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   const content = texts[mode];
 
   return (
-    <Card className="w-80">
+    <Card title={content.header}>
+      <p className="text-sm text-gray-500 mb-2">{content.subheader}</p>
       <form onSubmit={handleSubmit}>
+        {mode === 'register' && (
+          <div className="flex justify-between gap-4">
+            <div>
+              <Input
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="Awesome"
+                label="First name"
+              />
+            </div>
+            <div>
+              <Input
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Silver"
+                label="Last name"
+              />
+            </div>
+          </div>
+        )}
         <Input
           id="email"
           name="email"
@@ -70,24 +93,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           placeholder="******"
           label="Password"
         />
-        {mode === 'register' && (
-          <>
-            <Input
-              id="firstName"
-              name="firstName"
-              type="text"
-              placeholder="Awesome"
-              label="First name"
-            />
-            <Input
-              id="lastName"
-              name="lastName"
-              type="text"
-              placeholder="Silver"
-              label="Last name"
-            />
-          </>
-        )}
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">
           <Button type="submit" variant="secondary">
             {content.buttonText}

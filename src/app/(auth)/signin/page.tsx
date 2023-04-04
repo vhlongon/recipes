@@ -1,5 +1,4 @@
 import { AuthForm } from '@/components/AuthForm';
-import { ReactNode } from 'react';
 
 const SigninPage = () => {
   return (
