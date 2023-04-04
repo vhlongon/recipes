@@ -9,7 +9,7 @@ export const metadata = {
 
 const RootPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <body>
         <div className="h-screen w-screen bg-gradient p-6 grid grid-rows-sidebar grid-cols-1 md:grid-cols-sidebar md:grid-rows-none gap-8">
           <Panel as="aside" className="w-full h-full">

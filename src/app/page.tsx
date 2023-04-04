@@ -1,14 +1,13 @@
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Input } from '@/components/Input';
-import { Inter } from 'next/font/google';
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
       <Card
         title="this is the title"
-        actions={<Button variant="secondary">click me</Button>}
+        actions={<Button variant="accent">click me</Button>}
       >
         <p>some more description</p>
 

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Recipe" ALTER COLUMN "hashtags" DROP DEFAULT,
+ALTER COLUMN "portions" DROP DEFAULT;
