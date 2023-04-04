@@ -19,6 +19,7 @@ const createRecipe = (args?: Partial<Recipe>) => {
     instructions: ['Instruction 1', 'Instruction 2', 'Instruction 3'],
     hashtags: ['Hashtag 1', 'Hashtag 2', 'Hashtag 3'],
     portions: Math.floor(Math.random() * 10),
+    kcal: Math.floor(Math.random() * 1000),
     ...args,
   };
 };

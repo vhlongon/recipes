@@ -34,7 +34,7 @@ model Recipe {
   instructions    String[]
   userId          String
   user            User       @relation(fields: [userId], references: [id])
-  hashtags        String[]   
+  hashtags        String[]
   portions        Int
   kcal            Int        
 
