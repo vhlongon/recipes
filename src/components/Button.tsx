@@ -1,7 +1,7 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
 
-type BaseProps = React.DetailedHTMLProps<
+export type ButtonBaseProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
@@ -41,7 +41,8 @@ const buttonClasses = cva(['btn'], {
     variant: 'primary',
   },
 });
-type ButtonProps = BaseProps & VariantProps<typeof buttonClasses>;
+
+export type ButtonProps = ButtonBaseProps & VariantProps<typeof buttonClasses>;
 
 export const Button = ({
   variant,

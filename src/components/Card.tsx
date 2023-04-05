@@ -26,7 +26,7 @@ const cardClsses = cva(['card', 'w-full', 'shadow-xl'], {
 });
 
 type CardProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title?: string;
   actions?: React.ReactNode;
   className?: string;

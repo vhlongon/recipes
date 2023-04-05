@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import { Card } from './Card';
 import { IconLink, LinkIconProps } from './IconLink';
 
 const links: LinkIconProps[] = [
-  { label: 'Home', icon: 'Grid', href: '/home' },
+  { label: 'Home', icon: 'Home', href: '/' },
+  { label: 'Dashboard', icon: 'Grid', href: '/home' },
   { label: 'Profile', icon: 'User', href: '/profile' },
   { label: 'Settings', icon: 'Settings', href: '/settings' },
 ];

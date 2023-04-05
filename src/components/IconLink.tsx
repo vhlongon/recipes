@@ -1,10 +1,10 @@
 'use client';
 import NextLink from 'next/link';
-import { Settings, User, Grid, Calendar } from 'react-feather';
+import { Settings, User, Grid, Calendar, Home } from 'react-feather';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
-const icons = { Settings, User, Grid, Calendar } as const;
+const icons = { Settings, User, Grid, Calendar, Home } as const;
 
 type IconType = keyof typeof icons;
 
