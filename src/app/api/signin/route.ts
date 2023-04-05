@@ -14,37 +14,46 @@ export async function POST(request: Request) {
     });
 
     if (!user) {
-      return new NextResponse('failed to login', {
-        status: 401,
-        statusText: 'invalid login',
-      });
+      return NextResponse.json(
+        { message: 'Invalid login' },
+        {
+          status: 401,
+          statusText: 'Invalid email',
+        }
+      );
     }
 
     const isUser = await comparePassword(body.password, user.password);
 
     if (isUser) {
       const jwt = await createJWT(user);
-      return new NextResponse('user created', {
-        status: 201,
-        statusText: 'Created',
-        headers: {
-          'Set-Cookie': serialize(process.env.COOKIE_NAME || '', jwt, {
-            httpOnly: true,
-            path: '/',
-            maxAge: 60 * 60 * 24 * 7,
-          }),
-        },
-      });
+      return NextResponse.json(
+        { message: 'User created' },
+        {
+          status: 201,
+          statusText: 'User created',
+          headers: {
+            'Set-Cookie': serialize(process.env.COOKIE_NAME || '', jwt, {
+              httpOnly: true,
+              path: '/',
+              maxAge: 60 * 60 * 24 * 7,
+            }),
+          },
+        }
+      );
     } else {
-      return new NextResponse('failed to login', {
-        status: 401,
-        statusText: 'invalid login',
-      });
+      return NextResponse.json(
+        { message: `invalid login` },
+        { status: 401, statusText: `invalid login` }
+      );
     }
   } catch (error: any) {
-    return new NextResponse('could not login user', {
-      status: 500,
-      statusText: 'could not login user',
-    });
+    return NextResponse.json(
+      { message: 'An error ocurred' },
+      {
+        status: 500,
+        statusText: 'An error ocurred',
+      }
+    );
   }
 }

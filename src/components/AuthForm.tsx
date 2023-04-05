@@ -43,12 +43,13 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       if (mode === 'register') {
         await register(formData);
       } else {
-        await signin(formData);
+        const x = await signin(formData);
+        console.log(x);
       }
       router.replace('/home');
     } catch (error: any) {
       console.log(error.message);
-      setError(error?.response?.data?.message || error.message);
+      setError(error.message);
     }
   };
 

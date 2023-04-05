@@ -18,21 +18,27 @@ export async function POST(request: Request) {
 
     const jwt = await createJWT({ id: user.id, email: user.email });
 
-    return new NextResponse('user created', {
-      status: 201,
-      statusText: 'Created',
-      headers: {
-        'Set-Cookie': serialize(process.env.COOKIE_NAME || '', jwt, {
-          httpOnly: true,
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7,
-        }),
-      },
-    });
+    return NextResponse.json(
+      { message: 'User created' },
+      {
+        status: 201,
+        statusText: 'User created',
+        headers: {
+          'Set-Cookie': serialize(process.env.COOKIE_NAME || '', jwt, {
+            httpOnly: true,
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,
+          }),
+        },
+      }
+    );
   } catch (error: any) {
-    return new NextResponse('could not create user', {
-      status: 500,
-      statusText: 'already have a user with this email',
-    });
+    return NextResponse.json(
+      { message: 'There is already have a user with this email' },
+      {
+        status: 500,
+        statusText: 'There is already have a user with this email',
+      }
+    );
   }
 }
