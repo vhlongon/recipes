@@ -1,16 +1,8 @@
-import bcrypt from 'bcrypt';
 import { SignJWT, jwtVerify } from 'jose';
 import { db } from './db';
+import { User } from '@prisma/client';
 
-export const hashPassword = (password: string) => bcrypt.hash(password, 10);
-
-export const comparePassword = (password: string, hash: string) =>
-  bcrypt.compare(password, hash);
-
-type UserJWTPayload = {
-  id: string;
-  email: string;
-};
+type UserJWTPayload = Pick<User, 'email' | 'id'>;
 
 const encodedSecret = new TextEncoder().encode(process.env.JWT_SECRET);
 
@@ -30,26 +22,4 @@ export const validateJWT = async (token: string) => {
   const { payload } = await jwtVerify(token, encodedSecret);
 
   return payload as UserJWTPayload;
-};
-
-export const getUserFromCookies = async (cookies: {
-  get: (key?: string) => string;
-}) => {
-  const jwt = cookies.get(process.env.COOKIE_NAME);
-
-  if (!jwt) {
-    return null;
-  }
-
-  const payload = await validateJWT(jwt);
-
-  if (!payload) {
-    return null;
-  }
-
-  const user = await db.user.findUnique({
-    where: { id: payload.id },
-  });
-
-  return user;
 };

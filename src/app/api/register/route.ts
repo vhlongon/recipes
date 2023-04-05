@@ -1,5 +1,6 @@
-import { createJWT, hashPassword } from '@/lib/auth';
+import { createJWT } from '@/lib/auth';
 import { db } from '@/lib/db';
+import { hashPassword } from '@/lib/password';
 import { serialize } from 'cookie';
 import { NextResponse } from 'next/server';
 
