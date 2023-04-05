@@ -1,5 +1,4 @@
 import { User } from '@prisma/client';
-import { z } from 'zod';
 
 type FetchOpts = Omit<RequestInit, 'body'> & { body?: object; json?: boolean };
 
