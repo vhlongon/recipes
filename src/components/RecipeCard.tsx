@@ -3,6 +3,7 @@ import { Recipe } from '@prisma/client';
 import {
   Calendar,
   CheckCircle,
+  Circle,
   Clock,
   Hash,
   List,
@@ -28,7 +29,7 @@ export const RecipeCard = ({
       title={
         <div className="flex items-center gap-4 w-full justify-between">
           {title}
-          <span title="type" className="badge badge-primary font-semibold py-3">
+          <span title="type" className="badge badge-primary font-bold py-3">
             {type}
           </span>
         </div>
@@ -38,12 +39,15 @@ export const RecipeCard = ({
 
       {ingredients && (
         <div title="ingredients" className="flex flex-col">
-          <h3 className="text-lg font-bold flex items-center gap-2">
+          <h3 className="text-lg font-semibold flex items-center gap-2">
             <CheckCircle width="1.25rem" /> Ingredients
           </h3>
-          <ul className="ms-4">
+          <ul className="ms-2 list-inside">
             {ingredients.map(ingredient => (
-              <li key={ingredient}>{ingredient}</li>
+              <li className="flex items-center gap-2" key={ingredient}>
+                <Circle width="0.5rem" />
+                {ingredient}
+              </li>
             ))}
           </ul>
         </div>
@@ -51,15 +55,15 @@ export const RecipeCard = ({
 
       {instructions && (
         <div title="instructions" className="flex flex-col">
-          <h3 className="text-lg font-bold flex item-center gap-2">
+          <h3 className="text-lg font-semibold flex item-center gap-2">
             <List width="1.25rem" />
             Instructions
           </h3>
-          <ul className="ms-4">
+          <ol type="1" className="ms-2 list-decimal list-inside">
             {instructions.map(instruction => (
               <li key={instruction}>{instruction}</li>
             ))}
-          </ul>
+          </ol>
         </div>
       )}
 
@@ -74,7 +78,7 @@ export const RecipeCard = ({
         </div>
       )}
 
-      <div className="flex w-full justify-between flex-wrap mt-2 gap-2">
+      <div className="flex w-full flex-wrap mt-2 gap-2">
         <span title="created at" className="badge gap-2 py-3">
           <Calendar width="1rem" />
           {formatDate(createdAt)}
