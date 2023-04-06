@@ -10,6 +10,7 @@ import {
   PlusCircle,
 } from 'react-feather';
 import { Card } from './Card';
+import { Badge } from './Badge';
 
 export const RecipeCard = ({
   createdAt,
@@ -26,12 +27,18 @@ export const RecipeCard = ({
 }: Recipe) => {
   return (
     <Card
+      className="hover:scale-105 transition-all ease-in-out duration-200"
       title={
         <div className="flex items-center gap-4 w-full justify-between">
           {title}
-          <span title="type" className="badge badge-primary font-bold py-3">
+          <Badge
+            title="type"
+            variant="primary"
+            size="lg"
+            className="font-bold tracking-wider"
+          >
             {type}
-          </span>
+          </Badge>
         </div>
       }
     >
@@ -70,30 +77,38 @@ export const RecipeCard = ({
       {hashtags && (
         <div className="flex flex-wrap gap-2 my-2">
           {hashtags.map(hashtag => (
-            <span key={hashtag} className="badge badge-secondary py-3">
-              <Hash width="1rem" />
+            <Badge
+              key={hashtag}
+              variant="secondary"
+              icon={<Hash width="1rem" />}
+            >
               {hashtag}
-            </span>
+            </Badge>
           ))}
         </div>
       )}
 
       <div className="flex w-full flex-wrap mt-2 gap-2">
-        <span title="created at" className="badge gap-2 py-3">
-          <Calendar width="1rem" />
+        <Badge title="created at" icon={<Calendar width="1rem" />}>
           {formatDate(createdAt)}
-        </span>
-        <span title="preparation" className="badge badge-success gap-1 py-3">
-          <Clock width="1rem" /> {preparationTime}min
-        </span>
-
-        <span title="kcal" className="badge badge-warning gap-1 py-3">
-          <Clock width="1rem" /> Kcal: {kcal}
-        </span>
-
-        <span title="portions" className="badge badge-info gap-1 py-3">
-          <PlusCircle width="1rem" /> {portions}
-        </span>
+        </Badge>
+        <Badge
+          title="preparation"
+          variant="success"
+          icon={<Clock width="1rem" />}
+        >
+          {preparationTime}min
+        </Badge>
+        <Badge title="kcal" variant="warning" icon={<Clock width="1rem" />}>
+          Kcal: {kcal}
+        </Badge>
+        <Badge
+          title="portions"
+          variant="info"
+          icon={<PlusCircle width="1rem" />}
+        >
+          {portions}
+        </Badge>
       </div>
     </Card>
   );

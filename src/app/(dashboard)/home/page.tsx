@@ -22,22 +22,18 @@ const DashboardHomePage = async () => {
   const recipes = await getData();
 
   return (
-    <div className="h-full overflow-y-auto pr-6 w-1/1">
-      <div className=" h-full  items-stretch justify-center min-h-[content]">
-        <div className="grid">
-          {recipes?.length > 0 ? (
-            recipes.map(recipe => (
-              <div key={recipe.id}>
-                <Link href={`/recipe/${recipe.id}`}>
-                  <RecipeCard {...recipe} />
-                </Link>
-              </div>
-            ))
-          ) : (
-            <div className="flex-1">No recipes yet</div>
-          )}
-        </div>
-      </div>
+    <div className="grid">
+      {recipes?.length > 0 ? (
+        recipes.map(recipe => (
+          <div key={recipe.id}>
+            <Link href={`/recipe/${recipe.id}`}>
+              <RecipeCard {...recipe} />
+            </Link>
+          </div>
+        ))
+      ) : (
+        <div className="flex-1">No recipes yet</div>
+      )}
     </div>
   );
 };
