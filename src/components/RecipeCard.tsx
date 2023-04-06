@@ -12,11 +12,55 @@ import {
 import { Card } from './Card';
 import { Badge } from './Badge';
 
+export const RecipeCardSkeleton = () => {
+  return (
+    <Card className="w-full">
+      <div className="animate-pulse flex space-x-4">
+        <div className="flex-1 space-y-4 py-1">
+          <div className="flex justify-between items-center">
+            <div className="h-6 w-48 bg-gray-300 rounded"></div>
+            <div className="h-6 w-24 bg-gray-300 rounded"></div>
+          </div>
+          <div className="space-y-2 w-3/4 mt-24">
+            <div className="h-2 bg-gray-300 rounded"></div>
+            <div className="h-2 bg-gray-300 rounded"></div>
+          </div>
+          <div className="h-4 bg-gray-300 w-40 rounded"></div>
+          <div className="space-y-3 w-1/3">
+            <div className="h-2 bg-gray-300 rounded"></div>
+            <div className="h-2 bg-gray-300 rounded"></div>
+            <div className="h-2 bg-gray-300 rounded"></div>
+          </div>
+
+          <div className="h-4 bg-gray-300 w-40 rounded"></div>
+          <div className="space-y-3 w-1/3">
+            <div className="h-2 bg-gray-300 rounded"></div>
+            <div className="h-2 bg-gray-300 rounded"></div>
+            <div className="h-2 bg-gray-300 rounded"></div>
+          </div>
+
+          <div className="flex gap-2 items-center">
+            <div className="h-4 bg-gray-300 w-12 rounded"></div>
+            <div className="h-4 bg-gray-300 w-12 rounded"></div>
+            <div className="h-4 bg-gray-300 w-12 rounded"></div>
+          </div>
+
+          <div className="flex gap-2 items-center">
+            <div className="h-4 bg-gray-300 w-24 rounded"></div>
+            <div className="h-4 bg-gray-300 w-20 rounded"></div>
+            <div className="h-4 bg-gray-300 w-24 rounded"></div>
+            <div className="h-4 bg-gray-300 w-12 rounded"></div>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
 export const RecipeCard = ({
   createdAt,
   description,
   hashtags,
-  id,
   ingredients,
   instructions,
   kcal,
@@ -27,15 +71,14 @@ export const RecipeCard = ({
 }: Recipe) => {
   return (
     <Card
-      className="hover:scale-105 transition-all ease-in-out duration-200"
+      className="hover:scale-[1.025] transition-all ease-in-out duration-200"
       title={
         <div className="flex items-center gap-4 w-full justify-between">
           {title}
           <Badge
             title="type"
             variant="primary"
-            size="lg"
-            className="font-bold tracking-wider"
+            className="font-bold tracking-widest"
           >
             {type}
           </Badge>

@@ -10,9 +10,13 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         sidebar: '200px 1fr',
+        cardsGrid: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
       },
       gridTemplateRows: {
         sidebar: '200px 1fr',
+      },
+      maxHeight: {
+        panel: 'calc(100vh - 3rem)',
       },
       fontFamily: {
         sans: ['var(--font-inter)'],
