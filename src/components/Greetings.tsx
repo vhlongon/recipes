@@ -37,7 +37,6 @@ export const GreetingsSkeleton = () => {
 };
 
 export const Greetings = async () => {
-  await sleep(8000);
   const user = await getData();
 
   return (

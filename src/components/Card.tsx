@@ -1,5 +1,5 @@
 import { VariantProps, cva } from 'class-variance-authority';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 const cardClsses = cva(['card', 'w-full', 'shadow-xl'], {
   variants: {
@@ -27,7 +27,7 @@ const cardClsses = cva(['card', 'w-full', 'shadow-xl'], {
 
 type CardProps = {
   children?: React.ReactNode;
-  title?: string;
+  title?: ReactNode;
   actions?: React.ReactNode;
   className?: string;
 } & VariantProps<typeof cardClsses>;

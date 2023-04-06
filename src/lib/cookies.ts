@@ -19,6 +19,9 @@ export const getUserFromCookies = async (
 
   const user = await db.user.findUnique({
     where: { id: payload.id },
+    include: {
+      recipes: true,
+    },
   });
 
   return user;
