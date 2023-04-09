@@ -41,13 +41,13 @@ export const Card = ({
   spacing,
   children,
 }: CardProps) => {
-  const classNames = cardClsses({ className, bg, bordered, spacing });
+  const classNames = cardClsses({ bg, bordered, spacing, className });
   return (
     <div className={classNames}>
-      <div className="card-body">
+      <div className="card-body justify-between">
         {title && <h2 className="card-title">{title}</h2>}
         {children}
-        <div className="card-actions justify-end">{actions}</div>
+        {actions && <div className="card-actions justify-end">{actions}</div>}
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
-import { SignJWT, jwtVerify } from 'jose';
-import { db } from './db';
 import { User } from '@prisma/client';
+import { SignJWT, jwtVerify } from 'jose';
 
 type UserJWTPayload = Pick<User, 'email' | 'id'>;
 

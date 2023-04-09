@@ -1,6 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
-import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { useState } from 'react';
+import { TagsInput } from 'react-tag-input-component';
 
 const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
   variants: {
@@ -52,30 +52,27 @@ const labelClasses = cva([''], {
   },
 });
 
-type InputBaseProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
-
-type InputProps = InputBaseProps & {
+type TagInputProps = {
+  name: string;
+  placeHolder?: string;
+  onChange: (tags: string[]) => void;
+  tags?: string[];
   label?: string;
   altText?: string;
-  name: string;
-  register: UseFormRegister<any>;
 } & VariantProps<typeof inputClasses>;
 
-export const Input = ({
-  variant,
-  color,
-  size,
+export const TagInput = ({
+  tags = [],
+  onChange,
+  name,
+  placeHolder,
   label,
   altText,
-  id,
-  register,
-  required,
-  name,
-  ...props
-}: InputProps) => {
+  color,
+  variant,
+  size,
+}: TagInputProps) => {
+  const [selected, setSelected] = useState(tags);
   const inputClassname = inputClasses({ variant, color, size });
   const labelTextClassname = labelClasses({ color, class: 'label-text' });
   const labelTextAltClassname = labelClasses({
@@ -83,38 +80,32 @@ export const Input = ({
     class: 'label-text-alt',
   });
 
+  const handleChange = (tags: string[]) => {
+    setSelected(tags);
+    onChange(tags);
+  };
+
   return (
-    <>
+    <div>
       {label && (
-        <label className="label" htmlFor={id}>
+        <label className="label">
           <span className={labelTextClassname}>{label}</span>
           {altText && <span className={labelTextAltClassname}>{altText}</span>}
         </label>
       )}
-      <input
-        id={id}
-        {...register(name, {
-          required: `Required`,
-          ...(props.type === 'email'
-            ? {
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: 'value is not a valid email',
-                },
-              }
-            : {}),
-          ...(props.type === 'password'
-            ? {
-                minLength: {
-                  value: 4,
-                  message: 'Password must have at least 4 characters',
-                },
-              }
-            : {}),
-        })}
-        {...props}
-        className={inputClassname}
+      <TagsInput
+        value={selected}
+        onChange={handleChange}
+        name={name}
+        classNames={{
+          input: 'bg-slate-100',
+          tag: 'bg-slate-200',
+        }}
+        placeHolder={placeHolder}
       />
-    </>
+      <em className="text-xs text-slate-600 px-2">
+        press enter or comma to add new tag
+      </em>
+    </div>
   );
 };

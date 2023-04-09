@@ -3,10 +3,12 @@
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Input } from '@/components/Input';
-import { UserInput, register, signin } from '@/lib/api';
+import { register, signin } from '@/lib/api';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { ErrorMessage } from './ErrorMessage';
 
 const texts = {
   register: {
@@ -29,25 +31,31 @@ type AuthFormProps = {
   mode: keyof typeof texts;
 };
 
+type Inputs = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+};
+
 export const AuthForm = ({ mode }: AuthFormProps) => {
   const router = useRouter();
   const [error, setError] = useState('');
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register: formRegister,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
-    const formData = Object.fromEntries(
-      new FormData(e.currentTarget).entries()
-    ) as UserInput;
-
+  const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
       if (mode === 'register') {
-        await register(formData);
+        await register(data);
       } else {
-        await signin(formData);
+        await signin(data);
       }
       router.replace('/home');
     } catch (error: any) {
-      console.log(error.message);
       setError(error.message);
     }
   };
@@ -55,45 +63,67 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   const content = texts[mode];
 
   return (
-    <Card title={content.header}>
+    <Card title={content.header} className="w-full max-w-md">
       <p className="text-sm text-gray-500 mb-2">{content.subheader}</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {mode === 'register' && (
           <div className="flex justify-between gap-4">
             <div>
               <Input
+                register={formRegister}
+                required
                 id="firstName"
                 name="firstName"
                 type="text"
                 placeholder="Awesome"
                 label="First name"
               />
+              {errors.firstName && (
+                <ErrorMessage>{errors.firstName.message}</ErrorMessage>
+              )}
             </div>
             <div>
               <Input
+                register={formRegister}
+                required
                 id="lastName"
                 name="lastName"
                 type="text"
                 placeholder="Silver"
                 label="Last name"
               />
+              {errors.lastName && (
+                <ErrorMessage>{errors.lastName.message}</ErrorMessage>
+              )}
             </div>
           </div>
         )}
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="me@email.com"
-          label="Email"
-        />
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="******"
-          label="Password"
-        />
+        <div>
+          <Input
+            register={formRegister}
+            required
+            id="email"
+            name="email"
+            type="email"
+            placeholder="me@email.com"
+            label="Email"
+          />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        </div>
+        <div>
+          <Input
+            register={formRegister}
+            required
+            id="password"
+            name="password"
+            type="password"
+            placeholder="******"
+            label="Password"
+          />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
+        </div>
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">
           <Button type="submit" variant="secondary">
             {content.buttonText}

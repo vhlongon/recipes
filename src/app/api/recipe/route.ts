@@ -19,12 +19,14 @@ export async function POST(request: Request) {
       );
     }
 
-    const recipe = await db.recipe.create({
+    const input = {
       data: {
-        user: user.id,
+        userId: user.id,
         ...body,
       },
-    });
+    };
+
+    const recipe = await db.recipe.create(input);
 
     return NextResponse.json(
       { data: { message: `Recipe ${recipe.id} created` } },
@@ -35,7 +37,7 @@ export async function POST(request: Request) {
     );
   } catch (error: any) {
     return NextResponse.json(
-      { data: { message: 'could not create recipe' } },
+      { data: { message: `could not create recipe: ${error.message}` } },
       {
         status: 500,
         statusText: 'could not create recipe',

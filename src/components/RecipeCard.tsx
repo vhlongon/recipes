@@ -1,5 +1,6 @@
 import { formatDate } from '@/lib/date';
 import { Recipe } from '@prisma/client';
+import clsx from 'clsx';
 import {
   Calendar,
   CheckCircle,
@@ -9,8 +10,8 @@ import {
   List,
   PlusCircle,
 } from 'react-feather';
-import { Card } from './Card';
 import { Badge } from './Badge';
+import { Card } from './Card';
 
 export const RecipeCardSkeleton = () => {
   return (
@@ -57,6 +58,9 @@ export const RecipeCardSkeleton = () => {
   );
 };
 
+type RecipeCardProps = {
+  className?: string;
+} & Recipe;
 export const RecipeCard = ({
   createdAt,
   description,
@@ -68,10 +72,14 @@ export const RecipeCard = ({
   preparationTime,
   title,
   type,
-}: Recipe) => {
+  className,
+}: RecipeCardProps) => {
   return (
     <Card
-      className="hover:scale-[1.025] transition-all ease-in-out duration-200"
+      className={clsx(
+        'hover:scale-[1.025] transition-all ease-in-out duration-200 h-full',
+        className
+      )}
       title={
         <div className="flex items-center gap-4 w-full justify-between">
           {title}
@@ -85,7 +93,7 @@ export const RecipeCard = ({
         </div>
       }
     >
-      <p className="flex items-center gap-4">{description}</p>
+      {description && <p className="flex items-center gap-4">{description}</p>}
 
       {ingredients && (
         <div title="ingredients" className="flex flex-col">

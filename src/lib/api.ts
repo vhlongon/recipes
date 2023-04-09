@@ -44,9 +44,17 @@ export const signin = async (userInput: UserInput) => {
   });
 };
 
-export const createRecipe = async (
-  recipeInput: Omit<Recipe, 'createdAt' | 'id' | 'updatedAt' | 'userId'>
-) => {
+export type RecipeInput = Pick<
+  Recipe,
+  | 'type'
+  | 'description'
+  | 'ingredients'
+  | 'portions'
+  | 'preparationTime'
+  | 'kcal'
+  | 'title'
+>;
+export const createRecipe = async (recipeInput: RecipeInput) => {
   return fetchData('/api/recipe', {
     method: 'POST',
     body: recipeInput,

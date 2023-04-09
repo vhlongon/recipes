@@ -1,4 +1,5 @@
 import { db } from '@/lib/db';
+import { hashPassword } from '@/lib/password';
 import { Recipe, RecipeType } from '@prisma/client';
 
 const getRandomRecipeType = () => {
@@ -30,11 +31,11 @@ const main = async () => {
     .map((_, i) => createRecipe({ title: `${i} - Recipe title` }));
 
   const user = await db.user.upsert({
-    where: { email: 'user@email.com' },
+    where: { email: 'test@email.com' },
     update: {},
     create: {
-      email: 'user@email.com',
-      password: 'password',
+      email: 'test@email.com',
+      password: await hashPassword('password'),
       firstName: 'Victor',
       lastName: 'Longon',
       createdAt: new Date(),
