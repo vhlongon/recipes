@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { Recipe, User } from '@prisma/client';
 
 type FetchOpts = Omit<RequestInit, 'body'> & { body?: object; json?: boolean };
 
@@ -41,5 +41,14 @@ export const signin = async (userInput: UserInput) => {
   return fetchData('/api/signin', {
     method: 'POST',
     body: userInput,
+  });
+};
+
+export const createRecipe = async (
+  recipeInput: Omit<Recipe, 'createdAt' | 'id' | 'updatedAt' | 'userId'>
+) => {
+  return fetchData('/api/recipe', {
+    method: 'POST',
+    body: recipeInput,
   });
 };
