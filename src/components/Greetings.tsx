@@ -1,23 +1,9 @@
 import { getUserFromCookies } from '@/lib/cookies';
+import { getUser } from '@/lib/data';
 import { db } from '@/lib/db';
 import { cookies } from 'next/headers';
 import { ButtonLink } from './ButtonLink';
 import { Card } from './Card';
-import { sleep } from '@/lib/sleep';
-
-const getData = async () => {
-  const user = await getUserFromCookies(cookies());
-
-  if (!user) {
-    return null;
-  }
-
-  return db.user.findUnique({
-    where: {
-      id: user.id,
-    },
-  });
-};
 
 export const GreetingsSkeleton = () => {
   return (
@@ -37,7 +23,7 @@ export const GreetingsSkeleton = () => {
 };
 
 export const Greetings = async () => {
-  const user = await getData();
+  const user = await getUser();
 
   return (
     <>
