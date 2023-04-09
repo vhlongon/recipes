@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { message: 'Invalid login' },
+        { data: { message: 'Invalid login' } },
         {
           status: 401,
           statusText: 'Invalid email',
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     if (isUser) {
       const jwt = await createJWT(user);
       return NextResponse.json(
-        { message: 'User created' },
+        { data: { message: 'User created' } },
         {
           status: 201,
           statusText: 'User created',
@@ -44,13 +44,13 @@ export async function POST(request: Request) {
       );
     } else {
       return NextResponse.json(
-        { message: `invalid login` },
+        { data: { message: `invalid login` } },
         { status: 401, statusText: `invalid login` }
       );
     }
   } catch (error: any) {
     return NextResponse.json(
-      { message: 'An error ocurred' },
+      { data: { message: 'An error ocurred' } },
       {
         status: 500,
         statusText: 'An error ocurred',

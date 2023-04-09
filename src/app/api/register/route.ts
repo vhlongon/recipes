@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const jwt = await createJWT({ id: user.id, email: user.email });
 
     return NextResponse.json(
-      { message: 'User created' },
+      { data: { message: 'User created' } },
       {
         status: 201,
         statusText: 'User created',
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     );
   } catch (error: any) {
     return NextResponse.json(
-      { message: 'There is already have a user with this email' },
+      { data: { message: 'There is already have a user with this email' } },
       {
         status: 500,
         statusText: 'There is already have a user with this email',
