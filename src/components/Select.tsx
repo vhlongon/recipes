@@ -63,10 +63,7 @@ type SelectProps = SelectBaseProps & {
 } & VariantProps<typeof selectClasses>;
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    { variant, color, size, label, altText, id, ...props }: SelectProps,
-    ref
-  ) => {
+  ({ variant, color, size, label, altText, id, ...props }, ref) => {
     const selectClassname = selectClasses({ variant, color, size });
     const labelTextClassname = labelClasses({ color, class: 'label-text' });
     const labelTextAltClassname = labelClasses({

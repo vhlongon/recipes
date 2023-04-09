@@ -3,7 +3,7 @@ import { Recipe, User } from '@prisma/client';
 type FetchOpts = Omit<RequestInit, 'body'> & { body?: object; json?: boolean };
 
 export const fetchData = async (url: RequestInfo | URL, opts: FetchOpts) => {
-  const { body, json = false, headers, ...rest } = opts || {};
+  const { body, json = true, headers, ...rest } = opts || {};
   const res = await fetch(url, {
     ...(body && { body: JSON.stringify(body) }),
     headers: {
@@ -56,6 +56,13 @@ export type RecipeInput = Pick<
 >;
 export const createRecipe = async (recipeInput: RecipeInput) => {
   return fetchData('/api/recipe', {
+    method: 'POST',
+    body: recipeInput,
+  });
+};
+
+export const generateRecipe = async (recipeInput: RecipeInput) => {
+  return fetchData('/api/generate-recipe', {
     method: 'POST',
     body: recipeInput,
   });

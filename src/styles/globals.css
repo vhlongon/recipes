@@ -83,7 +83,7 @@
 
 
 .rti--container {
-  --rti-bg: "rgb(241 245 249)",
+  --rti-bg: "rgb(241 245 249) !important",
   --rti-border: "#ccc",Œ
   --rti-main: "#3182ce",
   --rti-radius: "0.375rem",

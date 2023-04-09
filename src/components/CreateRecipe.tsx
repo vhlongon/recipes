@@ -1,6 +1,6 @@
 'use client';
 
-import { createRecipe } from '@/lib/api';
+import { createRecipe, generateRecipe } from '@/lib/api';
 import { RecipeType } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -15,19 +15,20 @@ import { TagInput } from './TagInput';
 
 type CreateRecipeProps = {
   className?: string;
+  mode: 'manual' | 'auto';
 };
 
 type Inputs = {
   title: string;
-  description: string;
   type: RecipeType;
   ingredients: string[];
   portions: string;
   kcal: string;
   preparationTime: string;
+  description: string;
 };
 
-export const CreateRecipe = ({ className }: CreateRecipeProps) => {
+export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,37 +38,49 @@ export const CreateRecipe = ({ className }: CreateRecipeProps) => {
     reset,
     control,
     clearErrors,
+    getValues,
     formState: { errors },
   } = useForm<Inputs>();
 
   const openModal = () => {
+    reset();
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     clearErrors();
+    reset();
   };
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
-    try {
-      await createRecipe({
-        title: data.title,
-        description: data.description,
-        type: data.type,
-        ingredients: data.ingredients,
-        portions: Number(data.portions),
-        kcal: Number(data.kcal),
-        preparationTime: Number(data.preparationTime),
-      });
+    const input = {
+      title: data.title,
+      description: data.description ?? '',
+      type: data.type,
+      ingredients: data.ingredients,
+      portions: Number(data.portions),
+      kcal: Number(data.kcal),
+      preparationTime: Number(data.preparationTime),
+    };
 
-      setIsModalOpen(false);
-      reset();
+    try {
+      if (mode === 'manual') {
+        await createRecipe(input);
+      } else {
+        const res = await generateRecipe(input);
+
+        console.log(res);
+      }
+
+      closeModal();
       router.refresh();
     } catch (error: any) {
       setError(error.message);
     }
   };
+
+  console.log(getValues());
 
   return (
     <div className={className}>
@@ -109,24 +122,26 @@ export const CreateRecipe = ({ className }: CreateRecipeProps) => {
             </div>
           </div>
 
-          <div>
-            <Input
-              register={register}
-              required
-              id="description"
-              name="description"
-              type="text"
-              placeholder="Recipe description"
-              label="Description"
-            />
-            {errors.description && (
-              <ErrorMessage>{errors.description.message}</ErrorMessage>
-            )}
-          </div>
+          {mode === 'manual' && (
+            <div>
+              <Input
+                register={register}
+                required
+                id="description"
+                name="description"
+                type="text"
+                placeholder="Recipe description"
+                label="Description"
+              />
+              {errors.description && (
+                <ErrorMessage>{errors.description.message}</ErrorMessage>
+              )}
+            </div>
+          )}
           <div>
             <Controller
               render={({ field }) => {
-                const { onChange, ...rest } = field;
+                const { onChange, ref, value, name, onBlur } = field;
                 const handleChange = (value: string[]) => {
                   onChange(value);
                 };
@@ -134,7 +149,9 @@ export const CreateRecipe = ({ className }: CreateRecipeProps) => {
                   <TagInput
                     label="Ingredients"
                     onChange={handleChange}
-                    {...rest}
+                    tags={value}
+                    name={name}
+                    onBlur={onBlur}
                   />
                 );
               }}

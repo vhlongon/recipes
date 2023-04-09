@@ -56,9 +56,11 @@ type TagInputProps = {
   name: string;
   placeHolder?: string;
   onChange: (tags: string[]) => void;
+  onBlur?: () => void;
   tags?: string[];
   label?: string;
   altText?: string;
+  onRemoved?: (tag: string) => void;
 } & VariantProps<typeof inputClasses>;
 
 export const TagInput = ({
@@ -70,9 +72,10 @@ export const TagInput = ({
   altText,
   color,
   variant,
+  onBlur,
   size,
+  onRemoved,
 }: TagInputProps) => {
-  const [selected, setSelected] = useState(tags);
   const inputClassname = inputClasses({ variant, color, size });
   const labelTextClassname = labelClasses({ color, class: 'label-text' });
   const labelTextAltClassname = labelClasses({
@@ -81,7 +84,6 @@ export const TagInput = ({
   });
 
   const handleChange = (tags: string[]) => {
-    setSelected(tags);
     onChange(tags);
   };
 
@@ -94,8 +96,10 @@ export const TagInput = ({
         </label>
       )}
       <TagsInput
-        value={selected}
+        value={tags}
         onChange={handleChange}
+        onBlur={onBlur}
+        onRemoved={onRemoved}
         name={name}
         classNames={{
           input: 'bg-slate-100',
