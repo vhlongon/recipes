@@ -11,7 +11,10 @@ import { useRouter } from 'next/navigation';
 import { ErrorMessage } from './ErrorMessage';
 
 type EditOrDeleteActionsProps = {
-  recipe: Recipe;
+  recipe: Omit<Recipe, 'createdAt' | 'updatedAt'> & {
+    createdAt: string;
+    updatedAt: string;
+  };
 };
 
 type Action = 'edit' | 'delete' | null;
@@ -54,7 +57,7 @@ export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
       await deleteRecipe(recipe.id);
       onSuccess();
     } catch (error: any) {
-      setError(error.message);
+      setError(error?.message ?? 'Something went wrong');
     } finally {
       setIsSubmitting(false);
     }

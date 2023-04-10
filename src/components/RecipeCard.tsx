@@ -60,7 +60,9 @@ export const RecipeCardSkeleton = () => {
 type RecipeCardProps = {
   className?: string;
   actions?: React.ReactNode;
-} & Recipe;
+  createdAt: string;
+  updatedAt: string;
+} & Omit<Recipe, 'createdAt' | 'updatedAt'>;
 export const RecipeCard = ({
   createdAt,
   description,

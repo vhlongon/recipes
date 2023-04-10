@@ -30,7 +30,7 @@ export const ProtectForm = () => {
       await protect(data.password);
       router.replace('/home');
     } catch (error: any) {
-      setError(error.message);
+      setError(error?.message ?? 'Something went wrong');
     } finally {
       setIsSubmitting(false);
     }

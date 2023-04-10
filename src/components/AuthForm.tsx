@@ -58,7 +58,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       }
       router.replace('/home');
     } catch (error: any) {
-      setError(error.message);
+      setError(error?.message ?? 'Something went wrong');
     } finally {
       setIsSubmitting(false);
     }

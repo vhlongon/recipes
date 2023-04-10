@@ -61,11 +61,22 @@ export const getUserRecipe = async (id: string) => {
     return null;
   }
 
-  return await db.recipe.findUnique({
+  const recipe = await db.recipe.findUnique({
     where: {
       id,
     },
   });
+
+  if (recipe) {
+    const { createdAt, updatedAt, ...rest } = recipe;
+    return {
+      createdAt: createdAt.toISOString(),
+      updatedAt: updatedAt.toISOString(),
+      ...rest,
+    };
+  }
+
+  return null;
 };
 
 export const getUserRecipeCount = async () => {

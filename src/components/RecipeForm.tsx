@@ -76,7 +76,7 @@ export const RecipeForm = ({
       clearErrors();
       onSucess?.();
     } catch (error: any) {
-      setError(error);
+      setError(error?.message ?? 'Something went wrong');
     } finally {
       setIsSubmitting(false);
     }
