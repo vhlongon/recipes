@@ -70,7 +70,7 @@ export const Button = ({
         block,
       })}
     >
-      {children}
+      {loading ? 'Loading' : children}
     </button>
   );
 };

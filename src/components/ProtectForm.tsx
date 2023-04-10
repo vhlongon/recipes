@@ -22,13 +22,17 @@ export const ProtectForm = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
+      setIsSubmitting(true);
       await protect(data.password);
       router.replace('/home');
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -58,7 +62,9 @@ export const ProtectForm = () => {
           )}
         </div>
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" loading={isSubmitting}>
+            Submit
+          </Button>
         </div>
         {error && (
           <ErrorMessage className="justify-center">{error}</ErrorMessage>

@@ -21,6 +21,7 @@ export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
   const [action, setAction] = useState<Action>(null);
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const defaultValues = {
     title: recipe.title,
@@ -49,10 +50,13 @@ export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
 
   const onDelete = async () => {
     try {
+      setIsSubmitting(true);
       await deleteRecipe(recipe.id);
       onSuccess();
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -95,8 +99,13 @@ export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
             <p className="text-center text-xl text-gray-600">
               Are you sure you want to delete this recipe?
             </p>
-            <Button variant="secondary" type="button" onClick={onDelete}>
-              Delete
+            <Button
+              variant="secondary"
+              type="button"
+              loading={isSubmitting}
+              onClick={onDelete}
+            >
+              Yes, delete
             </Button>
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </div>

@@ -41,6 +41,7 @@ type Inputs = {
 export const AuthForm = ({ mode }: AuthFormProps) => {
   const router = useRouter();
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register: formRegister,
     handleSubmit,
@@ -49,6 +50,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
+      setIsSubmitting(true);
       if (mode === 'register') {
         await register(data);
       } else {
@@ -57,6 +59,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       router.replace('/home');
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -125,7 +129,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           )}
         </div>
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">
-          <Button type="submit" variant="primary">
+          <Button type="submit" loading={isSubmitting} variant="primary">
             {content.buttonText}
           </Button>
           {error && (

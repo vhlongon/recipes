@@ -8,6 +8,7 @@ import { ErrorMessage } from './ErrorMessage';
 import { Input } from './Input';
 import { Select } from './Select';
 import { TagInput } from './TagInput';
+import { Progress } from './Progress';
 
 type Inputs = {
   title: string;
@@ -44,6 +45,7 @@ export const RecipeForm = ({
   mode,
 }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -68,12 +70,15 @@ export const RecipeForm = ({
     };
 
     try {
+      setIsSubmitting(true);
       await onSubmit(input);
       reset();
       clearErrors();
       onSucess?.();
     } catch (error: any) {
       setError(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -212,11 +217,18 @@ export const RecipeForm = ({
         <Button
           type="submit"
           variant="primary"
-          className="w-28 self-center mt-2"
+          className="m-w-28 self-center mt-2"
+          loading={isSubmitting}
         >
           {mode === 'edit' ? 'Edit' : 'Create'}
         </Button>
       </form>
+      {isSubmitting && (
+        <div className="flex flex-col w-full gap-1 items-center text-sm text-gray-500 mt-2">
+          {`Hold your horses while we ${mode} your recipe`}
+          <Progress />
+        </div>
+      )}
       {error && <ErrorMessage className="justify-center">{error}</ErrorMessage>}
     </div>
   );
