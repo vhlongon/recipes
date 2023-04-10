@@ -1,5 +1,5 @@
 import { getUserFromCookies } from '@/lib/cookies';
-import { createUserRecipe } from '@/lib/data';
+import { deleteUserRecipe } from '@/lib/data';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -20,28 +20,28 @@ export async function POST(request: Request) {
       );
     }
 
-    const recipe = await createUserRecipe(body);
+    const recipeDeleted = await deleteUserRecipe(body.id);
 
-    if (!recipe) {
-      const message = `could not create recipe with title: ${body.title}`;
+    if (!recipeDeleted) {
+      const message = `recipe with id ${body.id} not found`;
       return NextResponse.json(
-        { data: { message: message } },
+        { data: { message } },
         {
-          status: 500,
+          status: 404,
           statusText: message,
         }
       );
     }
 
     return NextResponse.json(
-      { data: { message: `Recipe ${recipe.id} created` } },
+      { data: { message: `recipe with id: ${recipeDeleted} deleted` } },
       {
         status: 200,
         statusText: 'ok',
       }
     );
   } catch (error: any) {
-    const message = `could not create recipe: ${error.message}`;
+    const message = `could not delete recipe: ${error.message}`;
     return NextResponse.json(
       { data: { message } },
       {

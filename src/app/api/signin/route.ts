@@ -1,5 +1,5 @@
 import { createJWT } from '@/lib/auth';
-import { db } from '@/lib/db';
+import { getUserByEmail } from '@/lib/data';
 import { comparePassword } from '@/lib/password';
 import { serialize } from 'cookie';
 import { NextResponse } from 'next/server';
@@ -8,18 +8,15 @@ export async function POST(request: Request) {
   const body = await request.json();
 
   try {
-    const user = await db.user.findUnique({
-      where: {
-        email: body.email,
-      },
-    });
+    const user = await getUserByEmail(body.email);
 
     if (!user) {
+      const message = 'Invalid login';
       return NextResponse.json(
-        { data: { message: 'Invalid login' } },
+        { data: { message } },
         {
           status: 401,
-          statusText: 'Invalid email',
+          statusText: message,
         }
       );
     }
@@ -43,17 +40,19 @@ export async function POST(request: Request) {
         }
       );
     } else {
+      const message = `invalid login`;
       return NextResponse.json(
-        { data: { message: `invalid login` } },
-        { status: 401, statusText: `invalid login` }
+        { data: { message } },
+        { status: 401, statusText: message }
       );
     }
   } catch (error: any) {
+    const message = 'An error ocurred';
     return NextResponse.json(
-      { data: { message: 'An error ocurred' } },
+      { data: { message } },
       {
         status: 500,
-        statusText: 'An error ocurred',
+        statusText: message,
       }
     );
   }

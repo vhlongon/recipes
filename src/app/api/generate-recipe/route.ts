@@ -22,8 +22,6 @@ export async function POST(request: Request) {
       // stop: '\n\n',
     });
 
-    console.log(response.data.choices[0]);
-
     const answer = response.data.choices[0].text ?? '';
     const { description, instructions, hashtags } = parseAnswer(answer);
 
@@ -47,11 +45,12 @@ export async function POST(request: Request) {
       }
     );
   } catch (error: any) {
+    const message = `could not generate recipe: ${error.message}`;
     return NextResponse.json(
-      { data: { message: `could not generate recipe: ${error.message}` } },
+      { data: { message } },
       {
         status: 500,
-        statusText: 'could not generate recipe',
+        statusText: message,
       }
     );
   }

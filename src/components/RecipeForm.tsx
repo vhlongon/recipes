@@ -8,7 +8,6 @@ import { ErrorMessage } from './ErrorMessage';
 import { Input } from './Input';
 import { Select } from './Select';
 import { TagInput } from './TagInput';
-import { useRouter } from 'next/navigation';
 
 type Inputs = {
   title: string;
@@ -23,6 +22,7 @@ type Inputs = {
 type RecipeFormProps = {
   defaultValues?: Inputs;
   onSubmit: (data: FormData) => Promise<void>;
+  onSucess?: () => void;
   mode: 'create' | 'edit';
 };
 
@@ -40,9 +40,9 @@ export type FormData = Pick<
 export const RecipeForm = ({
   defaultValues,
   onSubmit,
+  onSucess,
   mode,
 }: RecipeFormProps) => {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   const {
@@ -71,7 +71,7 @@ export const RecipeForm = ({
       await onSubmit(input);
       reset();
       clearErrors();
-      router.refresh();
+      onSucess?.();
     } catch (error: any) {
       setError(error);
     }

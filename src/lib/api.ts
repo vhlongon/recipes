@@ -67,3 +67,19 @@ export const generateRecipe = async (recipeInput: RecipeInput) => {
     body: recipeInput,
   });
 };
+
+export const updateRecipe = async (
+  recipeInput: RecipeInput & { id: string }
+) => {
+  return fetchData('/api/update-recipe', {
+    method: 'POST',
+    body: recipeInput,
+  });
+};
+
+export const deleteRecipe = async (id: string) => {
+  return fetchData('/api/delete-recipe', {
+    method: 'POST',
+    body: { id },
+  });
+};

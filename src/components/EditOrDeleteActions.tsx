@@ -6,6 +6,9 @@ import { Edit, X } from 'react-feather';
 import { Button } from './Button';
 import { Modal } from './Modal';
 import { FormData, RecipeForm } from './RecipeForm';
+import { deleteRecipe, updateRecipe } from '@/lib/api';
+import { useRouter } from 'next/navigation';
+import { ErrorMessage } from './ErrorMessage';
 
 type EditOrDeleteActionsProps = {
   recipe: Recipe;
@@ -16,6 +19,8 @@ type Action = 'edit' | 'delete' | null;
 export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [action, setAction] = useState<Action>(null);
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   const defaultValues = {
     title: recipe.title,
@@ -37,15 +42,22 @@ export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
     setIsModalOpen(false);
   };
 
-  const onDelete = async () => {
-    // TODO: create api handler to delete recipe
-    console.log(`delete recipe: ${recipe.id}}`);
+  const onSuccess = () => {
     closeModal();
+    router.refresh();
+  };
+
+  const onDelete = async () => {
+    try {
+      await deleteRecipe(recipe.id);
+      onSuccess();
+    } catch (error: any) {
+      setError(error.message);
+    }
   };
 
   const onSubmit = async (formData: FormData) => {
-    //TODO create api handler to update recipe
-    console.log(formData);
+    await updateRecipe({ id: recipe.id, ...formData });
   };
 
   return (
@@ -76,6 +88,7 @@ export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
             mode="edit"
             onSubmit={onSubmit}
             defaultValues={defaultValues}
+            onSucess={onSuccess}
           />
         ) : (
           <div className="flex flex-col gap-4 items-center justify-center">
@@ -85,6 +98,7 @@ export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
             <Button variant="secondary" type="button" onClick={onDelete}>
               Delete
             </Button>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
           </div>
         )}
       </Modal>
