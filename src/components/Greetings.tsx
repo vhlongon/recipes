@@ -29,7 +29,7 @@ export const Greetings = async () => {
     <>
       <Card
         title={`Hello ${user?.firstName} ${user?.lastName}`}
-        className="w-full"
+        className="w-full max-w-xl"
       >
         <p className="text-slate-600">
           Welcome back! Time to get creative and come up with some new recipes?
@@ -37,7 +37,7 @@ export const Greetings = async () => {
         <p>or wanna check your current ones?</p>
 
         <ButtonLink
-          variant="secondary"
+          variant="primary"
           block={false}
           href="/home"
           className="w-fit mt-2"

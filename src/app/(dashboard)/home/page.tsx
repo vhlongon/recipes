@@ -1,6 +1,5 @@
-import { Card } from '@/components/Card';
 import { CreateRecipe } from '@/components/CreateRecipe';
-import { RecipeCard } from '@/components/RecipeCard';
+import { RecipePreview } from '@/components/RecipePreview';
 import { getUsersRecipes } from '@/lib/data';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -20,12 +19,12 @@ const DashboardHomePage = async () => {
               hasRecipes && 'pb-6'
             )}
           >
-            <CreateRecipe mode="manual" />
+            <CreateRecipe mode="auto" />
           </div>
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-6 max-h-panel scrollable  overflow-y-scroll">
             {recipes.map(recipe => (
               <Link href={`/recipe/${recipe.id}`} key={recipe.id}>
-                <RecipeCard {...recipe} />
+                <RecipePreview {...recipe} />
               </Link>
             ))}
           </div>

@@ -1,3 +1,6 @@
+import { ButtonLink } from '@/components/ButtonLink';
+import { EditOrDeleteActions } from '@/components/EditOrDeleteActions';
+import { RecipeCard } from '@/components/RecipeCard';
 import { getUserRecipe } from '@/lib/data';
 
 type RecipePageProps = {
@@ -6,20 +9,24 @@ type RecipePageProps = {
   };
 };
 const RecipePage = async ({ params }: RecipePageProps) => {
-  const data = await getUserRecipe(params.id);
+  const recipe = await getUserRecipe(params.id);
+
+  if (!recipe) {
+    return (
+      <div className="flex flex-col gap-4 w-full h-full items-center justify-center text-2xl text-slate-50">
+        Recipe not found
+        <ButtonLink href="/home">Go to recipes</ButtonLink>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      RecipePage for recipe: {params.id}
-      <div className="mt-8">
-        {data &&
-          Object.keys(data).map((key, index) => {
-            return (
-              <div key={index}>
-                {key}: {JSON.stringify(data[key])}
-              </div>
-            );
-          })}
+    <div className="flex p-6 h-full w-full justify-center justify-items-center items-center">
+      <div>
+        <RecipeCard
+          {...recipe}
+          actions={<EditOrDeleteActions recipe={recipe} />}
+        />
       </div>
     </div>
   );

@@ -19,8 +19,8 @@ export const RecipeCardSkeleton = () => {
       <div className="animate-pulse flex space-x-4">
         <div className="flex-1 space-y-4 py-1">
           <div className="flex justify-between items-center">
-            <div className="h-6 w-48 bg-gray-300 rounded"></div>
-            <div className="h-6 w-24 bg-gray-300 rounded"></div>
+            <div className="h-6 w-16 bg-gray-300 rounded"></div>
+            <div className="h-6 w-12 bg-gray-300 rounded"></div>
           </div>
           <div className="space-y-2 w-3/4 mt-24">
             <div className="h-2 bg-gray-300 rounded"></div>
@@ -47,10 +47,9 @@ export const RecipeCardSkeleton = () => {
           </div>
 
           <div className="flex gap-2 items-center">
-            <div className="h-4 bg-gray-300 w-24 rounded"></div>
             <div className="h-4 bg-gray-300 w-20 rounded"></div>
-            <div className="h-4 bg-gray-300 w-24 rounded"></div>
-            <div className="h-4 bg-gray-300 w-12 rounded"></div>
+            <div className="h-4 bg-gray-300 w-16 rounded"></div>
+            <div className="h-4 bg-gray-300 w-20 rounded"></div>
           </div>
         </div>
       </div>
@@ -60,6 +59,7 @@ export const RecipeCardSkeleton = () => {
 
 type RecipeCardProps = {
   className?: string;
+  actions?: React.ReactNode;
 } & Recipe;
 export const RecipeCard = ({
   createdAt,
@@ -73,6 +73,7 @@ export const RecipeCard = ({
   title,
   type,
   className,
+  actions,
 }: RecipeCardProps) => {
   return (
     <Card
@@ -80,6 +81,7 @@ export const RecipeCard = ({
         'hover:scale-[1.025] transition-all ease-in-out duration-200 h-full',
         className
       )}
+      actions={actions}
       title={
         <div className="flex items-center gap-4 w-full justify-between">
           {title}
@@ -117,11 +119,11 @@ export const RecipeCard = ({
             <List width="1.25rem" />
             Instructions
           </h3>
-          <ol type="1" className="ms-2 list-decimal list-inside">
+          <ul className="ms-2 list-inside">
             {instructions.map(instruction => (
               <li key={instruction}>{instruction}</li>
             ))}
-          </ol>
+          </ul>
         </div>
       )}
 

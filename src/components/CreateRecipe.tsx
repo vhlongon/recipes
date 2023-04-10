@@ -38,7 +38,6 @@ export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
     reset,
     control,
     clearErrors,
-    getValues,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -64,13 +63,13 @@ export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
       preparationTime: Number(data.preparationTime),
     };
 
+    // TODO: Add loading state
     try {
       if (mode === 'manual') {
         await createRecipe(input);
       } else {
-        const res = await generateRecipe(input);
-
-        console.log(res);
+        const { data } = await generateRecipe(input);
+        await createRecipe(data);
       }
 
       closeModal();
@@ -79,8 +78,6 @@ export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
       setError(error.message);
     }
   };
-
-  console.log(getValues());
 
   return (
     <div className={className}>
@@ -179,6 +176,8 @@ export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
                 id="portions"
                 name="portions"
                 type="number"
+                min="1"
+                max="10"
                 placeholder="2"
                 label="portions"
               />
@@ -193,6 +192,8 @@ export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
                 id="kcal"
                 name="kcal"
                 type="number"
+                min="80"
+                max="1000"
                 placeholder="300"
                 label="kcal"
               />
@@ -207,6 +208,8 @@ export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
                 id="preparationTime"
                 name="preparationTime"
                 type="number"
+                min="5"
+                max="120"
                 placeholder="30min"
                 label="Prep time"
               />
@@ -217,13 +220,13 @@ export const CreateRecipe = ({ className, mode }: CreateRecipeProps) => {
           </div>
           <Button
             type="submit"
-            variant="secondary"
+            variant="primary"
             className="w-28 self-center mt-2"
           >
             Send
           </Button>
         </form>
-        {error && <div className="text-red-500">{error}</div>}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </Modal>
     </div>
   );
