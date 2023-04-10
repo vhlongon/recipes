@@ -4,7 +4,7 @@ export const generatePrompt = (body: any) => {
   const { type, preparationTime, ingredients, portions, kcal } = body;
   const prompt = `Generate a ${type} recipe that takes ${preparationTime} and includes the following ingredients:\n${ingredients.join(
     '\n'
-  )}\n\nThis recipe makes ${portions} portions, with each portion containing approximately ${kcal} kcal. Generate the result divided into sections, i.e. "Description:" containing a short description for it, "Instructions:" containing step for step preparation, "Hashtags:" containing a list of max of three hashtags based on the recipe. Use metric system for units.`;
+  )}\n\nThis recipe makes ${portions} portions, each portion containing max ${kcal} kcal. Divide into sections, i.e. "Description:" containing a short description, "Instructions:" with step for step preparation, "Hashtags:" with a list of three hashtags based on the recipe. Use metric system for units.`;
 
   return prompt;
 };

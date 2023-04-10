@@ -12,13 +12,14 @@ export async function POST(request: Request) {
   const body = await request.json();
 
   const prompt = generatePrompt(body);
+  const promptLength = prompt.length;
 
   try {
     const response = await openai.createCompletion({
       model: 'text-davinci-003',
       prompt,
       temperature: 1,
-      max_tokens: 4000,
+      max_tokens: 4000 - promptLength,
       // stop: '\n\n',
     });
 
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
       }
     );
   } catch (error: any) {
+    console.log('🚀 ~ error:', error);
     const message = `could not generate recipe: ${error.message}`;
     return NextResponse.json(
       { data: { message } },
