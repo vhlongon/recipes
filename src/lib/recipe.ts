@@ -4,7 +4,7 @@ export const generatePrompt = (body: any) => {
   const { type, preparationTime, ingredients, portions, kcal } = body;
   const prompt = `Generate a ${type} recipe that takes ${preparationTime} and includes the following ingredients:\n${ingredients.join(
     '\n'
-  )}\n\nThis recipe makes ${portions} portions, with each portion containing approximately ${kcal} kcal. Generate the result divided into sections, i.e. "description:" containing a short description for it, "instructions:" containing step for step preparation, "hashtags:" containing a list of max of three hashtags based on the recipe`;
+  )}\n\nThis recipe makes ${portions} portions, with each portion containing approximately ${kcal} kcal. Generate the result divided into sections, i.e. "Description:" containing a short description for it, "Instructions:" containing step for step preparation, "Hashtags:" containing a list of max of three hashtags based on the recipe. Use metric system for units.`;
 
   return prompt;
 };
@@ -30,7 +30,6 @@ export const parseAnswer = (
       ?.split('\n')
       .slice(1)
       .map(item => item.trim()) ?? [];
-
   const hashtagsMatch = recipe.match(/#([a-zA-Z0-9]+)/g);
   const hashtags = hashtagsMatch
     ? hashtagsMatch.map(hashtag => hashtag.substring(1))

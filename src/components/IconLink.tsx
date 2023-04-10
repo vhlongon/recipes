@@ -1,8 +1,8 @@
 'use client';
-import NextLink from 'next/link';
-import { Settings, User, Grid, Calendar, Home } from 'react-feather';
-import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Calendar, Grid, Home, Settings, User } from 'react-feather';
 
 const icons = { Settings, User, Grid, Calendar, Home } as const;
 
@@ -24,7 +24,7 @@ export const IconLink = ({ href, icon }: LinkIconProps) => {
       <Icon
         size={40}
         className={clsx(
-          isActive ? 'stroke-secondary-focus' : 'stroke-slate-100',
+          isActive ? 'stroke-primary-focus' : 'stroke-slate-100',
           'transition duration-200 ease-in-out'
         )}
       />

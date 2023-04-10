@@ -33,8 +33,8 @@ export const Greetings = async () => {
       >
         <p className="text-slate-600">
           Welcome back! Time to get creative and come up with some new recipes?
+          Or wanna check your current ones?
         </p>
-        <p>or wanna check your current ones?</p>
 
         <ButtonLink
           variant="primary"

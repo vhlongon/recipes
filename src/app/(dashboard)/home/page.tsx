@@ -19,7 +19,7 @@ const DashboardHomePage = async () => {
               hasRecipes && 'pb-6'
             )}
           >
-            <CreateRecipe mode="auto" />
+            <CreateRecipe />
           </div>
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-6 max-h-panel scrollable  overflow-y-scroll">
             {recipes.map(recipe => (
@@ -32,7 +32,7 @@ const DashboardHomePage = async () => {
       ) : (
         <div className="flex flex-col gap-4 w-full h-full items-center justify-center text-2xl text-slate-50">
           No recipes yet
-          <CreateRecipe mode="auto" />
+          <CreateRecipe />
         </div>
       )}
     </>
