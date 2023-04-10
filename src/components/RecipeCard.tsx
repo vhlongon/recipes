@@ -80,7 +80,7 @@ export const RecipeCard = ({
   return (
     <Card
       className={clsx(
-        'hover:scale-[1.025] transition-all ease-in-out duration-200 h-full',
+        'hover:scale-[1.025] transition-all ease-in-out duration-200 h-full max-h-card overflow-y-scroll',
         className
       )}
       actions={actions}

@@ -17,6 +17,7 @@ module.exports = {
       },
       maxHeight: {
         panel: 'calc(100vh - 3rem)',
+        card: 'calc(100vh - 8rem)',
       },
       fontFamily: {
         sans: ['var(--font-inter)'],

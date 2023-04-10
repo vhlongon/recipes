@@ -21,7 +21,7 @@ const RecipePage = async ({ params }: RecipePageProps) => {
   }
 
   return (
-    <div className="flex p-6 h-full w-full max-w-2xl m-auto justify-center justify-items-center items-center">
+    <div className="flex p-6 h-full w-full max-w-3xl m-auto justify-center justify-items-center items-center">
       <div>
         <RecipeCard
           {...recipe}
