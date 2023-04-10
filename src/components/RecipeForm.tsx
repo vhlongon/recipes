@@ -217,7 +217,7 @@ export const RecipeForm = ({
           {mode === 'edit' ? 'Edit' : 'Create'}
         </Button>
       </form>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+      {error && <ErrorMessage className="justify-center">{error}</ErrorMessage>}
     </div>
   );
 };

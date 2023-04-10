@@ -125,13 +125,15 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           )}
         </div>
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">
-          <Button type="submit" variant="secondary">
+          <Button type="submit" variant="primary">
             {content.buttonText}
           </Button>
-          {error && <p className="text-error">{error}</p>}
+          {error && (
+            <ErrorMessage className="justify-center">{error}</ErrorMessage>
+          )}
           <div>
             <span>
-              <Link href={content.linkUrl} className="text-accent font-bold">
+              <Link href={content.linkUrl} className="text-secondary font-bold">
                 {content.linkText}
               </Link>
             </span>
