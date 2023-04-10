@@ -40,7 +40,9 @@ export const RecipePreview = ({
         </div>
       }
     >
-      {description && <p className="flex gap-4 italic">{description}</p>}
+      {description && (
+        <p className="gap-4 italic line-clamp-2">{description}</p>
+      )}
 
       {ingredients && (
         <div title="ingredients" className="flex flex-wrap gap-1">
