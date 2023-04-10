@@ -9,6 +9,10 @@
   }
 }
 
+.rti--container {
+  background: #f1f5f9 !important;
+}
+
 :root {
   --primary: transparent;
   --secondary: #701a75;
@@ -79,8 +83,4 @@
 
 [data-nextjs-scroll-focus-boundary] {
   display: contents;
-}
-
-.rti--container {
-  --rti-bg: 'rgb(241 245 249) !important';
 }
