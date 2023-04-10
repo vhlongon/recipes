@@ -83,3 +83,10 @@ export const deleteRecipe = async (id: string) => {
     body: { id },
   });
 };
+
+export const protect = async (password: string) => {
+  return fetchData('/api/protect', {
+    method: 'POST',
+    body: { password },
+  });
+};

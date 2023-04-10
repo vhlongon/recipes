@@ -1,9 +1,18 @@
+import clsx from 'clsx';
 import { ReactNode } from 'react';
 
-export const ErrorMessage = ({ children }: { children: ReactNode }) => {
+type ErrorMessageProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+export const ErrorMessage = ({ children, className }: ErrorMessageProps) => {
   return (
     <div
-      className="flex p-2 text-sm rounded-lg bg-red-5 text-red-400 mt-2"
+      className={clsx(
+        'flex p-2 text-sm rounded-lg bg-red-5 text-red-400 mt-2',
+        className
+      )}
       role="alert"
     >
       <svg
