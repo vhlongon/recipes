@@ -1,5 +1,6 @@
 'use client';
 import clsx from 'clsx';
+import { Route } from 'next';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Calendar, Grid, Home, Settings, User } from 'react-feather';
@@ -8,13 +9,16 @@ const icons = { Settings, User, Grid, Calendar, Home } as const;
 
 type IconType = keyof typeof icons;
 
-export type LinkIconProps = {
+export type LinkIconProps<T extends string> = {
   icon: IconType;
-  href: string;
+  href: Route<T>;
   label: string;
 };
 
-export const IconLink = ({ href, icon }: LinkIconProps) => {
+export const IconLink = <T extends string>({
+  href,
+  icon,
+}: LinkIconProps<T>) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 
