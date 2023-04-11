@@ -1,5 +1,5 @@
 import { ButtonLink } from '@/components/ButtonLink';
-import { EditOrDeleteRecipeActions } from '@/components/EditOrDeleteRecipeActions';
+import { EditDeleteRecipeActions } from '@/components/EditDeleteRecipeActions';
 import { RecipeCard } from '@/components/RecipeCard';
 import { getUserRecipe } from '@/lib/data';
 
@@ -25,7 +25,7 @@ const RecipePage = async ({ params }: RecipePageProps) => {
       <div>
         <RecipeCard
           {...recipe}
-          actions={<EditOrDeleteRecipeActions recipe={recipe} />}
+          actions={<EditDeleteRecipeActions recipe={recipe} />}
         />
       </div>
     </div>

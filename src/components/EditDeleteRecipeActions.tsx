@@ -1,16 +1,17 @@
 'use client';
 
-import { User } from '@prisma/client';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { Recipe } from '@prisma/client';
+import { useState } from 'react';
 import { Edit, X } from 'react-feather';
 import { Button } from './Button';
-import { UserProfileForm, FormData } from './UserProfileForm';
 import { Modal } from './Modal';
+import { FormData, RecipeForm } from './RecipeForm';
+import { deleteRecipe, updateRecipe } from '@/lib/api';
+import { useRouter } from 'next/navigation';
 import { ErrorMessage } from './ErrorMessage';
 
-type EditOrDeleteUserActionsProps = {
-  user: Omit<User, 'createdAt' | 'updatedAt'> & {
+type EditDeleteRecipeActionsProps = {
+  recipe: Omit<Recipe, 'createdAt' | 'updatedAt'> & {
     createdAt: string;
     updatedAt: string;
   };
@@ -18,9 +19,9 @@ type EditOrDeleteUserActionsProps = {
 
 type Action = 'edit' | 'delete' | null;
 
-export const EditOrDeleteUserActions = ({
-  user,
-}: EditOrDeleteUserActionsProps) => {
+export const EditDeleteRecipeActions = ({
+  recipe,
+}: EditDeleteRecipeActionsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [action, setAction] = useState<Action>(null);
   const router = useRouter();
@@ -28,12 +29,13 @@ export const EditOrDeleteUserActions = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const defaultValues = {
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    updatedAt: user.updatedAt,
-    createdAt: user.createdAt,
-    image: user.image,
+    title: recipe.title,
+    description: recipe.description ?? '',
+    type: recipe.type,
+    ingredients: recipe.ingredients,
+    portions: recipe.portions.toString(),
+    kcal: recipe.kcal.toString(),
+    preparationTime: recipe.preparationTime.toString(),
   };
 
   const openModal = (action: Action) => () => {
@@ -54,7 +56,7 @@ export const EditOrDeleteUserActions = ({
   const onDelete = async () => {
     try {
       setIsSubmitting(true);
-      // TODO handle user deletion
+      await deleteRecipe(recipe.id);
       onSuccess();
     } catch (error: any) {
       setError(error?.message ?? 'Something went wrong');
@@ -64,8 +66,7 @@ export const EditOrDeleteUserActions = ({
   };
 
   const onSubmit = async (formData: FormData) => {
-    // TODO handle user update
-    console.log(formData);
+    await updateRecipe({ id: recipe.id, ...formData });
   };
 
   return (
@@ -86,9 +87,14 @@ export const EditOrDeleteUserActions = ({
           </div>
         </div>
       )}
-      <Modal id="edit-user-modal" isOpen={isModalOpen} handleClose={closeModal}>
+      <Modal
+        id="edit-recipe-modal"
+        isOpen={isModalOpen}
+        handleClose={closeModal}
+      >
         {action === 'edit' ? (
-          <UserProfileForm
+          <RecipeForm
+            mode="edit"
             onSubmit={onSubmit}
             defaultValues={defaultValues}
             onSucess={onSuccess}
@@ -96,7 +102,7 @@ export const EditOrDeleteUserActions = ({
         ) : (
           <div className="flex flex-col gap-4 items-center justify-center">
             <p className="text-center text-xl text-gray-600">
-              Are you sure you want to delete your account?
+              Are you sure you want to delete this recipe?
             </p>
             <Button
               variant="secondary"
@@ -104,7 +110,7 @@ export const EditOrDeleteUserActions = ({
               loading={isSubmitting}
               onClick={onDelete}
             >
-              Yes, delete me
+              Yes, delete
             </Button>
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </div>
