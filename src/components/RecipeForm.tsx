@@ -9,6 +9,7 @@ import { Input } from './Input';
 import { Select } from './Select';
 import { TagInput } from './TagInput';
 import { Progress } from './Progress';
+import { useRouter } from 'next/navigation';
 
 type Inputs = {
   title: string;
@@ -46,6 +47,7 @@ export const RecipeForm = ({
 }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -75,6 +77,7 @@ export const RecipeForm = ({
       reset();
       clearErrors();
       onSucess?.();
+      router.refresh();
     } catch (error: any) {
       setError(error?.message ?? 'Something went wrong');
     } finally {
