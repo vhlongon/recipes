@@ -6,7 +6,6 @@ import { ReactPortal } from './ReactPortal';
 
 type ModalProps = {
   children: React.ReactNode;
-  id: string;
   isOpen?: boolean;
   handleClose?: () => void;
 };

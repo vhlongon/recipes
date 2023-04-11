@@ -1,5 +1,6 @@
 import { Card } from '@/components/Card';
-import { EditDeleteUserActions } from '@/components/EditDeleteUserActions';
+import { EditOrDeleteModal } from '@/components/EditDeleteModal';
+import { EditDeleteUser } from '@/components/EditDeleteUser';
 import { getUser } from '@/lib/data';
 import { User } from 'react-feather';
 
@@ -20,7 +21,11 @@ const ProfilePage = async () => {
           </div>
         }
         className="w-full max-w-md m-auto"
-        actions={<EditDeleteUserActions user={user} />}
+        actions={
+          <EditOrDeleteModal>
+            <EditDeleteUser user={user} />
+          </EditOrDeleteModal>
+        }
       >
         <div className="flex gap-2">
           <span>Email:</span>
