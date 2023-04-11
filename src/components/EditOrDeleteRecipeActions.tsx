@@ -10,7 +10,7 @@ import { deleteRecipe, updateRecipe } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import { ErrorMessage } from './ErrorMessage';
 
-type EditOrDeleteActionsProps = {
+type EditOrDeleteRecipeActionsProps = {
   recipe: Omit<Recipe, 'createdAt' | 'updatedAt'> & {
     createdAt: string;
     updatedAt: string;
@@ -19,7 +19,9 @@ type EditOrDeleteActionsProps = {
 
 type Action = 'edit' | 'delete' | null;
 
-export const EditOrDeleteActions = ({ recipe }: EditOrDeleteActionsProps) => {
+export const EditOrDeleteRecipeActions = ({
+  recipe,
+}: EditOrDeleteRecipeActionsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [action, setAction] = useState<Action>(null);
   const router = useRouter();
