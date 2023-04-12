@@ -20,6 +20,7 @@ model User {
   lastName  String
   password  String
   recipes   Recipe[]
+  image     String?
 }
 
 model Recipe {
@@ -36,7 +37,7 @@ model Recipe {
   user            User       @relation(fields: [userId], references: [id])
   hashtags        String[]
   portions        Int
-  kcal            Int        
+  kcal            Int
 
   @@unique([userId, title])
   @@index([userId, id])
