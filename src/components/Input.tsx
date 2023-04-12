@@ -1,5 +1,5 @@
 import { VariantProps, cva } from 'class-variance-authority';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
 const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
@@ -58,7 +58,7 @@ type InputBaseProps = React.DetailedHTMLProps<
 >;
 
 type InputProps = InputBaseProps & {
-  label?: string;
+  label?: ReactNode;
   altText?: string;
   name: string;
   register: UseFormRegister<any>;
