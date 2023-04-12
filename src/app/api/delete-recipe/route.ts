@@ -3,7 +3,7 @@ import { deleteUserRecipe } from '@/lib/data';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function DELETE(request: Request) {
   const body = await request.json();
 
   try {

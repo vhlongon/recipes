@@ -2,6 +2,7 @@
 
 import { deleteRecipe, updateRecipe } from '@/lib/api';
 import { Recipe } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from './Button';
 import { useEditDeleteContext } from './EditDeleteModal';
@@ -21,8 +22,9 @@ type Action = 'edit' | 'delete' | null;
 export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
-  const { isOpen, action, closeModal, onSuccess } = useEditDeleteContext();
+  const { isOpen, action, closeModal } = useEditDeleteContext();
 
   const defaultValues = {
     title: recipe.title,
@@ -32,6 +34,11 @@ export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
     portions: recipe.portions.toString(),
     kcal: recipe.kcal.toString(),
     preparationTime: recipe.preparationTime.toString(),
+  };
+
+  const onSuccess = () => {
+    closeModal();
+    router.refresh();
   };
 
   const onRecipeDelete = async () => {

@@ -1,6 +1,8 @@
 'use client';
 
+import { deleteUser, updateUser } from '@/lib/api';
 import { User } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from './Button';
 import { useEditDeleteContext } from './EditDeleteModal';
@@ -18,8 +20,8 @@ type EditDeleteUserProps = {
 export const EditDeleteUser = ({ user }: EditDeleteUserProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const { isOpen, action, closeModal, onSuccess } = useEditDeleteContext();
+  const router = useRouter();
+  const { isOpen, action, closeModal } = useEditDeleteContext();
 
   const defaultValues = {
     email: user.email,
@@ -27,15 +29,15 @@ export const EditDeleteUser = ({ user }: EditDeleteUserProps) => {
     lastName: user.lastName,
     updatedAt: user.updatedAt,
     createdAt: user.createdAt,
-    image: user.image,
+    image: null,
   };
 
   const onUserDelete = async () => {
     try {
       setIsSubmitting(true);
-      // TODO handle user deletion
-      console.log(`deleting user ${user.id}`);
-      onSuccess();
+      await deleteUser();
+      closeModal();
+      router.replace('/signin');
     } catch (error: any) {
       setError(error?.message ?? 'Something went wrong');
     } finally {
@@ -44,8 +46,12 @@ export const EditDeleteUser = ({ user }: EditDeleteUserProps) => {
   };
 
   const onUserUpdate = async (formData: FormData) => {
-    // TODO handle user update
-    console.log(formData);
+    await updateUser(formData);
+  };
+
+  const onSuccess = () => {
+    closeModal();
+    router.refresh();
   };
 
   return (
@@ -54,7 +60,7 @@ export const EditDeleteUser = ({ user }: EditDeleteUserProps) => {
         <UserProfileForm
           onSubmit={onUserUpdate}
           defaultValues={defaultValues}
-          onSucess={onSuccess}
+          onSuccess={onSuccess}
         />
       ) : (
         <div className="flex flex-col gap-4 items-center justify-center">

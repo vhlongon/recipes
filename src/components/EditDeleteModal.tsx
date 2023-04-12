@@ -8,7 +8,6 @@ import React, {
   useState,
 } from 'react';
 import { EditDeleteActions } from './EditDeleteActions';
-import { useRouter } from 'next/navigation';
 
 type EditDeleteModalProps = {
   children: ReactElement;
@@ -23,7 +22,6 @@ type EditDeleteContextProps = {
   isOpen: boolean;
   closeModal: () => void;
   openModal: () => void;
-  onSuccess: () => void;
 };
 
 const EditDeleteContext = createContext<EditDeleteContextProps | null>(null);
@@ -46,7 +44,6 @@ export const EditOrDeleteModal = ({
 }: EditDeleteModalProps) => {
   const [action, setAction] = useState<Action>(null);
   const [isOpen, setIsOpen] = useState(initialIsOpen);
-  const { refresh } = useRouter();
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
@@ -56,14 +53,9 @@ export const EditOrDeleteModal = ({
     setIsOpen(true);
   }, []);
 
-  const onSuccess = useCallback(() => {
-    closeModal();
-    refresh();
-  }, [closeModal, refresh]);
-
   const value = useMemo(
-    () => ({ action, setAction, isOpen, closeModal, openModal, onSuccess }),
-    [action, closeModal, isOpen, onSuccess, openModal]
+    () => ({ action, setAction, isOpen, closeModal, openModal }),
+    [action, closeModal, isOpen, openModal]
   );
 
   return (

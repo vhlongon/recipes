@@ -72,14 +72,14 @@ export const updateRecipe = async (
   recipeInput: RecipeInput & { id: string }
 ) => {
   return fetchData('/api/update-recipe', {
-    method: 'POST',
+    method: 'PATCH',
     body: recipeInput,
   });
 };
 
 export const deleteRecipe = async (id: string) => {
   return fetchData('/api/delete-recipe', {
-    method: 'POST',
+    method: 'DELETE',
     body: { id },
   });
 };
@@ -88,5 +88,25 @@ export const protect = async (password: string) => {
   return fetchData('/api/protect', {
     method: 'POST',
     body: { password },
+  });
+};
+
+export const uploadUserImage = async (image: string) => {
+  return fetchData('/api/user-image', {
+    method: 'POST',
+    body: { image },
+  });
+};
+
+export const updateUser = async (user: Partial<User>) => {
+  return fetchData('/api/update-user', {
+    method: 'PATCH',
+    body: user,
+  });
+};
+
+export const deleteUser = async () => {
+  return fetchData('/api/delete-user', {
+    method: 'DELETE',
   });
 };

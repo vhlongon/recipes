@@ -1,24 +1,34 @@
 'use client';
 
 import { User } from '@prisma/client';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Edit3, Image as ImageIcon, Mail } from 'react-feather';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ErrorMessage } from './ErrorMessage';
-import { Input } from './Input';
 import { Button } from './Button';
+import { ErrorMessage } from './ErrorMessage';
+import { FileInput } from './FileInput';
+import { Input } from './Input';
 
 export type FormData = Pick<User, 'email' | 'firstName' | 'lastName' | 'image'>;
+
+const convertImageToBase64 = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = error => reject(error);
+  });
 
 type RecipeFormProps = {
   defaultValues?: FormData;
   onSubmit: (data: FormData) => Promise<void>;
-  onSucess?: () => void;
+  onSuccess?: () => void;
 };
 
 export const UserProfileForm = ({
   defaultValues,
   onSubmit,
-  onSucess,
+  onSuccess,
 }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,16 +42,27 @@ export const UserProfileForm = ({
   } = useForm<FormData>({
     defaultValues,
   });
-  const submitHandler: SubmitHandler<FormData> = async data => {
-    console.log(data);
 
+  const submitHandler: SubmitHandler<FormData> = async data => {
     try {
-      await onSubmit(data);
+      setIsSubmitting(true);
+      const { image, ...rest } = data;
+      const file = (image as unknown as FileList)?.[0];
+      const imageBase64 = file ? await convertImageToBase64(file) : null;
+
+      const input = {
+        image: imageBase64,
+        ...rest,
+      };
+
+      await onSubmit(input);
       reset();
       clearErrors();
-      onSucess?.();
+      onSuccess?.();
     } catch (error: any) {
       setError(error?.message ?? 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -54,12 +75,15 @@ export const UserProfileForm = ({
         <div>
           <Input
             register={register}
-            required
             id="firstName"
             name="firstName"
             type="text"
-            placeholder="FirstName"
-            label="FirstName"
+            label={
+              <span className="flex items-center gap-2 text-slate-600">
+                <Edit3 size="1rem" />
+                First name
+              </span>
+            }
           />
           {errors.firstName && (
             <ErrorMessage>{errors.firstName.message}</ErrorMessage>
@@ -69,12 +93,15 @@ export const UserProfileForm = ({
         <div>
           <Input
             register={register}
-            required
             id="lastName"
             name="lastName"
             type="text"
-            placeholder="Lastname"
-            label="Lastname"
+            label={
+              <span className="flex items-center gap-2 text-slate-600">
+                <Edit3 size="1rem" />
+                Last name
+              </span>
+            }
           />
           {errors.lastName && (
             <ErrorMessage>{errors.lastName.message}</ErrorMessage>
@@ -84,14 +111,32 @@ export const UserProfileForm = ({
         <div>
           <Input
             register={register}
-            required
             id="email"
             name="email"
             type="email"
-            placeholder="me@email.com"
-            label="Email"
+            label={
+              <span className="flex items-center gap-2 text-slate-600">
+                <Mail size="1rem" />
+                Email
+              </span>
+            }
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        </div>
+
+        <div>
+          <FileInput
+            register={register}
+            id="image"
+            name="image"
+            label={
+              <span className="flex items-center gap-2 text-slate-600">
+                <ImageIcon size="1rem" />
+                Profile image
+              </span>
+            }
+          />
+          {errors.image && <ErrorMessage>{errors.image.message}</ErrorMessage>}
         </div>
 
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">

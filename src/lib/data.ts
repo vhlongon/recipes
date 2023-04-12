@@ -22,11 +22,22 @@ export const getUser = async () => {
     return null;
   }
 
-  return db.user.findUnique({
+  const currentUser = await db.user.findUnique({
     where: {
       id: user.id,
     },
   });
+
+  if (currentUser) {
+    const { createdAt, updatedAt, ...rest } = currentUser;
+    return {
+      createdAt: createdAt.toISOString(),
+      updatedAt: updatedAt.toISOString(),
+      ...rest,
+    };
+  }
+
+  return null;
 };
 
 export const getUserByEmail = async (email: string) => {
@@ -147,4 +158,66 @@ export const deleteUserRecipe = async (id: string) => {
   });
 
   return id;
+};
+
+export const updateUser = async (user: Partial<User>) => {
+  const currentUser = await getUserFromCookies(cookies());
+
+  if (!currentUser) {
+    return null;
+  }
+
+  const { id, ...rest } = user;
+
+  const updated = await db.user.update({
+    where: {
+      id: currentUser.id,
+    },
+    data: {
+      ...rest,
+    },
+  });
+
+  const { createdAt, updatedAt, ...restUser } = updated;
+
+  return {
+    ...restUser,
+    createdAt: createdAt.toISOString(),
+    updatedAt: updatedAt.toISOString(),
+  };
+};
+
+export const updateUserImage = async (image: string) => {
+  const user = await getUserFromCookies(cookies());
+
+  if (!user) {
+    return null;
+  }
+
+  const updated = await db.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      image,
+    },
+  });
+
+  return updated.image;
+};
+
+export const deleteUser = async () => {
+  const user = await getUserFromCookies(cookies());
+
+  if (!user) {
+    return null;
+  }
+
+  const deleted = await db.user.delete({
+    where: {
+      id: user.id,
+    },
+  });
+
+  return deleted;
 };
