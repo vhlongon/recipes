@@ -110,3 +110,9 @@ export const deleteUser = async () => {
     method: 'DELETE',
   });
 };
+
+export const logoutOutUser = async () => {
+  return fetchData('/api/logout', {
+    method: 'GET',
+  });
+};

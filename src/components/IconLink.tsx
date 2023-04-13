@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { Route } from 'next';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Calendar, Grid, Home, Settings, User } from 'react-feather';
+import { Calendar, Grid, Home, Settings, User, LogOut } from 'react-feather';
 
-const icons = { Settings, User, Grid, Calendar, Home } as const;
+const icons = { Settings, User, Grid, Calendar, Home, LogOut } as const;
 
 type IconType = keyof typeof icons;
 
@@ -13,11 +13,13 @@ export type LinkIconProps<T extends string> = {
   icon: IconType;
   href: Route<T>;
   label: string;
+  isHighlighted?: boolean;
 };
 
 export const IconLink = <T extends string>({
   href,
   icon,
+  isHighlighted = true,
 }: LinkIconProps<T>) => {
   const pathname = usePathname();
   const isActive = pathname === href;
@@ -28,7 +30,7 @@ export const IconLink = <T extends string>({
       <Icon
         size={40}
         className={clsx(
-          isActive ? 'stroke-primary-focus' : 'stroke-slate-100',
+          isActive && isHighlighted ? 'link-primary' : 'stroke-slate-100',
           'transition duration-200 ease-in-out'
         )}
       />
