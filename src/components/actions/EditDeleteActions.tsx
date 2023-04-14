@@ -16,7 +16,7 @@ export const EditDeleteActions = () => {
   };
 
   return (
-    <div className="flex w-full justify-end relative gap-4">
+    <div className="flex w-full mt-4 justify-end relative gap-4">
       <div className="flex flex-col gap-1 items-center">
         <Button variant="primary" square onClick={onEdit}>
           <Edit />

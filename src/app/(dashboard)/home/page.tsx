@@ -21,7 +21,7 @@ const DashboardHomePage = async () => {
     <>
       {hasRecipes ? (
         <>
-          <div className="flex w-full p-6 justify-between">
+          <div className="flex w-full gap-6 p-6 justify-between">
             {greetings}
             <CreateRecipe />
           </div>
