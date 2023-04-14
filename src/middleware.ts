@@ -4,15 +4,7 @@ import { validateJWT } from './lib/auth';
 import { isValidProtectPassword } from './lib/protect';
 
 const PUBLIC_FILE = /\.(.*)$/;
-const whiteListPaths = [
-  '/_next',
-  '/.next',
-  '/api',
-  '/static',
-  '/signin',
-  '/register',
-  '/protect',
-];
+const whiteListPaths = ['/signin', '/register'];
 
 export default async function middleware(request: NextRequest) {
   // protect all routes behind a password page

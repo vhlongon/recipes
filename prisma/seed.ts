@@ -1,11 +1,19 @@
 import { db } from '@/lib/db';
 import { hashPassword } from '@/lib/password';
-import { Recipe, RecipeType } from '@prisma/client';
+import { Recipe, RecipeType, Settings } from '@prisma/client';
+
+const getRandomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+const getRandomFloat = (min: number, max: number) => {
+  return Math.random() * (max - min) + min;
+};
 
 const getRandomRecipeType = () => {
   const types = Object.values(RecipeType);
 
-  return types[Math.floor(Math.random() * types.length)];
+  return types[getRandomInt(0, types.length - 1)];
 };
 
 const createRecipe = (args?: Partial<Recipe>) => {
@@ -25,10 +33,24 @@ const createRecipe = (args?: Partial<Recipe>) => {
   };
 };
 
+const createSettings = (args?: Partial<Settings>) => {
+  return {
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    theme: 'light',
+    language: 'en',
+    maxTokens: getRandomInt(2000, 4000),
+    temperature: getRandomFloat(0.5, 2),
+    ...args,
+  };
+};
+
 const main = async () => {
   const recipes = Array(3)
     .fill(0)
     .map((_, i) => createRecipe({ title: `${i} - Recipe title` }));
+
+  const settings = createSettings();
 
   const user = await db.user.upsert({
     where: { email: 'test@email.com' },
@@ -43,9 +65,13 @@ const main = async () => {
       recipes: {
         create: recipes,
       },
+      settings: {
+        create: settings,
+      },
     },
     include: {
       recipes: true,
+      settings: true,
     },
   });
 

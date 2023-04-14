@@ -1,12 +1,12 @@
 import { CreateRecipe } from '@/components/CreateRecipe';
 import { Greetings, GreetingsSkeleton } from '@/components/Greetings';
 import { RecipePreview } from '@/components/RecipePreview';
-import { getUsersRecipes } from '@/lib/data';
+import { getUserRecipes } from '@/lib/data';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
 const DashboardHomePage = async () => {
-  const recipes = await getUsersRecipes();
+  const recipes = await getUserRecipes();
 
   const hasRecipes = recipes?.length > 0;
 

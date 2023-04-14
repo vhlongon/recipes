@@ -48,7 +48,7 @@ export const getUserByEmail = async (email: string) => {
   });
 };
 
-export const getUsersRecipes = async () => {
+export const getUserRecipes = async () => {
   const user = await getUserFromCookies(cookies());
 
   if (!user) {
@@ -80,6 +80,31 @@ export const getUserRecipe = async (id: string) => {
 
   if (recipe) {
     const { createdAt, updatedAt, ...rest } = recipe;
+    return {
+      createdAt: createdAt.toISOString(),
+      updatedAt: updatedAt.toISOString(),
+      ...rest,
+    };
+  }
+
+  return null;
+};
+
+export const getUserSettings = async () => {
+  const user = await getUserFromCookies(cookies());
+
+  if (!user) {
+    return null;
+  }
+
+  const settings = await db.settings.findUnique({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  if (settings) {
+    const { createdAt, updatedAt, ...rest } = settings;
     return {
       createdAt: createdAt.toISOString(),
       updatedAt: updatedAt.toISOString(),
