@@ -1,4 +1,4 @@
-import { RecipeCardSkeleton } from '@/components/RecipeCard';
+import { RecipeCardSkeleton } from '@/components/recipe/RecipeCard';
 import { getUserRecipeCount } from '@/lib/data';
 
 const DashBoardLoader = async () => {

@@ -4,11 +4,11 @@ import { deleteUser, updateUser } from '@/lib/api';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Button } from './Button';
 import { useEditDeleteContext } from './EditDeleteModal';
-import { ErrorMessage } from './ErrorMessage';
-import { Modal } from './Modal';
-import { FormData, UserProfileForm } from './UserProfileForm';
+import { FormData, UserProfileForm } from '../forms/UserProfileForm';
+import { Button } from '../ui/Button';
+import { ErrorMessage } from '../ui/ErrorMessage';
+import { Modal } from '../ui/Modal';
 
 type EditDeleteUserProps = {
   user: Omit<User, 'createdAt' | 'updatedAt'> & {

@@ -1,5 +1,5 @@
 import { Edit, X } from 'react-feather';
-import { Button } from './Button';
+import { Button } from '../ui/Button';
 import { useEditDeleteContext } from './EditDeleteModal';
 
 export const EditDeleteActions = () => {

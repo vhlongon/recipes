@@ -1,6 +1,6 @@
-import { CreateRecipe } from '@/components/CreateRecipe';
-import { Greetings, GreetingsSkeleton } from '@/components/Greetings';
-import { RecipePreview } from '@/components/RecipePreview';
+import { Greetings, GreetingsSkeleton } from '@/components/layout/Greetings';
+import { CreateRecipe } from '@/components/recipe/CreateRecipe';
+import { RecipePreview } from '@/components/recipe/RecipePreview';
 import { getUserRecipes } from '@/lib/data';
 import Link from 'next/link';
 import { Suspense } from 'react';

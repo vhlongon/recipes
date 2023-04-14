@@ -1,14 +1,14 @@
 'use client';
 
-import { Button } from '@/components/Button';
-import { Card } from '@/components/Card';
-import { Input } from '@/components/Input';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
 import { register, signin } from '@/lib/api';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '../ui/ErrorMessage';
 
 const texts = {
   register: {

@@ -2,8 +2,8 @@ import { formatDate } from '@/lib/date';
 import { Recipe } from '@prisma/client';
 import clsx from 'clsx';
 import { Calendar, Clock, Hash, PlusCircle } from 'react-feather';
-import { Badge } from './Badge';
-import { Card } from './Card';
+import { Badge } from '../ui/Badge';
+import { Card } from '../ui/Card';
 
 type RecipeCardProps = {
   className?: string;

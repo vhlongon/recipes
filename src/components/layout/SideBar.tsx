@@ -1,6 +1,6 @@
 import { getUser } from '@/lib/data';
-import { IconLink, LinkIconProps } from './IconLink';
-import { Logout } from './LogOut';
+import { IconLink, LinkIconProps } from '../ui/IconLink';
+import { Logout } from '../actions/LogOut';
 
 const links: LinkIconProps<string>[] = [
   { label: 'Dashboard', icon: 'Grid', href: '/home' },

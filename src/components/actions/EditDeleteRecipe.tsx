@@ -4,11 +4,11 @@ import { deleteRecipe, updateRecipe } from '@/lib/api';
 import { Recipe } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Button } from './Button';
+import { FormData, RecipeForm } from '../forms/RecipeForm';
+import { Button } from '../ui/Button';
+import { ErrorMessage } from '../ui/ErrorMessage';
+import { Modal } from '../ui/Modal';
 import { useEditDeleteContext } from './EditDeleteModal';
-import { ErrorMessage } from './ErrorMessage';
-import { Modal } from './Modal';
-import { FormData, RecipeForm } from './RecipeForm';
 
 type EditDeleteRecipeProps = {
   recipe: Omit<Recipe, 'createdAt' | 'updatedAt'> & {
@@ -16,8 +16,6 @@ type EditDeleteRecipeProps = {
     updatedAt: string;
   };
 };
-
-type Action = 'edit' | 'delete' | null;
 
 export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
   const [error, setError] = useState<string | null>(null);

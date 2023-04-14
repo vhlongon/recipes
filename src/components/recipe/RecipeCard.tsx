@@ -10,8 +10,8 @@ import {
   List,
   PlusCircle,
 } from 'react-feather';
-import { Badge } from './Badge';
-import { Card } from './Card';
+import { Badge } from '../ui/Badge';
+import { Card } from '../ui/Card';
 
 export const RecipeCardSkeleton = () => {
   return (

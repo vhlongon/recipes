@@ -1,7 +1,7 @@
-import { Card } from '@/components/Card';
-import { EditOrDeleteModal } from '@/components/EditDeleteModal';
-import { EditDeleteUser } from '@/components/EditDeleteUser';
-import { ProfileImage } from '@/components/ProfileImage';
+import { EditOrDeleteModal } from '@/components/actions/EditDeleteModal';
+import { EditDeleteUser } from '@/components/actions/EditDeleteUser';
+import { ProfileImage } from '@/components/layout/ProfileImage';
+import { Card } from '@/components/ui/Card';
 import { getUser } from '@/lib/data';
 import { AtSign, User } from 'react-feather';
 

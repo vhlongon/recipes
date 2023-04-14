@@ -1,4 +1,4 @@
-import { Card } from '@/components/Card';
+import { Card } from '@/components/ui/Card';
 import { getUserSettings } from '@/lib/data';
 import { pick } from '@/lib/utils';
 import { Settings } from 'react-feather';

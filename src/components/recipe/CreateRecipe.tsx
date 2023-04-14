@@ -3,9 +3,9 @@
 import { createRecipe, generateRecipe } from '@/lib/api';
 import { useEffect, useState } from 'react';
 import { PlusCircle } from 'react-feather';
-import { Button } from './Button';
-import { Modal } from './Modal';
-import { FormData, RecipeForm } from './RecipeForm';
+import { FormData, RecipeForm } from '../forms/RecipeForm';
+import { Button } from '../ui/Button';
+import { Modal } from '../ui/Modal';
 
 type CreateRecipeProps = {
   className?: string;

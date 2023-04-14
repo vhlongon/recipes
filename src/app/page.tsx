@@ -1,4 +1,4 @@
-import { ProtectForm } from '@/components/ProtectForm';
+import { ProtectForm } from '@/components/forms/ProtectForm';
 
 export default async function Home() {
   return (

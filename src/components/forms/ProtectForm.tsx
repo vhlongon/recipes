@@ -3,10 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from './Button';
-import { ErrorMessage } from './ErrorMessage';
-import { Input } from './Input';
-import { Card } from './Card';
+import { Button } from '../ui/Button';
+import { ErrorMessage } from '../ui/ErrorMessage';
+import { Input } from '../ui/Input';
+import { Card } from '../ui/Card';
 import { protect } from '@/lib/api';
 import { Lock } from 'react-feather';
 

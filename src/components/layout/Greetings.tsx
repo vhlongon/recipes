@@ -1,9 +1,5 @@
-import { getUserFromCookies } from '@/lib/cookies';
 import { getUser } from '@/lib/data';
-import { db } from '@/lib/db';
-import { cookies } from 'next/headers';
-import { ButtonLink } from './ButtonLink';
-import { Card } from './Card';
+import { Card } from '../ui/Card';
 
 export const GreetingsSkeleton = () => {
   return (

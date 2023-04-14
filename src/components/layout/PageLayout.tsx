@@ -1,6 +1,6 @@
-import { Panel } from '@/components/Panel';
-import { Sidebar } from '@/components/SideBar';
-import '../styles/globals.css';
+import { Panel } from '@/components/ui/Panel';
+import { Sidebar } from '@/components/layout/SideBar';
+import '../../styles/globals.css';
 
 export const metadata = {
   title: 'Smart recipes generator',

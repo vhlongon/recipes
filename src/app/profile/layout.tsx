@@ -1,4 +1,4 @@
-import PageLayout from '@/components/PageLayout';
+import PageLayout from '@/components/layout/PageLayout';
 import { ReactNode } from 'react';
 
 const ProfileLayout = ({ children }: { children: ReactNode }) => {

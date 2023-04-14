@@ -1,10 +1,10 @@
 'use client';
 
+import { logoutOutUser } from '@/lib/api';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { LogOut as LogOutIcon } from 'react-feather';
-import { ProfileImage } from './ProfileImage';
-import { logoutOutUser } from '@/lib/api';
+import { ProfileImage } from '../layout/ProfileImage';
 
 type LogOutProps = {
   user: Pick<User, 'firstName' | 'lastName' | 'image'>;

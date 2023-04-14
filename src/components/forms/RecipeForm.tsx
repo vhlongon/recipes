@@ -3,12 +3,12 @@
 import { Recipe, RecipeType } from '@prisma/client';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from './Button';
-import { ErrorMessage } from './ErrorMessage';
-import { Input } from './Input';
-import { Select } from './Select';
-import { TagInput } from './TagInput';
-import { Progress } from './Progress';
+import { Button } from '../ui/Button';
+import { ErrorMessage } from '../ui/ErrorMessage';
+import { Input } from '../ui/Input';
+import { Select } from '../ui/Select';
+import { TagInput } from '../ui/TagInput';
+import { Progress } from '../ui/Progress';
 import { useRouter } from 'next/navigation';
 
 type Inputs = {

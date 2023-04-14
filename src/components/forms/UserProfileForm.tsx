@@ -4,10 +4,10 @@ import { User } from '@prisma/client';
 import { useState } from 'react';
 import { Edit3, Image as ImageIcon, Mail } from 'react-feather';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from './Button';
-import { ErrorMessage } from './ErrorMessage';
-import { FileInput } from './FileInput';
-import { Input } from './Input';
+import { Button } from '../ui/Button';
+import { ErrorMessage } from '../ui/ErrorMessage';
+import { FileInput } from '../ui/FileInput';
+import { Input } from '../ui/Input';
 
 export type FormData = Pick<User, 'email' | 'firstName' | 'lastName' | 'image'>;
 

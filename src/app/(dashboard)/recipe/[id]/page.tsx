@@ -1,7 +1,7 @@
-import { ButtonLink } from '@/components/ButtonLink';
-import { EditOrDeleteModal } from '@/components/EditDeleteModal';
-import { EditDeleteRecipe } from '@/components/EditDeleteRecipe';
-import { RecipeCard } from '@/components/RecipeCard';
+import { EditOrDeleteModal } from '@/components/actions/EditDeleteModal';
+import { EditDeleteRecipe } from '@/components/actions/EditDeleteRecipe';
+import { RecipeCard } from '@/components/recipe/RecipeCard';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 import { getUserRecipe } from '@/lib/data';
 
 type RecipePageProps = {
