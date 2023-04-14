@@ -32,8 +32,8 @@ export const Greetings = async () => {
         className="w-full max-w-xl"
       >
         <p className="text-slate-600">
-          Welcome back! Time to get creative and come up with some new recipes?
-          Or wanna check your current ones?
+          Welcome back!
+          <br /> Time to get creative and come up with some new recipes?
         </p>
       </Card>
     </>
