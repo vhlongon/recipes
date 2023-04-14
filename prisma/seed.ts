@@ -7,7 +7,7 @@ const getRandomInt = (min: number, max: number) => {
 };
 
 const getRandomFloat = (min: number, max: number) => {
-  return Math.random() * (max - min) + min;
+  return Number((Math.random() * (max - min) + min).toFixed(2));
 };
 
 const getRandomRecipeType = () => {
