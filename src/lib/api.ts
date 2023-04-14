@@ -30,6 +30,13 @@ export type UserInput = Pick<
   'email' | 'password' | 'firstName' | 'lastName'
 >;
 
+export const getUser = async () => {
+  return fetchData('/api/user', {
+    method: 'GET',
+    cache: 'no-cache',
+  });
+};
+
 export const register = async (userInput: UserInput) => {
   return fetchData('/api/register', {
     method: 'POST',
@@ -114,5 +121,7 @@ export const deleteUser = async () => {
 export const logoutOutUser = async () => {
   return fetchData('/api/logout', {
     method: 'GET',
+    cache: 'no-cache',
+    json: false,
   });
 };

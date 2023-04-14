@@ -97,7 +97,9 @@ export const RecipeCard = ({
         </div>
       }
     >
-      {description && <p className="flex items-center gap-4">{description}</p>}
+      <p className="flex items-center gap-4">
+        {description || `A delicous recipe using: ${ingredients.join(', ')}`}
+      </p>
 
       {ingredients && (
         <div title="ingredients" className="flex flex-col">

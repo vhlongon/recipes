@@ -1,25 +1,22 @@
-import { Route } from 'next';
+import { getUser } from '@/lib/data';
 import { IconLink, LinkIconProps } from './IconLink';
+import { Logout } from './LogOut';
 
 const links: LinkIconProps<string>[] = [
-  { label: 'Home', icon: 'Home', href: '/' },
   { label: 'Dashboard', icon: 'Grid', href: '/home' },
   { label: 'Profile', icon: 'User', href: '/profile' },
   { label: 'Settings', icon: 'Settings', href: '/settings' },
-  {
-    label: 'Logout',
-    icon: 'LogOut',
-    href: '/api/logout' as Route,
-    isHighlighted: false,
-  },
 ];
 
-export const Sidebar = () => {
+export const Sidebar = async () => {
+  const user = await getUser();
+
   return (
-    <div className="rounded-2xl h-full flex md:flex-wrap">
+    <div className="rounded-2xl h-full flex md:flex-wrap relative">
       {links.map(link => (
         <IconLink {...link} key={link.href} />
       ))}
+      {user && <Logout user={user} />}
     </div>
   );
 };

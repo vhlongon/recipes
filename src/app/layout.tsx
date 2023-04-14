@@ -12,14 +12,7 @@ const RootPageLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en" data-theme="light">
       <body className="md:overflow-y-hidden">
         <div id="modal-root"></div>
-        <div className="h-full w-full min-h-screen bg-gradient p-6 grid grid-rows-sidebar grid-cols-1 md:grid-cols-sidebar md:grid-rows-none gap-8">
-          <Panel as="aside" className="w-full h-full">
-            <Sidebar />
-          </Panel>
-          <Panel as="main" className="w-full h-full">
-            {children}
-          </Panel>
-        </div>
+        {children}
       </body>
     </html>
   );

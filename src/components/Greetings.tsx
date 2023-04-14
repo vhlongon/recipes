@@ -35,15 +35,6 @@ export const Greetings = async () => {
           Welcome back! Time to get creative and come up with some new recipes?
           Or wanna check your current ones?
         </p>
-
-        <ButtonLink
-          variant="primary"
-          block={false}
-          href="/home"
-          className="w-fit mt-2"
-        >
-          dashboard
-        </ButtonLink>
       </Card>
     </>
   );

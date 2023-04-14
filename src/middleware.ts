@@ -20,8 +20,12 @@ export default async function middleware(request: NextRequest) {
     request.cookies.get(process.env.PROTECT_COOKIE_NAME)?.value ?? '';
   const isAuthorized = isValidProtectPassword(hashInCookies);
 
+  if (request.nextUrl.pathname === '/') {
+    return NextResponse.next();
+  }
+
   if (!isAuthorized) {
-    request.nextUrl.pathname = '/protect';
+    request.nextUrl.pathname = '/';
     return NextResponse.redirect(request.nextUrl);
   }
 
@@ -59,8 +63,7 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - protect (access control page)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|protect).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

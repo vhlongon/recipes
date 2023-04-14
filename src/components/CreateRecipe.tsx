@@ -1,7 +1,7 @@
 'use client';
 
 import { createRecipe, generateRecipe } from '@/lib/api';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PlusCircle } from 'react-feather';
 import { Button } from './Button';
 import { Modal } from './Modal';
@@ -13,6 +13,7 @@ type CreateRecipeProps = {
 
 export const CreateRecipe = ({ className }: CreateRecipeProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showChild, setShowChild] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -31,17 +32,21 @@ export const CreateRecipe = ({ className }: CreateRecipeProps) => {
     await createRecipe(data);
   };
 
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    return null;
+  }
+
   return (
     <div className={className}>
       <Button variant="primary" className="w-48 flex gap-4" onClick={openModal}>
         <span>New Recipe</span>
         <PlusCircle />
       </Button>
-      <Modal
-        id="new-recipe-modal"
-        isOpen={isModalOpen}
-        handleClose={closeModal}
-      >
+      <Modal isOpen={isModalOpen} handleClose={closeModal}>
         <RecipeForm mode="create" onSubmit={onSubmit} onSucess={onSuccess} />
       </Modal>
     </div>

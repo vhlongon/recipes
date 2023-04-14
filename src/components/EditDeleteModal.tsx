@@ -4,6 +4,7 @@ import React, {
   ReactElement,
   createContext,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -42,6 +43,7 @@ export const EditOrDeleteModal = ({
   children,
   isOpen: initialIsOpen = false,
 }: EditDeleteModalProps) => {
+  const [showChild, setShowChild] = useState(false);
   const [action, setAction] = useState<Action>(null);
   const [isOpen, setIsOpen] = useState(initialIsOpen);
 
@@ -57,6 +59,14 @@ export const EditOrDeleteModal = ({
     () => ({ action, setAction, isOpen, closeModal, openModal }),
     [action, closeModal, isOpen, openModal]
   );
+
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    return null;
+  }
 
   return (
     <EditDeleteContext.Provider value={value}>
