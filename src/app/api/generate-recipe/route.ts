@@ -1,3 +1,4 @@
+import { getUserSettings } from '@/lib/data';
 import { generatePrompt, parseAnswer } from '@/lib/recipe';
 import { NextResponse } from 'next/server';
 import { Configuration, OpenAIApi } from 'openai';
@@ -13,15 +14,17 @@ export async function POST(request: Request) {
 
   const prompt = generatePrompt(body);
   const promptLength = prompt.length;
+  const settings = await getUserSettings();
 
   try {
-    const response = await openai.createCompletion({
+    const config = {
       model: 'text-davinci-003',
       prompt,
-      temperature: 1,
-      max_tokens: 4000 - promptLength,
-      // stop: '\n\n',
-    });
+      temperature: settings?.temperature || 1,
+      max_tokens: (settings?.maxTokens || 4000) - promptLength,
+    };
+
+    const response = await openai.createCompletion(config);
 
     const answer = response.data.choices[0].text ?? '';
     const { description, instructions, hashtags } = parseAnswer(answer);
