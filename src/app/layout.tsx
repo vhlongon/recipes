@@ -1,5 +1,3 @@
-import { Panel } from '@/components/ui/Panel';
-import { Sidebar } from '@/components/layout/SideBar';
 import '../styles/globals.css';
 
 export const metadata = {
