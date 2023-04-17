@@ -76,14 +76,16 @@ export const RecipeCard = ({
   type,
   className,
   actions,
+  image,
 }: RecipeCardProps) => {
   return (
     <Card
       className={clsx(
-        'hover:scale-[1.025] transition-all ease-in-out duration-200 h-full max-h-card overflow-y-scroll',
+        'hover:scale-[1.025] max-w-3xl transition-all ease-in-out duration-200 h-full max-h-card',
         className
       )}
       actions={actions}
+      image={image || '/recipe-image-placeholder.jpg'}
       title={
         <div className="flex items-center gap-4 w-full justify-between">
           {title}

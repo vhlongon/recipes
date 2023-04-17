@@ -20,7 +20,12 @@ export async function POST(request: Request) {
       );
     }
 
-    const recipe = await createUserRecipe(body);
+    const { image, ...rest } = body;
+
+    const recipe = await createUserRecipe({
+      ...(image ? { image } : {}),
+      ...rest,
+    });
 
     if (!recipe) {
       const message = `could not create recipe with title: ${body.title}`;

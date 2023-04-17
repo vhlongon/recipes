@@ -41,3 +41,17 @@ export const parseAnswer = (
     hashtags,
   };
 };
+
+export const generateRecipeImagePrompt = ({
+  description,
+  ingredients,
+}: {
+  description?: string;
+  ingredients: string[];
+}) => {
+  const prompt = `Generate a recipe image for a food recipe with the following description: ${
+    description || ingredients.join(', ')
+  }`;
+
+  return prompt;
+};

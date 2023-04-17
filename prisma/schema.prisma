@@ -36,6 +36,7 @@ model Recipe {
   portions        Int
   kcal            Int
   user            User       @relation(fields: [userId], references: [id])
+  image           String?
 
   @@unique([userId, title])
   @@index([userId, id])
