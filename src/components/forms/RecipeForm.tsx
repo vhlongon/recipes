@@ -114,6 +114,7 @@ export const RecipeForm = ({
               id="type"
               options={Object.values(RecipeType).map(type => ({
                 value: type,
+                label: type.toLowerCase(),
               }))}
             ></Select>
           </div>

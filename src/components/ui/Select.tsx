@@ -59,7 +59,7 @@ type SelectBaseProps = React.DetailedHTMLProps<
 type SelectProps = SelectBaseProps & {
   label?: string;
   altText?: string;
-  options: { value: string; selected?: boolean }[];
+  options: { value: string; label: string; selected?: boolean }[];
 } & VariantProps<typeof selectClasses>;
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -84,7 +84,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <select {...props} ref={ref} className={selectClassname}>
           {props.options.map((option, index) => (
             <option key={index} value={option.value} selected={option.selected}>
-              {option.value}
+              {option.label}
             </option>
           ))}
         </select>
