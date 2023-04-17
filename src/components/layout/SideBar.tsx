@@ -1,4 +1,7 @@
-import { Logout } from '../actions/LogOut';
+import { getUser } from '@/lib/data';
+import { sleep } from '@/lib/sleep';
+import { Provider } from '../Provider';
+import { LogoutUser } from '../actions/LogOutUser';
 import { IconLink, LinkIconProps } from '../ui/IconLink';
 
 const links: LinkIconProps<string>[] = [
@@ -7,13 +10,29 @@ const links: LinkIconProps<string>[] = [
   { label: 'Settings', icon: 'Settings', href: '/settings' },
 ];
 
-export const Sidebar = () => {
+export const SideBarSkeleton = () => {
+  return (
+    <div className="animate-pulse rounded-2xl h-full flex md:flex-wrap relative">
+      {links.map((link, index) => (
+        <IconLink {...link} key={link.href} className="pointer-events-none" />
+      ))}
+    </div>
+  );
+};
+
+export const Sidebar = async () => {
+  const user = await getUser();
+
   return (
     <div className="rounded-2xl h-full flex md:flex-wrap relative">
       {links.map(link => (
         <IconLink {...link} key={link.href} />
       ))}
-      <Logout />
+      {user && (
+        <Provider>
+          <LogoutUser />
+        </Provider>
+      )}
     </div>
   );
 };

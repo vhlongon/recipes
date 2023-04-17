@@ -1,5 +1,8 @@
 import { getUser } from '@/lib/data';
 import { Card } from '../ui/Card';
+import { Provider } from '../Provider';
+import { useAppSelector } from '@/store';
+import { GreetingsTitle } from './GreetingsTitle';
 
 export const GreetingsSkeleton = () => {
   return (
@@ -24,7 +27,11 @@ export const Greetings = async () => {
   return (
     <>
       <Card
-        title={`Hello ${user?.firstName} ${user?.lastName}`}
+        title={
+          <Provider>
+            <GreetingsTitle />
+          </Provider>
+        }
         className="w-full max-w-xl"
       >
         <p className="text-slate-600">

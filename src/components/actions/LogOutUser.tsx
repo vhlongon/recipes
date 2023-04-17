@@ -5,9 +5,8 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import { logout } from '@/store/userSlice';
 import { useRouter } from 'next/navigation';
 import { LogOut as LogOutIcon } from 'react-feather';
-import { ProfileImage } from '../layout/ProfileImage';
 
-export const Logout = () => {
+export const LogoutUser = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(state => {
@@ -24,13 +23,6 @@ export const Logout = () => {
     <>
       {user && (
         <>
-          <div className="indicator absolute top-4 left-2">
-            <span className="indicator-item badge badge-primary">
-              {user?.firstName.charAt(0).toUpperCase()}
-              {user?.lastName.charAt(0).toUpperCase()}
-            </span>
-            <ProfileImage src={user?.image ?? ''} size="sm" />
-          </div>
           <span
             className="w-full flex justify-center items-center cursor-pointer"
             title="Log out"

@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     if (isUser) {
       const jwt = await createJWT(user);
       return NextResponse.json(
-        { data: { message: 'User created' } },
+        { data: { user } },
         {
           status: 201,
           statusText: 'User created',

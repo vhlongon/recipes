@@ -14,12 +14,14 @@ export type LinkIconProps<T extends string> = {
   href: Route<T>;
   label: string;
   isHighlighted?: boolean;
+  className?: string;
 };
 
 export const IconLink = <T extends string>({
   href,
   icon,
   isHighlighted = true,
+  className,
 }: LinkIconProps<T>) => {
   const pathname = usePathname();
   const isActive = pathname === href;
@@ -31,7 +33,8 @@ export const IconLink = <T extends string>({
         size={40}
         className={clsx(
           isActive && isHighlighted ? 'link-primary' : 'stroke-slate-100',
-          'transition duration-200 ease-in-out'
+          'transition duration-200 ease-in-out',
+          className
         )}
       />
     </NextLink>

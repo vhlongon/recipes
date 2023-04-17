@@ -4,7 +4,6 @@ import { deleteUser, updateUser } from '@/lib/api';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Provider } from '../Provider';
 import { FormData, UserProfileForm } from '../forms/UserProfileForm';
 import { Button } from '../ui/Button';
 import { ErrorMessage } from '../ui/ErrorMessage';
@@ -57,30 +56,28 @@ export const EditDeleteUser = ({ user }: EditDeleteUserProps) => {
 
   return (
     <Modal isOpen={isOpen} handleClose={closeModal}>
-      <Provider>
-        {action === 'edit' ? (
-          <UserProfileForm
-            onSubmit={onUserUpdate}
-            defaultValues={defaultValues}
-            onSuccess={onSuccess}
-          />
-        ) : (
-          <div className="flex flex-col gap-4 items-center justify-center">
-            <p className="text-center text-xl text-gray-600">
-              Are you sure you want to delete your account?
-            </p>
-            <Button
-              variant="secondary"
-              type="button"
-              loading={isSubmitting}
-              onClick={onUserDelete}
-            >
-              Yes, delete me
-            </Button>
-            {error && <ErrorMessage>{error}</ErrorMessage>}
-          </div>
-        )}
-      </Provider>
+      {action === 'edit' ? (
+        <UserProfileForm
+          onSubmit={onUserUpdate}
+          defaultValues={defaultValues}
+          onSuccess={onSuccess}
+        />
+      ) : (
+        <div className="flex flex-col gap-4 items-center justify-center">
+          <p className="text-center text-xl text-gray-600">
+            Are you sure you want to delete your account?
+          </p>
+          <Button
+            variant="secondary"
+            type="button"
+            loading={isSubmitting}
+            onClick={onUserDelete}
+          >
+            Yes, delete me
+          </Button>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </div>
+      )}
     </Modal>
   );
 };

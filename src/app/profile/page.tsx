@@ -1,3 +1,4 @@
+import { Provider } from '@/components/Provider';
 import { EditOrDeleteModal } from '@/components/actions/EditDeleteModal';
 import { EditDeleteUser } from '@/components/actions/EditDeleteUser';
 import { ProfileImage } from '@/components/layout/ProfileImage';
@@ -24,7 +25,9 @@ const ProfilePage = async () => {
         className="w-full max-w-md m-auto"
         actions={
           <EditOrDeleteModal>
-            <EditDeleteUser user={user} />
+            <Provider>
+              <EditDeleteUser user={user} />
+            </Provider>
           </EditOrDeleteModal>
         }
       >

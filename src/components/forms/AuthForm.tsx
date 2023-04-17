@@ -4,11 +4,13 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { register, signin } from '@/lib/api';
+import { setUser } from '@/store/userSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '../ui/ErrorMessage';
+import { useAppDispatch } from '@/store';
 
 const texts = {
   register: {
@@ -47,15 +49,17 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     handleSubmit,
     formState: { errors, isDirty },
   } = useForm<Inputs>();
+  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
       setIsSubmitting(true);
-      if (mode === 'register') {
-        await register(data);
-      } else {
-        await signin(data);
-      }
+
+      const res =
+        mode === 'register' ? await register(data) : await signin(data);
+
+      dispatch(setUser(res.data.user));
+
       router.replace('/home');
     } catch (error: any) {
       setError(error?.message ?? 'Something went wrong');
