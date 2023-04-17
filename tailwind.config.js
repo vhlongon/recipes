@@ -16,7 +16,7 @@ module.exports = {
         sidebar: '200px 1fr',
       },
       maxHeight: {
-        panel: 'calc(100vh - 3rem)',
+        panel: 'calc(100vh - 18rem)',
         card: 'calc(100vh - 8rem)',
       },
       fontFamily: {

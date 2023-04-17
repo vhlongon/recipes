@@ -5,6 +5,8 @@ import { getUserRecipes } from '@/lib/data';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
+export const revalidate = 0;
+
 const DashboardHomePage = async () => {
   const recipes = await getUserRecipes();
 
@@ -25,12 +27,14 @@ const DashboardHomePage = async () => {
             {greetings}
             <CreateRecipe />
           </div>
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-6 max-h-panel scrollable  overflow-y-scroll">
-            {recipes.map(recipe => (
-              <Link href={`/recipe/${recipe.id}`} key={recipe.id}>
-                <RecipePreview {...recipe} />
-              </Link>
-            ))}
+          <div className="max-h-panel scrollable  overflow-y-scroll">
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-6">
+              {recipes.map(recipe => (
+                <Link href={`/recipe/${recipe.id}`} key={recipe.id}>
+                  <RecipePreview {...recipe} />
+                </Link>
+              ))}
+            </div>
           </div>
         </>
       ) : (

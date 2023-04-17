@@ -3,12 +3,25 @@ import { EditDeleteRecipe } from '@/components/actions/EditDeleteRecipe';
 import { RecipeCard } from '@/components/recipe/RecipeCard';
 import { ButtonLink } from '@/components/ui/ButtonLink';
 import { getUserRecipe } from '@/lib/data';
+import { Metadata } from 'next';
 
 type RecipePageProps = {
   params: {
     id: string;
   };
 };
+
+export async function generateMetadata({
+  params,
+}: RecipePageProps): Promise<Metadata> {
+  const recipe = await getUserRecipe(params.id);
+
+  return {
+    title: recipe?.title,
+    description: recipe?.description,
+  };
+}
+
 const RecipePage = async ({ params }: RecipePageProps) => {
   const recipe = await getUserRecipe(params.id);
 
@@ -22,17 +35,15 @@ const RecipePage = async ({ params }: RecipePageProps) => {
   }
 
   return (
-    <div className="flex p-6 h-full w-full max-w-3xl m-auto justify-center justify-items-center items-center">
-      <div>
-        <RecipeCard
-          {...recipe}
-          actions={
-            <EditOrDeleteModal>
-              <EditDeleteRecipe recipe={recipe} />
-            </EditOrDeleteModal>
-          }
-        />
-      </div>
+    <div className="flex p-6 h-full w-full max-w-2xl m-auto justify-center justify-items-center items-center">
+      <RecipeCard
+        {...recipe}
+        actions={
+          <EditOrDeleteModal>
+            <EditDeleteRecipe recipe={recipe} />
+          </EditOrDeleteModal>
+        }
+      />
     </div>
   );
 };

@@ -17,7 +17,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
           <Sidebar />
         </React.Suspense>
       </Panel>
-      <Panel as="main" className="w-full h-full">
+      <Panel as="main" className="w-full h-full max-h-screen">
         {children}
       </Panel>
     </div>

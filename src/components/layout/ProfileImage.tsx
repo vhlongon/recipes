@@ -40,6 +40,7 @@ export const ProfileImage = ({ src, variant, size }: ProfileImageProps) => {
     <div className={className}>
       <Image
         sizes="100vw"
+        className="object-cover"
         fill
         src={src || '/profile-placeholder.jpg'}
         alt="profile image"
