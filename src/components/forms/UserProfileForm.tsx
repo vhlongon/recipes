@@ -8,6 +8,8 @@ import { Button } from '../ui/Button';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { FileInput } from '../ui/FileInput';
 import { Input } from '../ui/Input';
+import { useAppDispatch } from '@/store';
+import { setUser } from '@/store/userSlice';
 
 export type FormData = Pick<User, 'email' | 'firstName' | 'lastName' | 'image'>;
 
@@ -32,6 +34,7 @@ export const UserProfileForm = ({
 }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -56,6 +59,7 @@ export const UserProfileForm = ({
       };
 
       await onSubmit(input);
+      dispatch(setUser(input));
       reset();
       clearErrors();
       onSuccess?.();

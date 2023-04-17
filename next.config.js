@@ -12,7 +12,7 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
     appDir: true,
-    serverComponentsExternalPackages: ['bcrypt'],
+    serverComponentsExternalPackages: ['bcrypt', 'cloudinary'],
   },
 };
 

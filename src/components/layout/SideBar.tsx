@@ -1,6 +1,5 @@
-import { getUser } from '@/lib/data';
-import { IconLink, LinkIconProps } from '../ui/IconLink';
 import { Logout } from '../actions/LogOut';
+import { IconLink, LinkIconProps } from '../ui/IconLink';
 
 const links: LinkIconProps<string>[] = [
   { label: 'Dashboard', icon: 'Grid', href: '/home' },
@@ -8,15 +7,13 @@ const links: LinkIconProps<string>[] = [
   { label: 'Settings', icon: 'Settings', href: '/settings' },
 ];
 
-export const Sidebar = async () => {
-  const user = await getUser();
-
+export const Sidebar = () => {
   return (
     <div className="rounded-2xl h-full flex md:flex-wrap relative">
       {links.map(link => (
         <IconLink {...link} key={link.href} />
       ))}
-      {user && <Logout user={user} />}
+      <Logout />
     </div>
   );
 };
