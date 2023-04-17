@@ -46,13 +46,45 @@ model Settings {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   userId      String   @unique
-  theme       String   @default("light")
+  theme       Theme    @default(LIGHT)
   language    String   @default("en")
   maxTokens   Int      @default(4000)
   temperature Float    @default(1.0)
   user        User     @relation(fields: [userId], references: [id])
 
   @@index([userId, id])
+}
+
+enum Theme {
+  LIGHT
+  DARK
+  CUPCAKE
+  BUMBLEBEE
+  EMERALD
+  CORPORATE
+  SYNTHWAVE
+  RETRO
+  CYBERPUNK
+  VALENTINE
+  HALLOWEEN
+  GARDEN
+  FOREST
+  AQUA
+  LOFI
+  PASTEL
+  FANTASY
+  WIREFRAME
+  BLACK
+  LUXURY
+  DRACULA
+  CMYK
+  AUTUMN
+  BUSINESS
+  ACID
+  LEMONADE
+  NIGHT
+  COFFEE
+  WINTER
 }
 
 enum RecipeType {

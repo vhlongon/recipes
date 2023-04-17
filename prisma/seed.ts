@@ -1,6 +1,6 @@
 import { db } from '@/lib/db';
 import { hashPassword } from '@/lib/password';
-import { Recipe, RecipeType, Settings } from '@prisma/client';
+import { Recipe, RecipeType, Settings, Theme } from '@prisma/client';
 
 const getRandomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -37,7 +37,7 @@ const createSettings = (args?: Partial<Settings>) => {
   return {
     createdAt: new Date(),
     updatedAt: new Date(),
-    theme: 'light',
+    theme: Theme.LIGHT,
     language: 'en',
     maxTokens: getRandomInt(2000, 4000),
     temperature: getRandomFloat(0.5, 2),
