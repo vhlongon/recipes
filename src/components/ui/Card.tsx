@@ -1,6 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
-import Image from 'next/image';
 import React, { ReactNode } from 'react';
+import { CardImage } from './CardImage';
 
 const cardClsses = cva(['card', 'w-full', 'shadow-xl'], {
   variants: {
@@ -45,13 +45,10 @@ export const Card = ({
   image,
 }: CardProps) => {
   const classNames = cardClsses({ bg, bordered, spacing, className });
+
   return (
     <div className={classNames}>
-      {image && (
-        <figure className="w-full aspect-video relative overflow-hidden">
-          <img src={image} className="object-cover w-full" alt="Recipe" />
-        </figure>
-      )}
+      {image && <CardImage src={image} alt="recipe" />}
       <div className="card-body justify-between overflow-y-scroll">
         {title && <h2 className="card-title">{title}</h2>}
         {children}

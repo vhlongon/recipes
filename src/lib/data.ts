@@ -1,7 +1,7 @@
+import { Recipe, Settings, User } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { getUserFromCookies } from './cookies';
 import { db } from './db';
-import { Recipe, Settings, User } from '@prisma/client';
 import { hashPassword } from './password';
 
 export const createUser = async (

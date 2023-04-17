@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { register, signin } from '@/lib/api';
+import { useAppDispatch } from '@/store';
 import { setUser } from '@/store/userSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '../ui/ErrorMessage';
-import { useAppDispatch } from '@/store';
 
 const texts = {
   register: {

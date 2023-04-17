@@ -13,6 +13,7 @@ export const revalidate = 0;
 
 const RootPageLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getUser();
+  console.log(user);
 
   return (
     <html lang="en" data-theme="light">
@@ -21,11 +22,9 @@ const RootPageLayout = async ({ children }: { children: React.ReactNode }) => {
         {children}
         <Preloader user={user} />
 
-        {user && (
-          <Provider>
-            <UserIndicator />
-          </Provider>
-        )}
+        <Provider>
+          <UserIndicator />
+        </Provider>
       </body>
     </html>
   );
