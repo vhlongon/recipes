@@ -1,12 +1,16 @@
 'use client';
 import { useAppSelector } from '@/store';
 import { ProfileImage } from './ProfileImage';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const UserIndicator = () => {
   const { user } = useAppSelector(state => state.user);
+  const pathname = usePathname();
+
+  const isRoot = pathname === '/';
   return (
     <div>
-      {user && (
+      {user && !isRoot && (
         <div className="indicator absolute top-10 left-8">
           <span className="indicator-item badge badge-primary">
             {user.firstName.charAt(0).toUpperCase()}
