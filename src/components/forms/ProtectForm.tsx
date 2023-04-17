@@ -10,6 +10,7 @@ import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Input } from '../ui/Input';
+import { ProfileImage } from '../layout/ProfileImage';
 
 type Inputs = {
   password: string;
@@ -45,20 +46,14 @@ export const ProtectForm = () => {
           Secure
         </span>
       }
-      className="w-full max-w-xl"
+      className="w-full max-w-md"
     >
       <p className="text-sm text-gray-500 mb-2">
         Provide password to access the app
       </p>
 
       <div className="flex w-full justify-center my-2">
-        <Image
-          src="/logo.png"
-          className="rounded-lg"
-          alt="logo"
-          width={200}
-          height={200}
-        />
+        <ProfileImage src="/logo.png" alt="Logo" variant="hexagon" size="xl" />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>

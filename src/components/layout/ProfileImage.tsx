@@ -7,7 +7,7 @@ const profileImageClasses = cva(['mask', 'relative'], {
       squircle: ['mask-squircle'],
       heart: ['mask-heart'],
       hexagon: ['mask-hexagon'],
-      hexagon2: ['mask-hexagon2'],
+      hexagon2: ['mask-hexagon-2'],
       decagon: ['mask-decagon'],
       pentagon: ['mask-pentagon'],
       diamond: ['mask-diamond'],
@@ -22,6 +22,7 @@ const profileImageClasses = cva(['mask', 'relative'], {
       sm: ['w-12', 'h-12'],
       md: ['w-24', 'h-24'],
       lg: ['w-36', 'h-36'],
+      xl: ['w-48', 'h-48'],
     },
   },
   defaultVariants: {
@@ -32,9 +33,15 @@ const profileImageClasses = cva(['mask', 'relative'], {
 
 type ProfileImageProps = {
   src?: string;
+  alt?: string;
 } & VariantProps<typeof profileImageClasses>;
 
-export const ProfileImage = ({ src, variant, size }: ProfileImageProps) => {
+export const ProfileImage = ({
+  src,
+  variant,
+  size,
+  alt,
+}: ProfileImageProps) => {
   const className = profileImageClasses({ variant, size });
   return (
     <div className={className}>
@@ -43,7 +50,7 @@ export const ProfileImage = ({ src, variant, size }: ProfileImageProps) => {
         className="object-cover"
         fill
         src={src || '/profile-placeholder.jpg'}
-        alt="profile image"
+        alt={alt || 'profile image'}
       />
     </div>
   );

@@ -1,13 +1,13 @@
 'use client';
 import { useAppSelector } from '@/store';
+import { usePathname } from 'next/navigation';
 import { ProfileImage } from './ProfileImage';
-import { usePathname, useRouter } from 'next/navigation';
 
 export const UserIndicator = () => {
   const { user } = useAppSelector(state => state.user);
   const pathname = usePathname();
-
   const isRoot = pathname === '/';
+
   return (
     <div>
       {user && !isRoot && (

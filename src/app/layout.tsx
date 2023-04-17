@@ -9,8 +9,11 @@ export const metadata = {
   description: 'Generate recipes using AI',
 };
 
+export const revalidate = 0;
+
 const RootPageLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getUser();
+
   return (
     <html lang="en" data-theme="light">
       <body className="md:overflow-y-hidden">
