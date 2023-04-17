@@ -1,14 +1,15 @@
 'use client';
 
+import { protect } from '@/lib/api';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Lock } from 'react-feather';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../ui/Button';
+import { Card } from '../ui/Card';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Input } from '../ui/Input';
-import { Card } from '../ui/Card';
-import { protect } from '@/lib/api';
-import { Lock } from 'react-feather';
 
 type Inputs = {
   password: string;
@@ -49,6 +50,17 @@ export const ProtectForm = () => {
       <p className="text-sm text-gray-500 mb-2">
         Provide password to access the app
       </p>
+
+      <div className="flex w-full justify-center my-2">
+        <Image
+          src="/logo.png"
+          className="rounded-lg"
+          alt="logo"
+          width={200}
+          height={200}
+        />
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Input
