@@ -1,5 +1,6 @@
 import { getUserFromCookies } from '@/lib/cookies';
 import { createUserRecipe } from '@/lib/data';
+import { uploadImage } from '@/lib/image';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -21,9 +22,12 @@ export async function POST(request: Request) {
     }
 
     const { image, ...rest } = body;
+    const recipeImage = image
+      ? await uploadImage(image, { width: 512, height: 341 })
+      : null;
 
     const recipe = await createUserRecipe({
-      ...(image ? { image } : {}),
+      ...(image ? { image: recipeImage } : {}),
       ...rest,
     });
 
