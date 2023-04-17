@@ -31,7 +31,7 @@ export const SettingsForm = ({
     handleSubmit,
     reset,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<SettingsFormData>({
     defaultValues,
   });
@@ -65,6 +65,7 @@ export const SettingsForm = ({
               name="language"
               type="text"
               label="Language"
+              disabled
             ></Input>
             {errors.language && (
               <ErrorMessage>{errors.language.message}</ErrorMessage>
@@ -123,9 +124,10 @@ export const SettingsForm = ({
             type="submit"
             variant="primary"
             className="m-w-28"
+            disabled={isSubmitting || !isDirty}
             loading={isSubmitting}
           >
-            Edit
+            Save
           </Button>
         </div>
       </form>

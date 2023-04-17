@@ -55,7 +55,7 @@ export const RecipeForm = ({
     reset,
     control,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<Inputs>({
     defaultValues,
   });
@@ -222,6 +222,7 @@ export const RecipeForm = ({
           type="submit"
           variant="primary"
           className="m-w-28 self-center mt-2"
+          disabled={isSubmitting || !isDirty}
           loading={isSubmitting}
         >
           {mode === 'edit' ? 'Edit' : 'Create'}

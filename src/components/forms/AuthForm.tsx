@@ -45,7 +45,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   const {
     register: formRegister,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
@@ -129,7 +129,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           )}
         </div>
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">
-          <Button type="submit" loading={isSubmitting} variant="primary">
+          <Button
+            type="submit"
+            loading={isSubmitting}
+            variant="primary"
+            disabled={isSubmitting || !isDirty}
+          >
             {content.buttonText}
           </Button>
           {error && (

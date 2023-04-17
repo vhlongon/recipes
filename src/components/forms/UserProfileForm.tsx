@@ -41,7 +41,7 @@ export const UserProfileForm = ({
     handleSubmit,
     reset,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<FormData>({
     defaultValues,
   });
@@ -144,7 +144,12 @@ export const UserProfileForm = ({
         </div>
 
         <div className="flex items-center flex-col gap-4 mt-4 justify-between">
-          <Button type="submit" loading={isSubmitting} variant="primary">
+          <Button
+            type="submit"
+            loading={isSubmitting}
+            variant="primary"
+            disabled={isSubmitting || !isDirty}
+          >
             Update
           </Button>
           {error && (
