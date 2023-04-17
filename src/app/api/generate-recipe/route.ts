@@ -63,7 +63,6 @@ export async function POST(request: Request) {
       }
     );
   } catch (error: any) {
-    console.log('🚀 ~ error:', error);
     const message = `could not generate recipe: ${error.message}`;
     return NextResponse.json(
       { data: { message } },

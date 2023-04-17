@@ -1,7 +1,10 @@
+import { EditOrDeleteModal } from '@/components/actions/EditDeleteModal';
+import { EditSettings } from '@/components/actions/EditSettings';
+import { Setting } from '@/components/layout/Setting';
 import { Card } from '@/components/ui/Card';
 import { getUserSettings } from '@/lib/data';
 import { pick } from '@/lib/utils';
-import { Settings } from 'react-feather';
+import { BookOpen, Globe, Layout, Settings, Thermometer } from 'react-feather';
 
 const SettingsPage = async () => {
   const settings = await getUserSettings();
@@ -30,18 +33,56 @@ const SettingsPage = async () => {
           </div>
         }
         className="w-full max-w-md m-auto"
-        // actions={
-        //   <EditOrDeleteModal>
-        //     <EditDeleteUser user={user} />
-        //   </EditOrDeleteModal>
-        // }
+        actions={
+          <EditOrDeleteModal actions={['edit']}>
+            <EditSettings settings={settings} />
+          </EditOrDeleteModal>
+        }
       >
-        <div>
-          {Object.entries(editableSettings).map(([key, value]) => (
-            <div className="flex-1" key={key}>
-              {key}: {value}
-            </div>
-          ))}
+        <div className="flex gap-2 flex-col">
+          <Setting
+            label="Temperature"
+            description="What sampling temperature to use, between 0 and 2. Higher values
+              like 0.8 will make the output more random, while lower values like
+              0.2 will make it more focused and deterministic."
+            icon={<Thermometer size="1rem" />}
+            value={editableSettings.temperature}
+          />
+
+          <Setting
+            label="Max Tokens"
+            description="The maximum number of tokens to generate in the completion. The
+              token count of your prompt plus max_tokens cannot exceed the model
+              context length. Most models have a context length of 2048 tokens
+              (except for the newest models, which support 4096)."
+            icon={<BookOpen size="1rem" />}
+            value={editableSettings.maxTokens}
+          />
+
+          <Setting
+            label="Language"
+            description="Language used for the interface of the app"
+            icon={<Globe size="1rem" />}
+            value={editableSettings.language}
+          />
+
+          <Setting
+            label="Theme"
+            description={
+              <span>
+                Set the theme of the app uses{' '}
+                <a
+                  className="link"
+                  href="https://daisyui.com/docs/themes/"
+                  target="_blank"
+                >
+                  Daisy UI themes
+                </a>
+              </span>
+            }
+            icon={<Layout size="1rem" />}
+            value={editableSettings.theme.toLowerCase()}
+          />
         </div>
       </Card>
     </div>

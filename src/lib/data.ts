@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { getUserFromCookies } from './cookies';
 import { db } from './db';
-import { Recipe, User } from '@prisma/client';
+import { Recipe, Settings, User } from '@prisma/client';
 import { hashPassword } from './password';
 
 export const createUser = async (
@@ -113,6 +113,25 @@ export const getUserSettings = async () => {
   }
 
   return null;
+};
+
+export const updateUserSettings = async (settings: Partial<Settings>) => {
+  const user = await getUserFromCookies(cookies());
+
+  if (!user) {
+    return null;
+  }
+
+  const { id, ...rest } = settings;
+
+  return await db.settings.update({
+    where: {
+      id,
+    },
+    data: {
+      ...rest,
+    },
+  });
 };
 
 export const getUserRecipeCount = async () => {

@@ -1,4 +1,4 @@
-import { Recipe, User } from '@prisma/client';
+import { Recipe, Settings, User } from '@prisma/client';
 
 type FetchOpts = Omit<RequestInit, 'body'> & { body?: object; json?: boolean };
 
@@ -123,5 +123,12 @@ export const logoutOutUser = async () => {
     method: 'GET',
     cache: 'no-cache',
     json: false,
+  });
+};
+
+export const updateSettings = async (settings: Partial<Settings>) => {
+  return fetchData('/api/update-settings', {
+    method: 'PATCH',
+    body: settings,
   });
 };

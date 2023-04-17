@@ -10,12 +10,13 @@ import React, {
 } from 'react';
 import { EditDeleteActions } from './EditDeleteActions';
 
+export type Action = 'edit' | 'delete' | null;
+
 type EditDeleteModalProps = {
   children: ReactElement;
   isOpen?: boolean;
+  actions?: Action[];
 };
-
-export type Action = 'edit' | 'delete' | null;
 
 type EditDeleteContextProps = {
   action: Action;
@@ -42,6 +43,7 @@ export const useEditDeleteContext = () => {
 export const EditOrDeleteModal = ({
   children,
   isOpen: initialIsOpen = false,
+  actions = ['edit', 'delete'],
 }: EditDeleteModalProps) => {
   const [showChild, setShowChild] = useState(false);
   const [action, setAction] = useState<Action>(null);
@@ -70,7 +72,7 @@ export const EditOrDeleteModal = ({
 
   return (
     <EditDeleteContext.Provider value={value}>
-      <EditDeleteActions />
+      <EditDeleteActions actions={actions} />
       {children}
     </EditDeleteContext.Provider>
   );

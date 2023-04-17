@@ -2,28 +2,28 @@ import { VariantProps, cva } from 'class-variance-authority';
 import React, { ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
-const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
+const rangeClasses = cva(['range', ' w-full', 'bg-transparent'], {
   variants: {
     variant: {
-      bordered: ['input-bordered'],
-      ghost: ['input-ghost'],
+      bordered: ['range-bordered'],
+      ghost: ['range-ghost'],
     },
     color: {
-      primary: ['input-primary'],
-      secondary: ['input-secondary'],
-      accent: ['input-accent'],
-      info: ['input-info'],
-      success: ['input-success'],
-      warning: ['input-warning'],
-      error: ['input-error'],
+      primary: ['range-primary'],
+      secondary: ['range-secondary'],
+      accent: ['range-accent'],
+      info: ['range-info'],
+      success: ['range-success'],
+      warning: ['range-warning'],
+      error: ['range-error'],
       transparent: ['bg-transparent', 'text-current'],
       offwhite: ['bg-slate-100', 'text-slate-800'],
     },
     size: {
-      lg: ['input-lg'],
-      md: ['input-md'],
-      sm: ['input-sm'],
-      xs: ['input-xs'],
+      lg: ['range-lg'],
+      md: ['range-md'],
+      sm: ['range-sm'],
+      xs: ['range-xs'],
     },
   },
   defaultVariants: {
@@ -52,22 +52,25 @@ const labelClasses = cva([''], {
   },
 });
 
-type InputBaseProps = Omit<
+type RangeInputBaseProps = Omit<
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
-  'type'
-> & { type: 'text' | 'email' | 'password' | 'number' };
+  'type' | 'min' | 'max' | 'step'
+>;
 
-type InputProps = InputBaseProps & {
+type InputProps = RangeInputBaseProps & {
   label?: ReactNode;
   altText?: string;
   name: string;
   register: UseFormRegister<any>;
-} & VariantProps<typeof inputClasses>;
+  min: number;
+  max: number;
+  step?: number;
+} & VariantProps<typeof rangeClasses>;
 
-export const Input = ({
+export const Range = ({
   variant,
   color,
   size,
@@ -79,7 +82,7 @@ export const Input = ({
   name,
   ...props
 }: InputProps) => {
-  const inputClassname = inputClasses({ variant, color, size });
+  const inputClassname = rangeClasses({ variant, color, size });
   const labelTextClassname = labelClasses({ color, class: 'label-text' });
   const labelTextAltClassname = labelClasses({
     color,
@@ -94,30 +97,28 @@ export const Input = ({
           {altText && <span className={labelTextAltClassname}>{altText}</span>}
         </label>
       )}
+      <div className=" flex flex-1 justify-between">
+        <span className="text-xs text-slate-600">{props.min}</span>
+        <span className="text-xs text-slate-600">{props.max}</span>
+      </div>
       <input
         id={id}
+        type="range"
         {...register(name, {
-          required: `Required`,
-          ...(props.type === 'email'
-            ? {
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: 'value is not a valid email',
-                },
-              }
-            : {}),
-          ...(props.type === 'password'
-            ? {
-                minLength: {
-                  value: 4,
-                  message: 'Password must have at least 4 characters',
-                },
-              }
-            : {}),
+          required: required ? `Required` : false,
         })}
         {...props}
         className={inputClassname}
       />
+      {props.step && (
+        <div className="w-full flex justify-between text-xs px-2">
+          {Array.from({ length: props.max / props.step }, (_, i) => (
+            <span key={i} className="text-slate-600">
+              |
+            </span>
+          ))}
+        </div>
+      )}
     </>
   );
 };
