@@ -1,5 +1,7 @@
+import { getUserFromCookies } from '@/lib/cookies';
 import { getUserSettings } from '@/lib/data';
 import { generatePrompt, parseAnswer } from '@/lib/recipe';
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { Configuration, OpenAIApi } from 'openai';
 
@@ -10,6 +12,18 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export async function POST(request: Request) {
+  const user = await getUserFromCookies(cookies());
+
+  if (!user) {
+    const message = 'not authorized';
+    return NextResponse.json(
+      { data: { message } },
+      {
+        status: 403,
+        statusText: message,
+      }
+    );
+  }
   const body = await request.json();
 
   const prompt = generatePrompt(body);
