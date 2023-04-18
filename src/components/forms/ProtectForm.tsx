@@ -1,16 +1,15 @@
 'use client';
 
 import { protect } from '@/lib/api';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Lock } from 'react-feather';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ProfileImage } from '../layout/ProfileImage';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Input } from '../ui/Input';
-import { ProfileImage } from '../layout/ProfileImage';
 
 type Inputs = {
   password: string;
@@ -53,7 +52,12 @@ export const ProtectForm = () => {
       </p>
 
       <div className="flex w-full justify-center my-2">
-        <ProfileImage src="/logo.png" alt="Logo" variant="hexagon" size="xl" />
+        <ProfileImage
+          src={'/logo2.png'}
+          alt="Logo"
+          variant="hexagon"
+          size="xl"
+        />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
