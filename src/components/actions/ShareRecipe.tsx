@@ -31,7 +31,7 @@ export const ShareRecipe = ({
           quote={description}
           hashtag={hashtags.join(', ')}
         >
-          <div className="p-2 bg-accent rounded-full">
+          <div className="btn btn-circle btn-accent text-">
             <Facebook size={'1.5rem'} />
           </div>
         </FacebookShareButton>
@@ -41,13 +41,13 @@ export const ShareRecipe = ({
           title={title}
           description={description}
         >
-          <div className="p-2 bg-accent rounded-full">
+          <div className="btn btn-circle btn-accent">
             <Instagram size={'1.5rem'} />
           </div>
         </InstapaperShareButton>
 
         <TwitterShareButton url={shareUrl} title={title} hashtags={hashtags}>
-          <div className="p-2 bg-accent rounded-full">
+          <div className="btn btn-circle btn-accent">
             <Twitter size={'1.5rem'} />
           </div>
         </TwitterShareButton>
