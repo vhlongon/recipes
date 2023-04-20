@@ -17,7 +17,7 @@ const rangeClasses = cva(['range', ' w-full', 'bg-transparent'], {
       warning: ['range-warning'],
       error: ['range-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: [''],
+      neutral: [''],
     },
     size: {
       lg: ['range-lg'],
@@ -28,7 +28,7 @@ const rangeClasses = cva(['range', ' w-full', 'bg-transparent'], {
   },
   defaultVariants: {
     variant: 'bordered',
-    color: 'offwhite',
+    color: 'neutral',
     size: 'md',
   },
 });
@@ -44,11 +44,11 @@ const labelClasses = cva([''], {
       warning: ['label-warning'],
       error: ['label-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: [''],
+      neutral: [''],
     },
   },
   defaultVariants: {
-    color: 'offwhite',
+    color: 'neutral',
   },
 });
 
