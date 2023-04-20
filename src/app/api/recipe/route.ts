@@ -1,6 +1,7 @@
 import { getUserFromCookies } from '@/lib/cookies';
 import { createUserRecipe } from '@/lib/data';
 import { uploadImage } from '@/lib/image';
+import { getErrorMessage } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -47,8 +48,8 @@ export async function POST(request: Request) {
         statusText: 'ok',
       }
     );
-  } catch (error: any) {
-    const message = `could not create recipe: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `could not create recipe: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

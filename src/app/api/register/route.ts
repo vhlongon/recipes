@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         },
       }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
       { data: { message: 'There is already have a user with this email' } },
       {

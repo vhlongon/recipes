@@ -1,5 +1,4 @@
 import { getUser } from '@/lib/data';
-import { sleep } from '@/lib/sleep';
 import { Provider } from '../Provider';
 import { LogoutUser } from '../actions/LogOutUser';
 import { IconLink, LinkIconProps } from '../ui/IconLink';
@@ -13,7 +12,7 @@ const links: LinkIconProps<string>[] = [
 export const SideBarSkeleton = () => {
   return (
     <div className="relative flex h-full animate-pulse rounded-2xl md:flex-wrap">
-      {links.map((link, index) => (
+      {links.map(link => (
         <IconLink {...link} key={link.href} className="pointer-events-none" />
       ))}
     </div>

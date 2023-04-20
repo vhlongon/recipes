@@ -1,6 +1,8 @@
 import { Recipe } from '@prisma/client';
 
-export const generatePrompt = (body: any) => {
+export const generatePrompt = (
+  body: Pick<Recipe, 'type' | 'preparationTime' | 'ingredients' | 'portions' | 'kcal'>
+) => {
   const { type, preparationTime, ingredients, portions, kcal } = body;
   const prompt = `Generate a ${type} recipe that takes ${preparationTime} and includes the following ingredients:\n${ingredients.join(
     '\n'

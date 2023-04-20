@@ -10,6 +10,7 @@ import { Select } from '../ui/Select';
 import { TagInput } from '../ui/TagInput';
 import { Progress } from '../ui/Progress';
 import { useRouter } from 'next/navigation';
+import { getErrorMessage } from '@/lib/utils';
 
 type Inputs = {
   title: string;
@@ -67,8 +68,8 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFo
       clearErrors();
       onSucess?.();
       router.refresh();
-    } catch (error: any) {
-      setError(error?.message ?? 'Something went wrong');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error) || 'Something went wrong trying to update recipe');
     } finally {
       setIsSubmitting(false);
     }
@@ -121,7 +122,7 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFo
         <div>
           <Controller
             render={({ field }) => {
-              const { onChange, ref, value, name, onBlur } = field;
+              const { onChange, value, name, onBlur } = field;
               const handleChange = (value: string[]) => {
                 onChange(value);
               };

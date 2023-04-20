@@ -1,6 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ReactNode } from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
   variants: {
@@ -61,7 +61,7 @@ type InputProps = InputBaseProps & {
   label?: ReactNode;
   altText?: string;
   name: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
 } & VariantProps<typeof inputClasses>;
 
 export const Input = ({ variant, color, size, label, altText, id, register, required, name, ...props }: InputProps) => {
@@ -83,7 +83,7 @@ export const Input = ({ variant, color, size, label, altText, id, register, requ
       <input
         id={id}
         {...register(name, {
-          required: `Required`,
+          required: required ? `Required` : false,
           ...(props.type === 'email'
             ? {
                 pattern: {

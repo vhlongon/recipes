@@ -10,6 +10,7 @@ import { FileInput } from '../ui/FileInput';
 import { Input } from '../ui/Input';
 import { useAppDispatch } from '@/store';
 import { setUser } from '@/store/userSlice';
+import { getErrorMessage } from '@/lib/utils';
 
 export type FormData = Pick<User, 'email' | 'firstName' | 'lastName' | 'image'>;
 
@@ -59,8 +60,8 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
       reset();
       clearErrors();
       onSuccess?.();
-    } catch (error: any) {
-      setError(error?.message ?? 'Something went wrong');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error) || 'Something went wrong trying to update profile');
     } finally {
       setIsSubmitting(false);
     }

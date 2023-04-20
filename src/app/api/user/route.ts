@@ -1,7 +1,8 @@
 import { getUser } from '@/lib/data';
+import { getErrorMessage } from '@/lib/utils';
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const user = await getUser();
 
@@ -23,8 +24,8 @@ export async function GET(request: Request) {
         statusText: 'ok',
       }
     );
-  } catch (error: any) {
-    const message = `could not get user: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `could not get user: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

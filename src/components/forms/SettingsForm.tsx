@@ -1,11 +1,12 @@
-import { Settings, Theme } from '@prisma/client';
-import React, { useState } from 'react';
+import { Theme } from '@prisma/client';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Input } from '../ui/Input';
-import { ErrorMessage } from '../ui/ErrorMessage';
-import { Select } from '../ui/Select';
 import { Button } from '../ui/Button';
+import { ErrorMessage } from '../ui/ErrorMessage';
+import { Input } from '../ui/Input';
 import { Range } from '../ui/Range';
+import { Select } from '../ui/Select';
+import { getErrorMessage } from '@/lib/utils';
 
 export type SettingsFormData = {
   language: string;
@@ -40,8 +41,8 @@ export const SettingsForm = ({ defaultValues, onSubmit, onSuccess }: SettingsFor
       reset();
       clearErrors();
       onSuccess?.();
-    } catch (error: any) {
-      setError(error?.message ?? 'Something went wrong');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error) || 'Something went wrong trying to update settings');
     } finally {
       setIsSubmitting(false);
     }

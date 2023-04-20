@@ -1,4 +1,3 @@
-import { getUser } from '@/lib/data';
 import { Provider } from '../Provider';
 import { Card } from '../ui/Card';
 import { GreetingsTitle } from './GreetingsTitle';
@@ -21,8 +20,6 @@ export const GreetingsSkeleton = () => {
 };
 
 export const Greetings = async () => {
-  const user = await getUser();
-
   return (
     <>
       <Card

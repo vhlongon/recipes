@@ -10,6 +10,7 @@ import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Input } from '../ui/Input';
+import { getErrorMessage } from '@/lib/utils';
 
 type Inputs = {
   password: string;
@@ -30,8 +31,8 @@ export const ProtectForm = () => {
       setIsSubmitting(true);
       await protect(data.password);
       router.replace('/home');
-    } catch (error: any) {
-      setError(error?.message ?? 'Something went wrong');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error) || 'Denied!');
     } finally {
       setIsSubmitting(false);
     }

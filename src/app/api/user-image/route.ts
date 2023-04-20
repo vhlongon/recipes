@@ -1,6 +1,7 @@
 import { getUserFromCookies } from '@/lib/cookies';
 import { updateUserImage } from '@/lib/data';
 import { uploadImage } from '@/lib/image';
+import { getErrorMessage } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -43,8 +44,8 @@ export async function POST(request: Request) {
         statusText: 'ok',
       }
     );
-  } catch (error: any) {
-    const message = `could not upload user image: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `could not upload user image: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

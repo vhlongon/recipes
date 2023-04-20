@@ -1,5 +1,6 @@
 import { getUserFromCookies } from '@/lib/cookies';
 import { generateRecipeCompletion } from '@/lib/openai';
+import { getErrorMessage } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -41,8 +42,8 @@ export async function POST(request: Request) {
         statusText: 'ok',
       }
     );
-  } catch (error: any) {
-    const message = `could not generate recipe: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `could not generate recipe: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

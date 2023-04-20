@@ -1,6 +1,7 @@
 import { getUserFromCookies } from '@/lib/cookies';
 import { updateUser } from '@/lib/data';
 import { uploadImage } from '@/lib/image';
+import { getErrorMessage } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -47,8 +48,8 @@ export async function PATCH(request: Request) {
         statusText: 'ok',
       }
     );
-  } catch (error: any) {
-    const message = `could not update user: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `could not update user: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

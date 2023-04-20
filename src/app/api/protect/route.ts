@@ -1,4 +1,5 @@
 import { encode, isValidProtectPassword } from '@/lib/protect';
+import { getErrorMessage } from '@/lib/utils';
 import { serialize } from 'cookie';
 import { NextResponse } from 'next/server';
 
@@ -33,8 +34,8 @@ export async function POST(request: Request) {
         },
       }
     );
-  } catch (error: any) {
-    const message = `not authorized: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `not authorized: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

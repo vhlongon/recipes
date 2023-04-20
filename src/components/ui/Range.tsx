@@ -1,6 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ReactNode } from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 const rangeClasses = cva(['range', ' w-full', 'bg-transparent'], {
   variants: {
@@ -61,7 +61,7 @@ type InputProps = RangeInputBaseProps & {
   label?: ReactNode;
   altText?: string;
   name: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
   min: number;
   max: number;
   step?: number;

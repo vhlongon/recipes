@@ -1,6 +1,7 @@
 'use client';
 
 import { deleteRecipe, updateRecipe } from '@/lib/api';
+import { getErrorMessage } from '@/lib/utils';
 import { Recipe } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -44,8 +45,8 @@ export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
       setIsSubmitting(true);
       await deleteRecipe(recipe.id);
       onSuccess();
-    } catch (error: any) {
-      setError(error?.message ?? 'Something went wrong');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error) || 'Something went wrong trying to delete recipe');
     } finally {
       setIsSubmitting(false);
     }

@@ -1,5 +1,6 @@
 import { getUserFromCookies } from '@/lib/cookies';
 import { updateUserSettings } from '@/lib/data';
+import { getErrorMessage } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -40,8 +41,8 @@ export async function PATCH(request: Request) {
         statusText: 'ok',
       }
     );
-  } catch (error: any) {
-    const message = `could not update settings: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `could not update settings: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

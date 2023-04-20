@@ -31,7 +31,7 @@
     "cookie": "^0.5.0",
     "css-reset-and-normalize": "^2.3.6",
     "daisyui": "^2.51.5",
-    "eslint": "8.37.0",
+    "eslint": "^8.38.0",
     "eslint-config-next": "13.2.4",
     "jose": "^4.13.1",
     "next": "13.2.4",
@@ -44,11 +44,13 @@
     "react-redux": "^8.0.5",
     "react-tag-input-component": "^2.0.2",
     "redux": "^4.2.1",
-    "typescript": "5.0.3",
+    "typescript": "^5.0.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
     "autoprefixer": "^10.4.14",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",

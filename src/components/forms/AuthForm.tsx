@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '../ui/ErrorMessage';
+import { getErrorMessage } from '@/lib/utils';
 
 const texts = {
   register: {
@@ -60,8 +61,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       dispatch(setUser(res.data.user));
 
       router.replace('/home');
-    } catch (error: any) {
-      setError(error?.message ?? 'Something went wrong');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error) || 'Something went wrong trying to authenticate user');
     } finally {
       setIsSubmitting(false);
     }

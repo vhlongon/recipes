@@ -1,5 +1,4 @@
 import { VariantProps, cva } from 'class-variance-authority';
-import { useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
 
 const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
@@ -88,7 +87,7 @@ export const TagInput = ({
   };
 
   return (
-    <div>
+    <div className={inputClassname}>
       {label && (
         <label className="label">
           <span className={labelTextClassname}>{label}</span>

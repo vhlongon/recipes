@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       const message = `invalid login`;
       return NextResponse.json({ data: { message } }, { status: 401, statusText: message });
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     const message = 'An error ocurred';
     return NextResponse.json(
       { data: { message } },

@@ -9,6 +9,7 @@ import { Button } from '../ui/Button';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Modal } from '../ui/Modal';
 import { useEditDeleteContext } from './EditDeleteModal';
+import { getErrorMessage } from '@/lib/utils';
 
 type EditDeleteUserProps = {
   user: Omit<User, 'createdAt' | 'updatedAt'> & {
@@ -38,8 +39,8 @@ export const EditDeleteUser = ({ user }: EditDeleteUserProps) => {
       await deleteUser();
       closeModal();
       router.replace('/signin');
-    } catch (error: any) {
-      setError(error?.message ?? 'Something went wrong');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error) || 'Something went wrong trying to delete user');
     } finally {
       setIsSubmitting(false);
     }

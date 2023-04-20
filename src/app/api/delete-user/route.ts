@@ -1,10 +1,11 @@
 import { getUserFromCookies } from '@/lib/cookies';
 import { deleteUser } from '@/lib/data';
+import { getErrorMessage } from '@/lib/utils';
 import { serialize } from 'cookie';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function DELETE(request: Request) {
+export async function DELETE() {
   try {
     const user = await getUserFromCookies(cookies());
 
@@ -46,8 +47,8 @@ export async function DELETE(request: Request) {
         },
       }
     );
-  } catch (error: any) {
-    const message = `could not delete user: ${error.message}`;
+  } catch (error: unknown) {
+    const message = `could not delete user: ${getErrorMessage(error)}`;
     return NextResponse.json(
       { data: { message } },
       {

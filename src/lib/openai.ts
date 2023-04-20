@@ -1,6 +1,7 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { getUserSettings } from './data';
 import { generatePrompt, generateRecipeImagePrompt, parseAnswer } from './recipe';
+import { Recipe } from '@prisma/client';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -8,7 +9,9 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-export const generateRecipeCompletion = async (body: any) => {
+export const generateRecipeCompletion = async (
+  body: Pick<Recipe, 'type' | 'preparationTime' | 'ingredients' | 'portions' | 'kcal'>
+) => {
   const prompt = generatePrompt(body);
   const promptLength = prompt.length;
   const settings = await getUserSettings();

@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { getUserFromCookies } from './cookies';
 import { db } from './db';
 import { hashPassword } from './password';
+import { omit } from './utils';
 
 export const createUser = async (input: Pick<User, 'email' | 'firstName' | 'lastName' | 'password'>) => {
   const { password, ...rest } = input;
@@ -209,14 +210,14 @@ export const updateUser = async (user: Partial<User>) => {
     return null;
   }
 
-  const { id, ...rest } = user;
+  const withoutId = omit(user, ['id']);
 
   const updated = await db.user.update({
     where: {
       id: currentUser.id,
     },
     data: {
-      ...rest,
+      ...withoutId,
     },
   });
 
