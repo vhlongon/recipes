@@ -59,14 +59,18 @@ export const SettingsForm = ({ defaultValues, onSubmit, onSuccess }: SettingsFor
 
           <div className="flex-1">
             <Select
-              {...register('theme', { required: true })}
+              register={register}
+              name="theme"
               title="Type"
               label="Type"
               id="type"
-              options={Object.values(Theme).map(type => ({
-                value: type,
-                label: type.toLowerCase(),
-              }))}></Select>
+              options={Object.values(Theme).map(type => {
+                return {
+                  value: type,
+                  label: type.toLowerCase(),
+                  selected: defaultValues?.theme === type,
+                };
+              })}></Select>
           </div>
         </div>
 

@@ -93,7 +93,9 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFo
           </div>
           <div>
             <Select
-              {...register('type', { required: true })}
+              register={register}
+              required
+              name="type"
               title="Type"
               label="Type"
               id="type"

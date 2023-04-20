@@ -14,13 +14,13 @@
 }
 
 :root {
-  --primary: transparent;
-  --secondary: #701a75;
+  --scrollbar-primary: transparent;
+  --scrollbar-secondary: hsl(var(--b1) / 1);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--secondary) var(--primary);
+  scrollbar-color: var(--scrollbar-secondary) var(--scrollbar-primary);
 }
 
 *::-webkit-scrollbar {
@@ -28,52 +28,124 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--primary);
+  background: var(--scrollbar-primary);
   border-radius: 5px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
+  background-color: var(--scrollbar-secondary);
   border-radius: 14px;
-  border: 3px solid var(--primary);
+  border: 3px solid var(--scrollbar-primary);
 }
 
-.bg-gradient {
+[data-theme='light'] .bg-gradient {
+  background: #7f7fd5;
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+}
+[data-theme='dark'] .bg-gradient {
+  background: #0f2027;
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+}
+
+[data-theme='cupcake'] .bg-gradient {
+  background: #659999;
+  background: linear-gradient(to right, #f4791f, #659999);
+}
+
+[data-theme='emerald'] .bg-gradient {
+  background: #8360c3;
+  background: linear-gradient(to right, #2ebf91, #8360c3);
+}
+
+[data-theme='cyberpunk'] .bg-gradient {
+  background: #d38312;
+  background: linear-gradient(to right, #d38312, #a83279);
+}
+
+[data-theme='corporate'] .bg-gradient {
+  background-color: #8ec5fc;
+  background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
+}
+
+[data-theme='retro'] .bg-gradient {
+  background-color: #ffe53b;
+  background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
+}
+
+[data-theme='synthwave'] .bg-gradient {
+  background-color: #ff3cac;
+  background-image: linear-gradient(225deg, #ff3cac 0%, #784ba0 50%, #2b86c5 100%);
+}
+
+[data-theme='valentine'] .bg-gradient {
   background-color: #4158d0;
-  background-image: linear-gradient(
-    43deg,
-    #4158d0 0%,
-    #c850c0 46%,
-    #ffcc70 100%
-  );
+  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
 }
 
-.rainbow-mesh {
-  background-color: hsla(0, 100%, 50%, 1);
-  background-image: radial-gradient(
-      at 40% 20%,
-      hsla(28, 100%, 74%, 1) 0px,
-      transparent 50%
-    ),
-    radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 1) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 1) 0px, transparent 50%),
-    radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 1) 0px, transparent 50%);
+[data-theme='halloween'] .bg-gradient {
+  background: #000000;
+  background: linear-gradient(to right, #e74c3c, #000000);
 }
 
-.candy-mesh {
-  background-color: #ff99ee;
-  background-image: radial-gradient(
-      at 99% 6%,
-      hsla(195, 69%, 67%, 1) 0px,
-      transparent 50%
-    ),
-    radial-gradient(at 55% 88%, hsla(189, 74%, 69%, 1) 0px, transparent 50%),
-    radial-gradient(at 53% 27%, hsla(271, 78%, 63%, 1) 0px, transparent 50%),
-    radial-gradient(at 89% 89%, hsla(317, 89%, 70%, 1) 0px, transparent 50%),
-    radial-gradient(at 35% 44%, hsla(337, 92%, 61%, 1) 0px, transparent 50%);
+[data-theme='garden'] .bg-gradient {
+  background: #6a9113;
+  background: linear-gradient(to right, #141517, #6a9113);
+}
+
+[data-theme='forest'] .bg-gradient {
+  background: #6a9113;
+  background: linear-gradient(to right, #141517, #6a9113);
+}
+
+[data-theme='pastel'] .bg-gradient {
+  background: #d1913c;
+  background: linear-gradient(to right, #ffd194, #d1913c);
+}
+
+[data-theme='fantasy'] .bg-gradient {
+  background: #780206;
+  background: linear-gradient(to right, #061161, #780206);
+}
+[data-theme='luxury'] .bg-gradient {
+  background: #000000;
+  background: linear-gradient(to right, #434343, #000000);
+}
+
+[data-theme='dracula'] .bg-gradient {
+  background: #dc2424;
+  background: linear-gradient(to right, #4a569d, #dc2424);
+}
+[data-theme='cmyk'] .bg-gradient {
+  background: #ed4264;
+  background: linear-gradient(to right, #ffedbc, #ed4264);
+}
+
+[data-theme='autumn'] .bg-gradient {
+  background: #5a3f37;
+  background: linear-gradient(to right, #2c7744, #5a3f37);
+}
+[data-theme='acid'] .bg-gradient {
+  background: #833ab4;
+  background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+}
+[data-theme='lemonade'] .bg-gradient {
+  background: #3ca55c;
+  background: linear-gradient(to right, #b5ac49, #3ca55c);
+}
+
+[data-theme='night'] .bg-gradient {
+  background: #141e30;
+  background: linear-gradient(to right, #243b55, #141e30);
+}
+
+[data-theme='coffee'] .bg-gradient {
+  background: #603813;
+  background: linear-gradient(to right, #b29f94, #603813);
+}
+
+[data-theme='winter'] .bg-gradient {
+  background: #000428;
+  background: linear-gradient(to right, #004e92, #000428);
 }
 
 .glass {

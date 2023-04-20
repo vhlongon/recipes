@@ -20,7 +20,7 @@ export const LogoutUser = () => {
       {user && (
         <>
           <span className="flex w-full cursor-pointer items-center justify-center" title="Log out" role="button">
-            <LogOutIcon className="stroke-slate-100" size={40} onClick={onClick} />
+            <LogOutIcon className="text-base-content" size={40} onClick={onClick} />
           </span>
         </>
       )}

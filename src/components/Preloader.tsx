@@ -1,10 +1,14 @@
 'use client';
 
-import { useRef } from 'react';
 import { store } from '@/store';
-import { setUser, ContextUser } from '@/store/userSlice';
+import { ContextUser, setUser } from '@/store/userSlice';
+import { useRef } from 'react';
 
-export const Preloader = ({ user }: { user: ContextUser }) => {
+type PreloadProps = {
+  user: ContextUser;
+};
+
+export const Preloader = ({ user }: PreloadProps) => {
   const loaded = useRef(false);
 
   if (!loaded.current) {

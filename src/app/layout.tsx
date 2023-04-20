@@ -1,7 +1,8 @@
 import { Preloader } from '@/components/Preloader';
 import { Provider } from '@/components/Provider';
 import { UserIndicator } from '@/components/layout/UserIndicator';
-import { getUser } from '@/lib/data';
+import { getUser, getUserSettings } from '@/lib/data';
+import { Theme } from '@prisma/client';
 import '../styles/globals.css';
 
 export const metadata = {
@@ -13,20 +14,23 @@ export const revalidate = 0;
 
 const RootPageLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getUser();
-  console.log(user);
+  const settings = await getUserSettings();
+  const theme = settings?.theme?.toLowerCase() as Theme;
 
   return (
-    <html lang="en" data-theme="light">
-      <body className="md:overflow-y-hidden">
-        <div id="modal-root"></div>
-        {children}
-        <Preloader user={user} />
+    <>
+      <Preloader user={user} />
+      <html lang="en" data-theme={theme}>
+        <body className="md:overflow-y-hidden">
+          <div id="modal-root"></div>
+          {children}
 
-        <Provider>
-          <UserIndicator />
-        </Provider>
-      </body>
-    </html>
+          <Provider>
+            <UserIndicator />
+          </Provider>
+        </body>
+      </html>
+    </>
   );
 };
 
