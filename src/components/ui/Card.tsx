@@ -39,7 +39,7 @@ export const Card = ({ title, actions, className, bg, bordered, spacing, childre
 
   return (
     <div className={classNames}>
-      {image && <CardImage src={image} alt="recipe" />}
+      {image && <CardImage src={image} alt="recipe" fill />}
       <div className="card-body justify-between overflow-y-scroll">
         {title && <h2 className="card-title">{title}</h2>}
         {children}

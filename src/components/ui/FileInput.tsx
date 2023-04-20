@@ -1,6 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ReactNode } from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 
 const fileInputClasses = cva(['file-input', ' w-full', 'bg-transparent'], {
   variants: {
@@ -61,7 +61,8 @@ type FileInputProps = FileInputBaseProps & {
   label?: ReactNode;
   altText?: string;
   name: string;
-  register: UseFormRegister<FieldValues>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  register: UseFormRegister<any>;
 } & VariantProps<typeof fileInputClasses>;
 
 export const FileInput = ({
