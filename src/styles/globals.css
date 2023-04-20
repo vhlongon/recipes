@@ -11,6 +11,7 @@
 
 .rti--container {
   background: hsl(var(--b1) / 1) !important;
+  --rti-radius: var(--rounded-btn, 0.5rem);
 }
 
 :root {

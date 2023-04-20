@@ -89,27 +89,31 @@ export const TagInput = ({
 
   return (
     <div>
-      {label && (
-        <label className="label">
-          <span className={labelTextClassname}>{label}</span>
-          {altText && <span className={labelTextAltClassname}>{altText}</span>}
-        </label>
-      )}
-      <div className={clsx(inputClassname, 'px-0')}>
-        <TagsInput
-          value={tags}
-          onChange={handleChange}
-          onBlur={onBlur}
-          onRemoved={onRemoved}
-          name={name}
-          classNames={{
-            input: 'bg-base-100',
-            tag: 'bg-base-200',
-          }}
-          placeHolder={placeHolder}
-        />
+      <div>
+        {label && (
+          <label className="label">
+            <span className={labelTextClassname}>{label}</span>
+            {altText && <span className={labelTextAltClassname}>{altText}</span>}
+          </label>
+        )}
+        <div className={clsx(inputClassname, 'px-0', 'h-auto')}>
+          <TagsInput
+            value={tags}
+            onChange={handleChange}
+            onBlur={onBlur}
+            onRemoved={onRemoved}
+            name={name}
+            classNames={{
+              input: 'bg-base-100',
+              tag: 'bg-base-200 text-base-content',
+            }}
+            placeHolder={placeHolder}
+          />
+        </div>
       </div>
-      <em className="px-2 text-xs text-base-content">press enter or comma to add new tag</em>
+      <div>
+        <em className="px-2 text-xs text-base-content">press enter or comma to add new tag</em>
+      </div>
     </div>
   );
 };
