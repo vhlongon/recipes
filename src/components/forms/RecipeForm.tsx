@@ -144,7 +144,7 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFo
           />
           {errors.ingredients && <ErrorMessage>{errors.ingredients.message}</ErrorMessage>}
         </div>
-        <div className="flex w-full justify-between gap-4">
+        <div className="mt-6 flex w-full justify-between gap-4">
           <div>
             <Input
               register={register}

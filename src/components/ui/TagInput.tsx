@@ -1,4 +1,5 @@
 import { VariantProps, cva } from 'class-variance-authority';
+import clsx from 'clsx';
 import { TagsInput } from 'react-tag-input-component';
 
 const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
@@ -16,7 +17,7 @@ const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
       warning: ['input-warning'],
       error: ['input-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['bg-slate-100', 'text-slate-800'],
+      offwhite: [''],
     },
     size: {
       lg: ['input-lg'],
@@ -87,26 +88,28 @@ export const TagInput = ({
   };
 
   return (
-    <div className={inputClassname}>
+    <div>
       {label && (
         <label className="label">
           <span className={labelTextClassname}>{label}</span>
           {altText && <span className={labelTextAltClassname}>{altText}</span>}
         </label>
       )}
-      <TagsInput
-        value={tags}
-        onChange={handleChange}
-        onBlur={onBlur}
-        onRemoved={onRemoved}
-        name={name}
-        classNames={{
-          input: 'bg-slate-100',
-          tag: 'bg-slate-200',
-        }}
-        placeHolder={placeHolder}
-      />
-      <em className="px-2 text-xs text-slate-600">press enter or comma to add new tag</em>
+      <div className={clsx(inputClassname, 'px-0')}>
+        <TagsInput
+          value={tags}
+          onChange={handleChange}
+          onBlur={onBlur}
+          onRemoved={onRemoved}
+          name={name}
+          classNames={{
+            input: 'bg-base-100',
+            tag: 'bg-base-200',
+          }}
+          placeHolder={placeHolder}
+        />
+      </div>
+      <em className="px-2 text-xs text-base-content">press enter or comma to add new tag</em>
     </div>
   );
 };

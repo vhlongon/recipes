@@ -17,7 +17,7 @@ const fileInputClasses = cva(['file-input', ' w-full', 'bg-transparent'], {
       warning: ['file-input-warning'],
       error: ['file-input-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['bg-slate-100', 'text-slate-800'],
+      offwhite: [''],
     },
     size: {
       lg: ['file-input-lg'],

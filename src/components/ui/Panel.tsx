@@ -11,7 +11,7 @@ export const Panel = ({ children, className, as: Component = 'div' }: PanelProps
   return (
     <Component
       className={clsx(
-        'rounded-2xl border-2 border-solid border-gray-200 bg-white bg-opacity-40 text-slate-800 backdrop-blur-lg backdrop-saturate-200',
+        'rounded-2xl border-2 border-solid border-gray-200 bg-white bg-opacity-40 text-base-content backdrop-blur-lg backdrop-saturate-200',
         className
       )}>
       {children}

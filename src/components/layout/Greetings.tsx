@@ -28,7 +28,7 @@ export const Greetings = async () => {
             <GreetingsTitle />
           </Provider>
         }
-        className="w-full max-w-xl">
+        className="w-full max-w-lg">
         <p className="text-base-content">
           Welcome back!
           <br /> Time to get creative and come up with some new recipes?

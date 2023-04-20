@@ -17,7 +17,7 @@ const rangeClasses = cva(['range', ' w-full', 'bg-transparent'], {
       warning: ['range-warning'],
       error: ['range-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['bg-slate-100', 'text-slate-800'],
+      offwhite: [''],
     },
     size: {
       lg: ['range-lg'],
@@ -85,8 +85,8 @@ export const Range = ({ variant, color, size, label, altText, id, register, requ
         </label>
       )}
       <div className=" flex flex-1 justify-between">
-        <span className="text-xs text-slate-600">{props.min}</span>
-        <span className="text-xs text-slate-600">{props.max}</span>
+        <span className="text-xs text-base-content">{props.min}</span>
+        <span className="text-xs text-base-content">{props.max}</span>
       </div>
       <input
         id={id}
@@ -100,7 +100,7 @@ export const Range = ({ variant, color, size, label, altText, id, register, requ
       {props.step && (
         <div className="flex w-full justify-between px-2 text-xs">
           {Array.from({ length: props.max / props.step }, (_, i) => (
-            <span key={i} className="text-slate-600">
+            <span key={i} className="text-base-content">
               |
             </span>
           ))}

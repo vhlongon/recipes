@@ -51,7 +51,7 @@ const RecipePage = async ({ params }: RecipePageProps) => {
 
   if (!recipe) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center gap-4 text-2xl text-slate-50">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-4 text-2xl text-base-content">
         Recipe not found
         <ButtonLink href="/home">Go to recipes</ButtonLink>
       </div>

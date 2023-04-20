@@ -10,7 +10,7 @@
 }
 
 .rti--container {
-  background: #f1f5f9 !important;
+  background: hsl(var(--b1) / 1) !important;
 }
 
 :root {
