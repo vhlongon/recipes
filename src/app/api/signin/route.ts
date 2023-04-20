@@ -41,10 +41,7 @@ export async function POST(request: Request) {
       );
     } else {
       const message = `invalid login`;
-      return NextResponse.json(
-        { data: { message } },
-        { status: 401, statusText: message }
-      );
+      return NextResponse.json({ data: { message } }, { status: 401, statusText: message });
     }
   } catch (error: any) {
     const message = 'An error ocurred';

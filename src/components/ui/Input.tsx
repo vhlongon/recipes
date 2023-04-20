@@ -53,10 +53,7 @@ const labelClasses = cva([''], {
 });
 
 type InputBaseProps = Omit<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
+  React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
   'type'
 > & { type: 'text' | 'email' | 'password' | 'number' };
 
@@ -67,18 +64,7 @@ type InputProps = InputBaseProps & {
   register: UseFormRegister<any>;
 } & VariantProps<typeof inputClasses>;
 
-export const Input = ({
-  variant,
-  color,
-  size,
-  label,
-  altText,
-  id,
-  register,
-  required,
-  name,
-  ...props
-}: InputProps) => {
+export const Input = ({ variant, color, size, label, altText, id, register, required, name, ...props }: InputProps) => {
   const inputClassname = inputClasses({ variant, color, size });
   const labelTextClassname = labelClasses({ color, class: 'label-text' });
   const labelTextAltClassname = labelClasses({

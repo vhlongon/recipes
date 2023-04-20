@@ -1,13 +1,6 @@
 'use client';
 
-import React, {
-  ReactElement,
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { ReactElement, createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { EditDeleteActions } from './EditDeleteActions';
 
 export type Action = 'edit' | 'delete' | null;
@@ -32,9 +25,7 @@ export const useEditDeleteContext = () => {
   const context = React.useContext(EditDeleteContext);
 
   if (!context) {
-    throw new Error(
-      'useEditDeleteContext must be used within a EditDeleteProvider'
-    );
+    throw new Error('useEditDeleteContext must be used within a EditDeleteProvider');
   }
 
   return context;

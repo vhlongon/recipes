@@ -30,21 +30,10 @@ type RecipeFormProps = {
 
 export type FormData = Pick<
   Recipe,
-  | 'title'
-  | 'description'
-  | 'type'
-  | 'ingredients'
-  | 'portions'
-  | 'kcal'
-  | 'preparationTime'
+  'title' | 'description' | 'type' | 'ingredients' | 'portions' | 'kcal' | 'preparationTime'
 >;
 
-export const RecipeForm = ({
-  defaultValues,
-  onSubmit,
-  onSucess,
-  mode,
-}: RecipeFormProps) => {
+export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -87,11 +76,8 @@ export const RecipeForm = ({
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit(submiHandler)}
-        className="flex flex-col gap-2"
-      >
-        <div className="flex gap-4 w-full justify-between">
+      <form onSubmit={handleSubmit(submiHandler)} className="flex flex-col gap-2">
+        <div className="flex w-full justify-between gap-4">
           <div>
             <Input
               register={register}
@@ -102,9 +88,7 @@ export const RecipeForm = ({
               placeholder="Recipe title"
               label="Title"
             />
-            {errors.title && (
-              <ErrorMessage>{errors.title.message}</ErrorMessage>
-            )}
+            {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
           </div>
           <div>
             <Select
@@ -115,8 +99,7 @@ export const RecipeForm = ({
               options={Object.values(RecipeType).map(type => ({
                 value: type,
                 label: type.toLowerCase(),
-              }))}
-            ></Select>
+              }))}></Select>
           </div>
         </div>
 
@@ -131,9 +114,7 @@ export const RecipeForm = ({
               placeholder="Recipe description"
               label="Description"
             />
-            {errors.description && (
-              <ErrorMessage>{errors.description.message}</ErrorMessage>
-            )}
+            {errors.description && <ErrorMessage>{errors.description.message}</ErrorMessage>}
           </div>
         )}
 
@@ -144,15 +125,7 @@ export const RecipeForm = ({
               const handleChange = (value: string[]) => {
                 onChange(value);
               };
-              return (
-                <TagInput
-                  label="Ingredients"
-                  onChange={handleChange}
-                  tags={value}
-                  name={name}
-                  onBlur={onBlur}
-                />
-              );
+              return <TagInput label="Ingredients" onChange={handleChange} tags={value} name={name} onBlur={onBlur} />;
             }}
             control={control}
             name="ingredients"
@@ -166,11 +139,9 @@ export const RecipeForm = ({
               },
             }}
           />
-          {errors.ingredients && (
-            <ErrorMessage>{errors.ingredients.message}</ErrorMessage>
-          )}
+          {errors.ingredients && <ErrorMessage>{errors.ingredients.message}</ErrorMessage>}
         </div>
-        <div className="flex gap-4 w-full justify-between">
+        <div className="flex w-full justify-between gap-4">
           <div>
             <Input
               register={register}
@@ -183,9 +154,7 @@ export const RecipeForm = ({
               placeholder="2"
               label="portions"
             />
-            {errors.portions && (
-              <ErrorMessage>{errors.portions.message}</ErrorMessage>
-            )}
+            {errors.portions && <ErrorMessage>{errors.portions.message}</ErrorMessage>}
           </div>
           <div>
             <Input
@@ -213,23 +182,20 @@ export const RecipeForm = ({
               placeholder="30min"
               label="Prep time"
             />
-            {errors.preparationTime && (
-              <ErrorMessage>{errors.preparationTime.message}</ErrorMessage>
-            )}
+            {errors.preparationTime && <ErrorMessage>{errors.preparationTime.message}</ErrorMessage>}
           </div>
         </div>
         <Button
           type="submit"
           variant="primary"
-          className="m-w-28 self-center mt-2"
+          className="m-w-28 mt-2 self-center"
           disabled={isSubmitting || !isDirty}
-          loading={isSubmitting}
-        >
+          loading={isSubmitting}>
           {mode === 'edit' ? 'Edit' : 'Create'}
         </Button>
       </form>
       {isSubmitting && (
-        <div className="flex flex-col w-full gap-1 items-center text-sm text-gray-500 mt-2">
+        <div className="mt-2 flex w-full flex-col items-center gap-1 text-sm text-gray-500">
           {`Hold your horses while we ${mode} your recipe`}
           <Progress />
         </div>

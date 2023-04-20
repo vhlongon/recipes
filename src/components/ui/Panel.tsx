@@ -7,18 +7,13 @@ type PanelProps = {
   as?: React.ElementType;
 };
 
-export const Panel = ({
-  children,
-  className,
-  as: Component = 'div',
-}: PanelProps) => {
+export const Panel = ({ children, className, as: Component = 'div' }: PanelProps) => {
   return (
     <Component
       className={clsx(
-        'rounded-2xl border-solid border-2 border-gray-200 backdrop-blur-lg backdrop-saturate-200 bg-white bg-opacity-40 text-slate-800',
+        'rounded-2xl border-2 border-solid border-gray-200 bg-white bg-opacity-40 text-slate-800 backdrop-blur-lg backdrop-saturate-200',
         className
-      )}
-    >
+      )}>
       {children}
     </Component>
   );

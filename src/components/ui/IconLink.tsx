@@ -17,18 +17,13 @@ export type LinkIconProps<T extends string> = {
   className?: string;
 };
 
-export const IconLink = <T extends string>({
-  href,
-  icon,
-  isHighlighted = true,
-  className,
-}: LinkIconProps<T>) => {
+export const IconLink = <T extends string>({ href, icon, isHighlighted = true, className }: LinkIconProps<T>) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 
   const Icon = icons[icon];
   return (
-    <NextLink href={href} className="w-full flex justify-center items-center">
+    <NextLink href={href} className="flex w-full items-center justify-center">
       <Icon
         size={40}
         className={clsx(

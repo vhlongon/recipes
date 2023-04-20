@@ -14,7 +14,7 @@ const ProfilePage = async () => {
   }
 
   return (
-    <div className="flex flex-1 justify-center w-full h-full items-center">
+    <div className="flex h-full w-full flex-1 items-center justify-center">
       <Card
         title={
           <div className="flex items-center gap-2">
@@ -22,21 +22,20 @@ const ProfilePage = async () => {
             Profile
           </div>
         }
-        className="w-full max-w-md m-auto"
+        className="m-auto w-full max-w-md"
         actions={
           <EditOrDeleteModal>
             <Provider>
               <EditDeleteUser user={user} />
             </Provider>
           </EditOrDeleteModal>
-        }
-      >
+        }>
         <div className="flex gap-4">
           <div className="avatar">
             <ProfileImage src={user.image ?? ''} />
           </div>
 
-          <div className="flex flex-col flex-1 justify-center">
+          <div className="flex flex-1 flex-col justify-center">
             <span className="font-semibold">
               {user.firstName} {user.lastName}
             </span>

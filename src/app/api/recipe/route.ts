@@ -22,9 +22,7 @@ export async function POST(request: Request) {
     }
 
     const { image, ...rest } = body;
-    const recipeImage = image
-      ? await uploadImage(image, { width: 512, height: 341 })
-      : null;
+    const recipeImage = image ? await uploadImage(image, { width: 512, height: 341 }) : null;
 
     const recipe = await createUserRecipe({
       ...(image ? { image: recipeImage } : {}),

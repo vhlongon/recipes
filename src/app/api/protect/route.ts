@@ -25,15 +25,11 @@ export async function POST(request: Request) {
         status: 201,
         statusText: 'ok',
         headers: {
-          'Set-Cookie': serialize(
-            process.env.PROTECT_COOKIE_NAME,
-            encodedPassword,
-            {
-              httpOnly: true,
-              path: '/',
-              maxAge: 999999,
-            }
-          ),
+          'Set-Cookie': serialize(process.env.PROTECT_COOKIE_NAME, encodedPassword, {
+            httpOnly: true,
+            path: '/',
+            maxAge: 999999,
+          }),
         },
       }
     );

@@ -18,11 +18,7 @@ export type SettingsFormProps = {
   onSubmit: (data: SettingsFormData) => Promise<void>;
   onSuccess?: () => void;
 };
-export const SettingsForm = ({
-  defaultValues,
-  onSubmit,
-  onSuccess,
-}: SettingsFormProps) => {
+export const SettingsForm = ({ defaultValues, onSubmit, onSuccess }: SettingsFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -53,23 +49,11 @@ export const SettingsForm = ({
 
   return (
     <div>
-      <form
-        className="flex flex-col gap-2"
-        onSubmit={handleSubmit(submitHandler)}
-      >
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit(submitHandler)}>
         <div className="flex w-full gap-6">
           <div className="flex-1">
-            <Input
-              register={register}
-              id="language"
-              name="language"
-              type="text"
-              label="Language"
-              disabled
-            ></Input>
-            {errors.language && (
-              <ErrorMessage>{errors.language.message}</ErrorMessage>
-            )}
+            <Input register={register} id="language" name="language" type="text" label="Language" disabled></Input>
+            {errors.language && <ErrorMessage>{errors.language.message}</ErrorMessage>}
           </div>
 
           <div className="flex-1">
@@ -81,8 +65,7 @@ export const SettingsForm = ({
               options={Object.values(Theme).map(type => ({
                 value: type,
                 label: type.toLowerCase(),
-              }))}
-            ></Select>
+              }))}></Select>
           </div>
         </div>
 
@@ -97,9 +80,7 @@ export const SettingsForm = ({
               label="Max Tokens"
               color="secondary"
             />
-            {errors.maxTokens && (
-              <ErrorMessage>{errors.maxTokens.message}</ErrorMessage>
-            )}
+            {errors.maxTokens && <ErrorMessage>{errors.maxTokens.message}</ErrorMessage>}
           </div>
 
           <div className="flex-1">
@@ -113,20 +94,17 @@ export const SettingsForm = ({
               color="secondary"
               label="Temperature"
             />
-            {errors.temperature && (
-              <ErrorMessage>{errors.temperature.message}</ErrorMessage>
-            )}
+            {errors.temperature && <ErrorMessage>{errors.temperature.message}</ErrorMessage>}
           </div>
         </div>
 
-        <div className="flex w-full justify-center mt-6">
+        <div className="mt-6 flex w-full justify-center">
           <Button
             type="submit"
             variant="primary"
             className="m-w-28"
             disabled={isSubmitting || !isDirty}
-            loading={isSubmitting}
-          >
+            loading={isSubmitting}>
             Save
           </Button>
         </div>

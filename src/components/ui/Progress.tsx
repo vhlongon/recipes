@@ -21,19 +21,6 @@ const progressClasses = cva(['progress', 'w-56'], {
 });
 type ProgressProps = ProgressBaseProps & VariantProps<typeof progressClasses>;
 
-export const Progress = ({
-  color,
-  value,
-  max = '100',
-  className,
-  ...props
-}: ProgressProps) => {
-  return (
-    <progress
-      className={progressClasses({ className, color })}
-      value={value}
-      max={max}
-      {...props}
-    />
-  );
+export const Progress = ({ color, value, max = '100', className, ...props }: ProgressProps) => {
+  return <progress className={progressClasses({ className, color })} value={value} max={max} {...props} />;
 };

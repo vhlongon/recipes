@@ -53,10 +53,7 @@ const labelClasses = cva([''], {
 });
 
 type FileInputBaseProps = Omit<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
+  React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
   'type'
 >;
 

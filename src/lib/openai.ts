@@ -1,10 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { getUserSettings } from './data';
-import {
-  generatePrompt,
-  generateRecipeImagePrompt,
-  parseAnswer,
-} from './recipe';
+import { generatePrompt, generateRecipeImagePrompt, parseAnswer } from './recipe';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,

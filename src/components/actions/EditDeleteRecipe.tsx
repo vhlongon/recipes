@@ -59,23 +59,11 @@ export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
     <div>
       <Modal isOpen={isOpen} handleClose={closeModal}>
         {action === 'edit' ? (
-          <RecipeForm
-            mode="edit"
-            onSubmit={onRecipeUpdate}
-            defaultValues={defaultValues}
-            onSucess={onSuccess}
-          />
+          <RecipeForm mode="edit" onSubmit={onRecipeUpdate} defaultValues={defaultValues} onSucess={onSuccess} />
         ) : (
-          <div className="flex flex-col gap-4 items-center justify-center">
-            <p className="text-center text-xl text-gray-600">
-              Are you sure you want to delete this recipe?
-            </p>
-            <Button
-              variant="secondary"
-              type="button"
-              loading={isSubmitting}
-              onClick={onRecipeDelete}
-            >
+          <div className="flex flex-col items-center justify-center gap-4">
+            <p className="text-center text-xl text-gray-600">Are you sure you want to delete this recipe?</p>
+            <Button variant="secondary" type="button" loading={isSubmitting} onClick={onRecipeDelete}>
               Yes, delete
             </Button>
             {error && <ErrorMessage>{error}</ErrorMessage>}

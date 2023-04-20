@@ -23,16 +23,8 @@ export const LogoutUser = () => {
     <>
       {user && (
         <>
-          <span
-            className="w-full flex justify-center items-center cursor-pointer"
-            title="Log out"
-            role="button"
-          >
-            <LogOutIcon
-              className="stroke-slate-100"
-              size={40}
-              onClick={onClick}
-            />
+          <span className="flex w-full cursor-pointer items-center justify-center" title="Log out" role="button">
+            <LogOutIcon className="stroke-slate-100" size={40} onClick={onClick} />
           </span>
         </>
       )}

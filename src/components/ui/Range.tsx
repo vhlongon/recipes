@@ -53,10 +53,7 @@ const labelClasses = cva([''], {
 });
 
 type RangeInputBaseProps = Omit<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
+  React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
   'type' | 'min' | 'max' | 'step'
 >;
 
@@ -70,18 +67,7 @@ type InputProps = RangeInputBaseProps & {
   step?: number;
 } & VariantProps<typeof rangeClasses>;
 
-export const Range = ({
-  variant,
-  color,
-  size,
-  label,
-  altText,
-  id,
-  register,
-  required,
-  name,
-  ...props
-}: InputProps) => {
+export const Range = ({ variant, color, size, label, altText, id, register, required, name, ...props }: InputProps) => {
   const inputClassname = rangeClasses({ variant, color, size });
   const labelTextClassname = labelClasses({ color, class: 'label-text' });
   const labelTextAltClassname = labelClasses({
@@ -111,7 +97,7 @@ export const Range = ({
         className={inputClassname}
       />
       {props.step && (
-        <div className="w-full flex justify-between text-xs px-2">
+        <div className="flex w-full justify-between px-2 text-xs">
           {Array.from({ length: props.max / props.step }, (_, i) => (
             <span key={i} className="text-slate-600">
               |

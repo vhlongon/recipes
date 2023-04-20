@@ -1,9 +1,5 @@
 'use client';
-import {
-  FacebookShareButton,
-  InstapaperShareButton,
-  TwitterShareButton,
-} from 'next-share';
+import { FacebookShareButton, InstapaperShareButton, TwitterShareButton } from 'next-share';
 import { usePathname } from 'next/navigation';
 import { Facebook, Instagram, Twitter } from 'react-feather';
 
@@ -13,12 +9,7 @@ type ShareProps = {
   hashtags: string[];
   url?: string;
 };
-export const ShareRecipe = ({
-  title,
-  url,
-  description,
-  hashtags,
-}: ShareProps) => {
+export const ShareRecipe = ({ title, url, description, hashtags }: ShareProps) => {
   const pathname = usePathname();
   const originUrl = window.location.origin;
   const shareUrl = url || `${originUrl}${pathname}`;
@@ -26,28 +17,20 @@ export const ShareRecipe = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-2">
-        <FacebookShareButton
-          url={shareUrl}
-          quote={description}
-          hashtag={hashtags.join(', ')}
-        >
-          <div className="btn btn-circle btn-accent text-">
+        <FacebookShareButton url={shareUrl} quote={description} hashtag={hashtags.join(', ')}>
+          <div className="text- btn-accent btn-circle btn">
             <Facebook size={'1.5rem'} />
           </div>
         </FacebookShareButton>
 
-        <InstapaperShareButton
-          url={shareUrl}
-          title={title}
-          description={description}
-        >
-          <div className="btn btn-circle btn-accent">
+        <InstapaperShareButton url={shareUrl} title={title} description={description}>
+          <div className="btn-accent btn-circle btn">
             <Instagram size={'1.5rem'} />
           </div>
         </InstapaperShareButton>
 
         <TwitterShareButton url={shareUrl} title={title} hashtags={hashtags}>
-          <div className="btn btn-circle btn-accent">
+          <div className="btn-accent btn-circle btn">
             <Twitter size={'1.5rem'} />
           </div>
         </TwitterShareButton>

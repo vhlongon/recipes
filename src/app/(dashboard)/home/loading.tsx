@@ -4,7 +4,7 @@ import { getUserRecipeCount } from '@/lib/data';
 const DashBoardLoader = async () => {
   const totalRecipes = await getUserRecipeCount();
   return (
-    <div className="grid gap-6 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-6 max-h-panel scrollable  overflow-y-scroll">
+    <div className="scrollable grid max-h-panel grid-cols-1 gap-6 overflow-y-scroll p-6 lg:grid-cols-2  xl:grid-cols-3">
       {Array.from({ length: totalRecipes }, (_, i) => {
         return <RecipeCardSkeleton key={i} />;
       })}

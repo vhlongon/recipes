@@ -2,10 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '@prisma/client';
 
-export type ContextUser = Pick<
-  User,
-  'firstName' | 'lastName' | 'email' | 'image'
-> | null;
+export type ContextUser = Pick<User, 'firstName' | 'lastName' | 'email' | 'image'> | null;
 
 export interface UserState {
   isLoggedIn: boolean;

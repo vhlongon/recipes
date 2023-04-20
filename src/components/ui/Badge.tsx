@@ -2,10 +2,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import clsx from 'clsx';
 import React from 'react';
 
-type BaaseProps = React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLSpanElement>,
-  HTMLSpanElement
->;
+type BaaseProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
 
 const badgeClasses = cva(['badge', 'py-3'], {
   variants: {
@@ -34,25 +31,11 @@ const badgeClasses = cva(['badge', 'py-3'], {
   },
 });
 
-export type BadgeProps = BaaseProps &
-  VariantProps<typeof badgeClasses> & { icon?: React.ReactNode };
+export type BadgeProps = BaaseProps & VariantProps<typeof badgeClasses> & { icon?: React.ReactNode };
 
-export const Badge = ({
-  variant,
-  size,
-  className,
-  children,
-  icon,
-  ...rest
-}: BadgeProps) => {
+export const Badge = ({ variant, size, className, children, icon, ...rest }: BadgeProps) => {
   return (
-    <span
-      className={clsx(
-        badgeClasses({ variant, size, className }),
-        icon && 'gap-1'
-      )}
-      {...rest}
-    >
+    <span className={clsx(badgeClasses({ variant, size, className }), icon && 'gap-1')} {...rest}>
       {icon}
       {children}
     </span>

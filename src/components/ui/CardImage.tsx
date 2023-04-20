@@ -6,13 +6,8 @@ export const CardImage = ({ src, alt }: { src: string; alt?: string }) => {
     event.currentTarget.src = '/recipe-image-placeholder.jpg';
   };
   return (
-    <figure className="w-full aspect-video relative overflow-hidden">
-      <img
-        src={src}
-        className="object-cover w-full"
-        alt={alt}
-        onError={addImageFallback}
-      />
+    <figure className="relative aspect-video w-full overflow-hidden">
+      <img src={src} className="w-full object-cover" alt={alt} onError={addImageFallback} />
     </figure>
   );
 };

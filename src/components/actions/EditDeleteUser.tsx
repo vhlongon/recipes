@@ -57,22 +57,11 @@ export const EditDeleteUser = ({ user }: EditDeleteUserProps) => {
   return (
     <Modal isOpen={isOpen} handleClose={closeModal}>
       {action === 'edit' ? (
-        <UserProfileForm
-          onSubmit={onUserUpdate}
-          defaultValues={defaultValues}
-          onSuccess={onSuccess}
-        />
+        <UserProfileForm onSubmit={onUserUpdate} defaultValues={defaultValues} onSuccess={onSuccess} />
       ) : (
-        <div className="flex flex-col gap-4 items-center justify-center">
-          <p className="text-center text-xl text-gray-600">
-            Are you sure you want to delete your account?
-          </p>
-          <Button
-            variant="secondary"
-            type="button"
-            loading={isSubmitting}
-            onClick={onUserDelete}
-          >
+        <div className="flex flex-col items-center justify-center gap-4">
+          <p className="text-center text-xl text-gray-600">Are you sure you want to delete your account?</p>
+          <Button variant="secondary" type="button" loading={isSubmitting} onClick={onUserDelete}>
             Yes, delete me
           </Button>
           {error && <ErrorMessage>{error}</ErrorMessage>}

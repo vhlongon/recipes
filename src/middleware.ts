@@ -8,8 +8,7 @@ const whiteListPaths = ['/signin', '/register'];
 
 export default async function middleware(request: NextRequest) {
   // protect all routes behind a password page
-  const hashInCookies =
-    request.cookies.get(process.env.PROTECT_COOKIE_NAME)?.value ?? '';
+  const hashInCookies = request.cookies.get(process.env.PROTECT_COOKIE_NAME)?.value ?? '';
   const isAuthorized = isValidProtectPassword(hashInCookies);
 
   if (request.nextUrl.pathname === '/') {
@@ -22,9 +21,7 @@ export default async function middleware(request: NextRequest) {
   }
 
   const { pathname } = request.nextUrl;
-  const isPathWhiteListed =
-    whiteListPaths.some(path => pathname.startsWith(path)) ||
-    PUBLIC_FILE.test(pathname);
+  const isPathWhiteListed = whiteListPaths.some(path => pathname.startsWith(path)) || PUBLIC_FILE.test(pathname);
 
   if (isPathWhiteListed) {
     return NextResponse.next();

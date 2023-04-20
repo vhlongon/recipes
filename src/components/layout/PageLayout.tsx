@@ -10,14 +10,14 @@ export const metadata = {
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-full w-full min-h-screen bg-gradient p-6 grid grid-rows-sidebar grid-cols-1 md:grid-cols-sidebar md:grid-rows-none gap-8">
-      <Panel as="aside" className="w-full h-full">
+    <div className="bg-gradient grid h-full min-h-screen w-full grid-cols-1 grid-rows-sidebar gap-8 p-6 md:grid-cols-sidebar md:grid-rows-none">
+      <Panel as="aside" className="h-full w-full">
         <React.Suspense fallback={<SideBarSkeleton />}>
           {/* @ts-expect-error Async Server Component */}
           <Sidebar />
         </React.Suspense>
       </Panel>
-      <Panel as="main" className="w-full h-full max-h-screen">
+      <Panel as="main" className="h-full max-h-screen w-full">
         {children}
       </Panel>
     </div>

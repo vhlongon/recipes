@@ -27,11 +27,7 @@ type RecipeFormProps = {
   onSuccess?: () => void;
 };
 
-export const UserProfileForm = ({
-  defaultValues,
-  onSubmit,
-  onSuccess,
-}: RecipeFormProps) => {
+export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useAppDispatch();
@@ -72,10 +68,7 @@ export const UserProfileForm = ({
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit(submitHandler)}
-        className="flex flex-col gap-2"
-      >
+      <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col gap-2">
         <div>
           <Input
             register={register}
@@ -89,9 +82,7 @@ export const UserProfileForm = ({
               </span>
             }
           />
-          {errors.firstName && (
-            <ErrorMessage>{errors.firstName.message}</ErrorMessage>
-          )}
+          {errors.firstName && <ErrorMessage>{errors.firstName.message}</ErrorMessage>}
         </div>
 
         <div>
@@ -107,9 +98,7 @@ export const UserProfileForm = ({
               </span>
             }
           />
-          {errors.lastName && (
-            <ErrorMessage>{errors.lastName.message}</ErrorMessage>
-          )}
+          {errors.lastName && <ErrorMessage>{errors.lastName.message}</ErrorMessage>}
         </div>
 
         <div>
@@ -143,18 +132,11 @@ export const UserProfileForm = ({
           {errors.image && <ErrorMessage>{errors.image.message}</ErrorMessage>}
         </div>
 
-        <div className="flex items-center flex-col gap-4 mt-4 justify-between">
-          <Button
-            type="submit"
-            loading={isSubmitting}
-            variant="primary"
-            disabled={isSubmitting || !isDirty}
-          >
+        <div className="mt-4 flex flex-col items-center justify-between gap-4">
+          <Button type="submit" loading={isSubmitting} variant="primary" disabled={isSubmitting || !isDirty}>
             Update
           </Button>
-          {error && (
-            <ErrorMessage className="justify-center">{error}</ErrorMessage>
-          )}
+          {error && <ErrorMessage className="justify-center">{error}</ErrorMessage>}
         </div>
       </form>
     </div>

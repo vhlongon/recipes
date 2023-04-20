@@ -1,10 +1,7 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
 
-export type ButtonBaseProps = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
+export type ButtonBaseProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 const buttonClasses = cva(['btn'], {
   variants: {
@@ -68,8 +65,7 @@ export const Button = ({
         circle,
         loading,
         block,
-      })}
-    >
+      })}>
       {loading ? 'Loading' : children}
     </button>
   );

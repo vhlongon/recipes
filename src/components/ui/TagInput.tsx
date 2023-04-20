@@ -107,9 +107,7 @@ export const TagInput = ({
         }}
         placeHolder={placeHolder}
       />
-      <em className="text-xs text-slate-600 px-2">
-        press enter or comma to add new tag
-      </em>
+      <em className="px-2 text-xs text-slate-600">press enter or comma to add new tag</em>
     </div>
   );
 };

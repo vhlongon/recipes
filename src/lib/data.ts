@@ -4,9 +4,7 @@ import { getUserFromCookies } from './cookies';
 import { db } from './db';
 import { hashPassword } from './password';
 
-export const createUser = async (
-  input: Pick<User, 'email' | 'firstName' | 'lastName' | 'password'>
-) => {
+export const createUser = async (input: Pick<User, 'email' | 'firstName' | 'lastName' | 'password'>) => {
   const { password, ...rest } = input;
   return await db.user.create({
     data: {

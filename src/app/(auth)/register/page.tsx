@@ -3,7 +3,7 @@ import { AuthForm } from '@/components/forms/AuthForm';
 
 const RegisterPage = () => {
   return (
-    <div className="flex flex-1 justify-center w-full h-full items-center">
+    <div className="flex h-full w-full flex-1 items-center justify-center">
       <Provider>
         <AuthForm mode="register" />
       </Provider>

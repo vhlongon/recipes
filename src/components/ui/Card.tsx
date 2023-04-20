@@ -34,16 +34,7 @@ type CardProps = {
   image?: string | null;
 } & VariantProps<typeof cardClsses>;
 
-export const Card = ({
-  title,
-  actions,
-  className,
-  bg,
-  bordered,
-  spacing,
-  children,
-  image,
-}: CardProps) => {
+export const Card = ({ title, actions, className, bg, bordered, spacing, children, image }: CardProps) => {
   const classNames = cardClsses({ bg, bordered, spacing, className });
 
   return (

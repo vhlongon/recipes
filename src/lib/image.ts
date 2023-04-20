@@ -10,10 +10,7 @@ type Options = {
   width?: number;
   height?: number;
 };
-export const uploadImage = async (
-  image: string,
-  { width = 256, height = 256 }: Options = {}
-) => {
+export const uploadImage = async (image: string, { width = 256, height = 256 }: Options = {}) => {
   const { public_id } = await cloudinary.uploader.upload(image, {
     width,
     height,

@@ -11,20 +11,15 @@ const SettingsPage = async () => {
 
   if (!settings)
     return (
-      <div className="flex flex-1 justify-center w-full h-full items-center text-2xl text-slate-100">
+      <div className="flex h-full w-full flex-1 items-center justify-center text-2xl text-slate-100">
         No settings found
       </div>
     );
 
-  const editableSettings = pick(settings, [
-    'temperature',
-    'theme',
-    'maxTokens',
-    'language',
-  ]);
+  const editableSettings = pick(settings, ['temperature', 'theme', 'maxTokens', 'language']);
 
   return (
-    <div className="flex flex-1 justify-center w-full h-full items-center text-2xl text-slate-100">
+    <div className="flex h-full w-full flex-1 items-center justify-center text-2xl text-slate-100">
       <Card
         title={
           <div className="flex items-center gap-2">
@@ -32,14 +27,13 @@ const SettingsPage = async () => {
             Settings
           </div>
         }
-        className="w-full max-w-md m-auto"
+        className="m-auto w-full max-w-md"
         actions={
           <EditOrDeleteModal actions={['edit']}>
             <EditSettings settings={settings} />
           </EditOrDeleteModal>
-        }
-      >
-        <div className="flex gap-2 flex-col">
+        }>
+        <div className="flex flex-col gap-2">
           <Setting
             label="Temperature"
             description="What sampling temperature to use, between 0 and 2. Higher values
@@ -71,11 +65,7 @@ const SettingsPage = async () => {
             description={
               <span>
                 Set the theme of the app uses{' '}
-                <a
-                  className="link"
-                  href="https://daisyui.com/docs/themes/"
-                  target="_blank"
-                >
+                <a className="link" href="https://daisyui.com/docs/themes/" target="_blank">
                   Daisy UI themes
                 </a>
               </span>

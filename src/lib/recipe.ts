@@ -8,17 +8,11 @@ export const generatePrompt = (body: any) => {
 
   return prompt;
 };
-export const parseAnswer = (
-  answer: string
-): Pick<Recipe, 'hashtags' | 'description' | 'instructions'> => {
+export const parseAnswer = (answer: string): Pick<Recipe, 'hashtags' | 'description' | 'instructions'> => {
   const recipe = answer;
   const sections = recipe.split('\n\n');
-  const descriptionSection = sections.find(section =>
-    section.includes('Description:')
-  );
-  const instructionsSection = sections.find(section =>
-    section.includes('Instructions:')
-  );
+  const descriptionSection = sections.find(section => section.includes('Description:'));
+  const instructionsSection = sections.find(section => section.includes('Instructions:'));
   const description =
     descriptionSection
       ?.split('\n')
@@ -31,9 +25,7 @@ export const parseAnswer = (
       .slice(1)
       .map(item => item.trim()) ?? [];
   const hashtagsMatch = recipe.match(/#([a-zA-Z0-9]+)/g);
-  const hashtags = hashtagsMatch
-    ? hashtagsMatch.map(hashtag => hashtag.substring(1))
-    : [];
+  const hashtags = hashtagsMatch ? hashtagsMatch.map(hashtag => hashtag.substring(1)) : [];
 
   return {
     description,

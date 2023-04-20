@@ -11,8 +11,8 @@ export const UserIndicator = () => {
   return (
     <div>
       {user && !isRoot && (
-        <div className="indicator absolute top-10 left-8">
-          <span className="indicator-item badge badge-primary">
+        <div className="indicator absolute left-8 top-10">
+          <span className="badge-primary badge indicator-item">
             {user.firstName.charAt(0).toUpperCase()}
             {user.lastName.charAt(0).toUpperCase()}
           </span>

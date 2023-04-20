@@ -23,24 +23,16 @@ export const RecipePreview = ({
 }: RecipeCardProps) => {
   return (
     <Card
-      className={clsx(
-        'hover:scale-[1.025] transition-all ease-in-out duration-200 h-full',
-        className
-      )}
+      className={clsx('h-full transition-all duration-200 ease-in-out hover:scale-[1.025]', className)}
       title={
-        <div className="flex items-center gap-4 w-full justify-between">
+        <div className="flex w-full items-center justify-between gap-4">
           {title}
-          <Badge
-            title="type"
-            variant="primary"
-            className="font-bold tracking-widest"
-          >
+          <Badge title="type" variant="primary" className="font-bold tracking-widest">
             {type}
           </Badge>
         </div>
-      }
-    >
-      <p className="gap-4 italic line-clamp-2">
+      }>
+      <p className="line-clamp-2 gap-4 italic">
         {description || `A delicous recipe using: ${ingredients.join(', ')}.`}
       </p>
 
@@ -54,38 +46,26 @@ export const RecipePreview = ({
       )}
 
       {hashtags && (
-        <div className="flex flex-wrap gap-2 my-2">
+        <div className="my-2 flex flex-wrap gap-2">
           {hashtags.slice(0, 3).map(hashtag => (
-            <Badge
-              key={hashtag}
-              variant="secondary"
-              icon={<Hash width="1rem" />}
-            >
+            <Badge key={hashtag} variant="secondary" icon={<Hash width="1rem" />}>
               {hashtag}
             </Badge>
           ))}
         </div>
       )}
 
-      <div className="flex w-full flex-wrap mt-2 gap-2">
+      <div className="mt-2 flex w-full flex-wrap gap-2">
         <Badge title="created at" icon={<Calendar width="1rem" />}>
           {formatDate(createdAt)}
         </Badge>
-        <Badge
-          title="preparation"
-          variant="success"
-          icon={<Clock width="1rem" />}
-        >
+        <Badge title="preparation" variant="success" icon={<Clock width="1rem" />}>
           {preparationTime}min
         </Badge>
         <Badge title="kcal" variant="warning" icon={<Clock width="1rem" />}>
           Kcal: {kcal}
         </Badge>
-        <Badge
-          title="portions"
-          variant="info"
-          icon={<PlusCircle width="1rem" />}
-        >
+        <Badge title="portions" variant="info" icon={<PlusCircle width="1rem" />}>
           {portions}
         </Badge>
       </div>

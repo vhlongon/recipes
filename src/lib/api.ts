@@ -25,10 +25,7 @@ export const fetchData = async (url: RequestInfo | URL, opts: FetchOpts) => {
   return res;
 };
 
-export type UserInput = Pick<
-  User,
-  'email' | 'password' | 'firstName' | 'lastName'
->;
+export type UserInput = Pick<User, 'email' | 'password' | 'firstName' | 'lastName'>;
 
 export const getUser = async () => {
   return fetchData('/api/user', {
@@ -53,13 +50,7 @@ export const signin = async (userInput: UserInput) => {
 
 export type RecipeInput = Pick<
   Recipe,
-  | 'type'
-  | 'description'
-  | 'ingredients'
-  | 'portions'
-  | 'preparationTime'
-  | 'kcal'
-  | 'title'
+  'type' | 'description' | 'ingredients' | 'portions' | 'preparationTime' | 'kcal' | 'title'
 >;
 export const createRecipe = async (recipeInput: RecipeInput) => {
   return fetchData('/api/recipe', {
@@ -75,9 +66,7 @@ export const generateRecipe = async (recipeInput: RecipeInput) => {
   });
 };
 
-export const updateRecipe = async (
-  recipeInput: RecipeInput & { id: string }
-) => {
+export const updateRecipe = async (recipeInput: RecipeInput & { id: string }) => {
   return fetchData('/api/update-recipe', {
     method: 'PATCH',
     body: recipeInput,

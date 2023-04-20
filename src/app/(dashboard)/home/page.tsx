@@ -23,12 +23,12 @@ const DashboardHomePage = async () => {
     <>
       {hasRecipes ? (
         <>
-          <div className="flex w-full gap-6 p-6 justify-between">
+          <div className="flex w-full justify-between gap-6 p-6">
             {greetings}
             <CreateRecipe />
           </div>
-          <div className="max-h-panel scrollable  overflow-y-scroll">
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-6">
+          <div className="scrollable max-h-panel  overflow-y-scroll">
+            <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 xl:grid-cols-3">
               {recipes.map(recipe => (
                 <Link href={`/recipe/${recipe.id}`} key={recipe.id}>
                   <RecipePreview {...recipe} />
@@ -38,8 +38,8 @@ const DashboardHomePage = async () => {
           </div>
         </>
       ) : (
-        <div className="flex flex-col gap-4 w-full h-full items-center relative justify-center text-2xl text-slate-50">
-          <div className="absolute top-6 left-6 w-full">{greetings}</div>
+        <div className="relative flex h-full w-full flex-col items-center justify-center gap-4 text-2xl text-slate-50">
+          <div className="absolute left-6 top-6 w-full">{greetings}</div>
           No recipes yet
           <CreateRecipe />
         </div>

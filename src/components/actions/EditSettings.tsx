@@ -8,10 +8,7 @@ import { Modal } from '../ui/Modal';
 import { useEditDeleteContext } from './EditDeleteModal';
 
 type EditSettingsProps = {
-  settings: Pick<
-    Settings,
-    'language' | 'maxTokens' | 'temperature' | 'theme' | 'id'
-  >;
+  settings: Pick<Settings, 'language' | 'maxTokens' | 'temperature' | 'theme' | 'id'>;
 };
 
 export const EditSettings = ({ settings }: EditSettingsProps) => {
@@ -43,11 +40,7 @@ export const EditSettings = ({ settings }: EditSettingsProps) => {
   return (
     <Modal isOpen={isOpen} handleClose={closeModal}>
       {action === 'edit' && (
-        <SettingsForm
-          onSubmit={onUserUpdate}
-          defaultValues={defaultValues}
-          onSuccess={onSuccess}
-        />
+        <SettingsForm onSubmit={onUserUpdate} defaultValues={defaultValues} onSuccess={onSuccess} />
       )}
     </Modal>
   );

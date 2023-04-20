@@ -40,46 +40,29 @@ export const ProtectForm = () => {
   return (
     <Card
       title={
-        <span className="flex gap-2 justify-center">
+        <span className="flex justify-center gap-2">
           <Lock />
           Secure
         </span>
       }
-      className="w-full max-w-md"
-    >
-      <p className="text-sm text-gray-500 mb-2">
-        Provide password to access the app
-      </p>
+      className="w-full max-w-md">
+      <p className="mb-2 text-sm text-gray-500">Provide password to access the app</p>
 
-      <div className="flex w-full justify-center my-2">
-        <ProfileImage
-          src={'/logo2.png'}
-          alt="Logo"
-          variant="hexagon"
-          size="xl"
-        />
+      <div className="my-2 flex w-full justify-center">
+        <ProfileImage src={'/logo2.png'} alt="Logo" variant="hexagon" size="xl" />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <Input
-            register={register}
-            name="password"
-            id="password"
-            type="password"
-          />
-          {errors.password && (
-            <ErrorMessage>{errors.password.message}</ErrorMessage>
-          )}
+          <Input register={register} name="password" id="password" type="password" />
+          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
         </div>
-        <div className="flex items-center flex-col gap-4 mt-4 justify-between">
+        <div className="mt-4 flex flex-col items-center justify-between gap-4">
           <Button type="submit" loading={isSubmitting}>
             Submit
           </Button>
         </div>
-        {error && (
-          <ErrorMessage className="justify-center">{error}</ErrorMessage>
-        )}
+        {error && <ErrorMessage className="justify-center">{error}</ErrorMessage>}
       </form>
     </Card>
   );

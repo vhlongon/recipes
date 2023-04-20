@@ -55,8 +55,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     try {
       setIsSubmitting(true);
 
-      const res =
-        mode === 'register' ? await register(data) : await signin(data);
+      const res = mode === 'register' ? await register(data) : await signin(data);
 
       dispatch(setUser(res.data.user));
 
@@ -72,7 +71,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
   return (
     <Card title={content.header} className="w-full max-w-md">
-      <p className="text-sm text-gray-500 mb-2">{content.subheader}</p>
+      <p className="mb-2 text-sm text-gray-500">{content.subheader}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         {mode === 'register' && (
           <div className="flex justify-between gap-4">
@@ -86,9 +85,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                 placeholder="Awesome"
                 label="First name"
               />
-              {errors.firstName && (
-                <ErrorMessage>{errors.firstName.message}</ErrorMessage>
-              )}
+              {errors.firstName && <ErrorMessage>{errors.firstName.message}</ErrorMessage>}
             </div>
             <div>
               <Input
@@ -100,9 +97,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                 placeholder="Silver"
                 label="Last name"
               />
-              {errors.lastName && (
-                <ErrorMessage>{errors.lastName.message}</ErrorMessage>
-              )}
+              {errors.lastName && <ErrorMessage>{errors.lastName.message}</ErrorMessage>}
             </div>
           </div>
         )}
@@ -128,25 +123,16 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             placeholder="******"
             label="Password"
           />
-          {errors.password && (
-            <ErrorMessage>{errors.password.message}</ErrorMessage>
-          )}
+          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
         </div>
-        <div className="flex items-center flex-col gap-4 mt-4 justify-between">
-          <Button
-            type="submit"
-            loading={isSubmitting}
-            variant="primary"
-            disabled={isSubmitting || !isDirty}
-          >
+        <div className="mt-4 flex flex-col items-center justify-between gap-4">
+          <Button type="submit" loading={isSubmitting} variant="primary" disabled={isSubmitting || !isDirty}>
             {content.buttonText}
           </Button>
-          {error && (
-            <ErrorMessage className="justify-center">{error}</ErrorMessage>
-          )}
+          {error && <ErrorMessage className="justify-center">{error}</ErrorMessage>}
           <div>
             <span>
-              <Link href={content.linkUrl} className="text-secondary font-bold">
+              <Link href={content.linkUrl} className="font-bold text-secondary">
                 {content.linkText}
               </Link>
             </span>

@@ -51,10 +51,7 @@ const labelClasses = cva([''], {
   },
 });
 
-type SelectBaseProps = React.DetailedHTMLProps<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  HTMLSelectElement
->;
+type SelectBaseProps = React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
 
 type SelectProps = SelectBaseProps & {
   label?: string;
@@ -76,9 +73,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label className="label" htmlFor={id}>
             <span className={labelTextClassname}>{label}</span>
-            {altText && (
-              <span className={labelTextAltClassname}>{altText}</span>
-            )}
+            {altText && <span className={labelTextAltClassname}>{altText}</span>}
           </label>
         )}
         <select {...props} ref={ref} className={selectClassname}>

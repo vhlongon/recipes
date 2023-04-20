@@ -42,7 +42,7 @@ export const CreateRecipe = ({ className }: CreateRecipeProps) => {
 
   return (
     <div className={className}>
-      <Button variant="primary" className="w-48 flex gap-4" onClick={openModal}>
+      <Button variant="primary" className="flex w-48 gap-4" onClick={openModal}>
         <span>New Recipe</span>
         <PlusCircle />
       </Button>

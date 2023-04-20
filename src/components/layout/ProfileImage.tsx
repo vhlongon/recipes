@@ -36,12 +36,7 @@ type ProfileImageProps = {
   alt?: string;
 } & VariantProps<typeof profileImageClasses>;
 
-export const ProfileImage = ({
-  src,
-  variant,
-  size,
-  alt,
-}: ProfileImageProps) => {
+export const ProfileImage = ({ src, variant, size, alt }: ProfileImageProps) => {
   const className = profileImageClasses({ variant, size });
   return (
     <div className={className}>
