@@ -52,14 +52,19 @@
   background: linear-gradient(to right, #f4791f, #659999);
 }
 
+[data-theme='bumblebee'] .bg-gradient {
+  background: #c6ffdd;
+  background: linear-gradient(to right, #f7797d, #fbd786, #c6ffdd);
+}
+
 [data-theme='emerald'] .bg-gradient {
   background: #8360c3;
   background: linear-gradient(to right, #2ebf91, #8360c3);
 }
 
 [data-theme='cyberpunk'] .bg-gradient {
-  background: #d38312;
-  background: linear-gradient(to right, #d38312, #a83279);
+  background: #aa076b;
+  background: linear-gradient(to right, #61045f, #aa076b);
 }
 
 [data-theme='corporate'] .bg-gradient {
