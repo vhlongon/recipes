@@ -16,7 +16,7 @@ const selectClasses = cva(['select', ' w-full', 'bg-transparent'], {
       warning: ['select-warning'],
       error: ['select-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['bg-slate-100', 'text-slate-800'],
+      offwhite: [''],
     },
     size: {
       lg: ['select-lg'],
@@ -43,7 +43,7 @@ const labelClasses = cva([''], {
       warning: ['label-warning'],
       error: ['label-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['text-black'],
+      offwhite: [''],
     },
   },
   defaultVariants: {

@@ -25,19 +25,19 @@ export const RecipePreview = ({
     <Card
       className={clsx('h-full transition-all duration-200 ease-in-out hover:scale-[1.025]', className)}
       title={
-        <div className="flex w-full items-center justify-between gap-4">
+        <div className="flex w-full items-center justify-between gap-4 text-base-content">
           {title}
           <Badge title="type" variant="primary" className="font-bold tracking-widest">
             {type}
           </Badge>
         </div>
       }>
-      <p className="line-clamp-2 gap-4 italic">
+      <p className="line-clamp-2 gap-4 italic text-base-content">
         {description || `A delicous recipe using: ${ingredients.join(', ')}.`}
       </p>
 
       {ingredients && (
-        <div title="ingredients" className="flex flex-wrap gap-1">
+        <div title="ingredients" className="flex flex-wrap gap-1 text-base-content">
           <span className="font-semibold">Ingredients:</span>
           {ingredients.map(ingredient => (
             <span key={ingredient}>{ingredient}</span>
@@ -56,7 +56,7 @@ export const RecipePreview = ({
       )}
 
       <div className="mt-2 flex w-full flex-wrap gap-2">
-        <Badge title="created at" icon={<Calendar width="1rem" />}>
+        <Badge title="created at" variant="error" icon={<Calendar width="1rem" />}>
           {formatDate(createdAt)}
         </Badge>
         <Badge title="preparation" variant="success" icon={<Clock width="1rem" />}>

@@ -11,7 +11,7 @@ const SettingsPage = async () => {
 
   if (!settings)
     return (
-      <div className="flex h-full w-full flex-1 items-center justify-center text-2xl text-slate-100">
+      <div className="flex h-full w-full flex-1 items-center justify-center text-2xl text-base-content">
         No settings found
       </div>
     );
@@ -19,7 +19,7 @@ const SettingsPage = async () => {
   const editableSettings = pick(settings, ['temperature', 'theme', 'maxTokens', 'language']);
 
   return (
-    <div className="flex h-full w-full flex-1 items-center justify-center text-2xl text-slate-100">
+    <div className="flex h-full w-full flex-1 items-center justify-center text-2xl text-base-content">
       <Card
         title={
           <div className="flex items-center gap-2">

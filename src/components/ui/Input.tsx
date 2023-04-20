@@ -17,7 +17,7 @@ const inputClasses = cva(['input', ' w-full', 'bg-transparent'], {
       warning: ['input-warning'],
       error: ['input-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['bg-slate-100', 'text-slate-800'],
+      offwhite: [''],
     },
     size: {
       lg: ['input-lg'],
@@ -44,7 +44,7 @@ const labelClasses = cva([''], {
       warning: ['label-warning'],
       error: ['label-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['text-black'],
+      offwhite: [''],
     },
   },
   defaultVariants: {

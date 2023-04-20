@@ -25,7 +25,7 @@ export const EditDeleteActions = ({ actions }: EditDeleteActionsProps) => {
           <Button variant="primary" square onClick={onEdit}>
             <Edit />
           </Button>
-          <span className="text-sm text-slate-400">Edit</span>
+          <span className="text-sm text-base-content">Edit</span>
         </div>
       )}
       {actions.includes('delete') && (
@@ -33,7 +33,7 @@ export const EditDeleteActions = ({ actions }: EditDeleteActionsProps) => {
           <Button variant="secondary" square onClick={onDelete}>
             <X />
           </Button>
-          <span className="text-sm text-slate-400">Delete</span>
+          <span className="text-sm text-base-content">Delete</span>
         </div>
       )}
     </div>

@@ -44,7 +44,7 @@ const labelClasses = cva([''], {
       warning: ['label-warning'],
       error: ['label-error'],
       transparent: ['bg-transparent', 'text-current'],
-      offwhite: ['text-black'],
+      offwhite: [''],
     },
   },
   defaultVariants: {

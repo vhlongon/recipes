@@ -14,7 +14,7 @@ const ProfilePage = async () => {
   }
 
   return (
-    <div className="flex h-full w-full flex-1 items-center justify-center">
+    <div className="flex h-full w-full flex-1 items-center justify-center text-base-content">
       <Card
         title={
           <div className="flex items-center gap-2">

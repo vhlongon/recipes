@@ -1,3 +1,4 @@
+import { getErrorMessage } from '@/lib/utils';
 import { Theme } from '@prisma/client';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -6,7 +7,6 @@ import { ErrorMessage } from '../ui/ErrorMessage';
 import { Input } from '../ui/Input';
 import { Range } from '../ui/Range';
 import { Select } from '../ui/Select';
-import { getErrorMessage } from '@/lib/utils';
 
 export type SettingsFormData = {
   language: string;
@@ -53,7 +53,7 @@ export const SettingsForm = ({ defaultValues, onSubmit, onSuccess }: SettingsFor
       <form className="flex flex-col gap-2" onSubmit={handleSubmit(submitHandler)}>
         <div className="flex w-full gap-6">
           <div className="flex-1">
-            <Input register={register} id="language" name="language" type="text" label="Language" disabled></Input>
+            <Input register={register} id="language" name="language" type="text" label="Language" disabled />
             {errors.language && <ErrorMessage>{errors.language.message}</ErrorMessage>}
           </div>
 

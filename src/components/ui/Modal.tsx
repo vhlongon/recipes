@@ -57,7 +57,7 @@ export const Modal = ({ children, isOpen, handleClose }: ModalProps) => {
   return (
     <ReactPortal wrapperId="modal-root">
       <div className={clsx('modal', isOpen && 'modal-open')}>
-        <div className="modal-box relative bg-slate-100">
+        <div className="modal-box relative">
           <Button onClick={handleClose} variant="ghost" circle className="absolute right-2 top-2">
             <XCircle size="1.5rem" />
           </Button>
