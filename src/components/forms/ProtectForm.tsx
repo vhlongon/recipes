@@ -55,7 +55,7 @@ export const ProtectForm = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <Input register={register} name="password" id="password" type="password" />
+          <Input register={register} name="password" id="password" type="password" required />
           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
         </div>
         <div className="mt-4 flex flex-col items-center justify-between gap-4">

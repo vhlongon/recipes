@@ -72,6 +72,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
         <div>
           <Input
             register={register}
+            required
             id="firstName"
             name="firstName"
             type="text"
@@ -88,6 +89,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
         <div>
           <Input
             register={register}
+            required
             id="lastName"
             name="lastName"
             type="text"
@@ -104,6 +106,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
         <div>
           <Input
             register={register}
+            required
             id="email"
             name="email"
             type="email"
@@ -122,6 +125,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
             register={register}
             id="image"
             name="image"
+            accept=".jpg,.jpeg,.png,.gif,.webp"
             label={
               <span className="flex items-center gap-2 text-base-content">
                 <ImageIcon size="1rem" />

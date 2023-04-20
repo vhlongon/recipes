@@ -34,12 +34,13 @@ const profileImageClasses = cva(['mask', 'relative'], {
 type ProfileImageProps = {
   src?: string;
   alt?: string;
+  className?: string;
 } & VariantProps<typeof profileImageClasses>;
 
-export const ProfileImage = ({ src, variant, size, alt }: ProfileImageProps) => {
-  const className = profileImageClasses({ variant, size });
+export const ProfileImage = ({ src, variant, size, alt, className }: ProfileImageProps) => {
+  const classNames = profileImageClasses({ variant, size, className });
   return (
-    <div className={className}>
+    <div className={classNames}>
       <Image
         sizes="100vw"
         className="object-cover"
