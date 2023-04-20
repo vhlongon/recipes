@@ -4,14 +4,13 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { register, signin } from '@/lib/api';
-import { useAppDispatch } from '@/store';
-import { setUser } from '@/store/userSlice';
+import { getErrorMessage } from '@/lib/utils';
+import { useUserSlice } from '@/store/stateHooks';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '../ui/ErrorMessage';
-import { getErrorMessage } from '@/lib/utils';
 
 const texts = {
   register: {
@@ -50,7 +49,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     handleSubmit,
     formState: { errors, isDirty },
   } = useForm<Inputs>();
-  const dispatch = useAppDispatch();
+  const { setUser } = useUserSlice();
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
@@ -58,7 +57,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
       const res = mode === 'register' ? await register(data) : await signin(data);
 
-      dispatch(setUser(res.data.user));
+      setUser(res.data.user);
 
       router.replace('/home');
     } catch (error: unknown) {

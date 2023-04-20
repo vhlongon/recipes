@@ -1,10 +1,10 @@
 'use client';
-import { useAppSelector } from '@/store';
+import { useUserSlice } from '@/store/stateHooks';
 import { usePathname } from 'next/navigation';
 import { ProfileImage } from './ProfileImage';
 
 export const UserIndicator = () => {
-  const { user } = useAppSelector(state => state.user);
+  const { user } = useUserSlice();
   const pathname = usePathname();
   const isRoot = pathname === '/';
 

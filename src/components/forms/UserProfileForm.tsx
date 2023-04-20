@@ -1,5 +1,7 @@
 'use client';
 
+import { getErrorMessage } from '@/lib/utils';
+import { useUserSlice } from '@/store/stateHooks';
 import { User } from '@prisma/client';
 import { useState } from 'react';
 import { Edit3, Image as ImageIcon, Mail } from 'react-feather';
@@ -8,9 +10,6 @@ import { Button } from '../ui/Button';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { FileInput } from '../ui/FileInput';
 import { Input } from '../ui/Input';
-import { useAppDispatch } from '@/store';
-import { setUser } from '@/store/userSlice';
-import { getErrorMessage } from '@/lib/utils';
 
 export type FormData = Pick<User, 'email' | 'firstName' | 'lastName' | 'image'>;
 
@@ -31,7 +30,7 @@ type RecipeFormProps = {
 export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const dispatch = useAppDispatch();
+  const { setUser } = useUserSlice();
 
   const {
     register,
@@ -56,7 +55,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
       };
 
       await onSubmit(input);
-      dispatch(setUser(input));
+      setUser(input);
       reset();
       clearErrors();
       onSuccess?.();
@@ -77,7 +76,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
             name="firstName"
             type="text"
             label={
-              <span className="flex items-center gap-2 text-slate-600">
+              <span className="flex items-center gap-2 text-base-content">
                 <Edit3 size="1rem" />
                 First name
               </span>
@@ -93,7 +92,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
             name="lastName"
             type="text"
             label={
-              <span className="flex items-center gap-2 text-slate-600">
+              <span className="flex items-center gap-2 text-base-content">
                 <Edit3 size="1rem" />
                 Last name
               </span>
@@ -109,7 +108,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
             name="email"
             type="email"
             label={
-              <span className="flex items-center gap-2 text-slate-600">
+              <span className="flex items-center gap-2 text-base-content">
                 <Mail size="1rem" />
                 Email
               </span>
@@ -124,7 +123,7 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
             id="image"
             name="image"
             label={
-              <span className="flex items-center gap-2 text-slate-600">
+              <span className="flex items-center gap-2 text-base-content">
                 <ImageIcon size="1rem" />
                 Profile image
               </span>

@@ -1,12 +1,11 @@
 'use client';
 
-import { useAppSelector } from '@/store';
-import React from 'react';
+import { useUserSlice } from '@/store/stateHooks';
 
 export const GreetingsTitle = () => {
-  const { user } = useAppSelector(state => state.user);
+  const { user } = useUserSlice();
   return (
-    <span>
+    <span className="text-base-content">
       Hello {user?.firstName} {user?.lastName}
     </span>
   );

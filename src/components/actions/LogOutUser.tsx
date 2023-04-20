@@ -1,21 +1,17 @@
 'use client';
 
 import { logoutOutUser } from '@/lib/api';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { logout } from '@/store/userSlice';
+import { useUserSlice } from '@/store/stateHooks';
 import { useRouter } from 'next/navigation';
 import { LogOut as LogOutIcon } from 'react-feather';
 
 export const LogoutUser = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector(state => {
-    return state.user;
-  });
+  const { logout, user } = useUserSlice();
 
   const onClick = async () => {
     await logoutOutUser();
-    dispatch(logout());
+    logout();
     router.push('/signin');
   };
 
