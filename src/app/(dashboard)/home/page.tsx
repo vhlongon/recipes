@@ -38,7 +38,7 @@ const DashboardHomePage = async () => {
           </div>
         </>
       ) : (
-        <div className="relative flex h-full w-full flex-col items-center justify-center gap-4 text-2xl text-slate-50">
+        <div className="relative flex h-full w-full flex-col items-center justify-center gap-4 text-2xl text-base-content">
           <div className="absolute left-6 top-6 w-full">{greetings}</div>
           No recipes yet
           <CreateRecipe />

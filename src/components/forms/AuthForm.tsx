@@ -70,8 +70,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   const content = texts[mode];
 
   return (
-    <Card title={content.header} className="w-full max-w-md">
-      <p className="mb-2 text-sm text-gray-500">{content.subheader}</p>
+    <Card title={content.header} className="w-full max-w-md text-base-content">
+      <p className="mb-2 text-sm text-base-content">{content.subheader}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         {mode === 'register' && (
           <div className="flex justify-between gap-4">

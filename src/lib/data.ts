@@ -1,4 +1,4 @@
-import { Recipe, Settings, User } from '@prisma/client';
+import { Recipe, Settings, Theme, User } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { getUserFromCookies } from './cookies';
 import { db } from './db';
@@ -11,6 +11,14 @@ export const createUser = async (input: Pick<User, 'email' | 'firstName' | 'last
     data: {
       ...rest,
       password: await hashPassword(password),
+      settings: {
+        create: {
+          language: 'en',
+          temperature: 0.75,
+          maxTokens: 3000,
+          theme: Theme.LIGHT,
+        },
+      },
     },
   });
 };
