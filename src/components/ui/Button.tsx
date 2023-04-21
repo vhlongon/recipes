@@ -16,6 +16,7 @@ const buttonClasses = cva(['btn'], {
       sm: ['btn-sm'],
       md: ['btn-md'],
       lg: ['btn-lg'],
+      xs: ['btn-xs'],
     },
     outline: {
       true: ['btn-outline'],
