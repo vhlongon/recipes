@@ -27,7 +27,7 @@ export const IconLink = <T extends string>({ href, icon, isHighlighted = true, c
       <Icon
         size={40}
         className={clsx(
-          isActive && isHighlighted ? 'link-accent' : 'text-base-content',
+          isActive && isHighlighted ? 'link-primary' : 'text-base-content',
           'transition duration-200 ease-in-out',
           className
         )}

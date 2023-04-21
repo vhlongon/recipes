@@ -54,10 +54,11 @@ type ModalProps = {
   handleClose?: () => void;
 };
 export const Modal = ({ children, isOpen, handleClose }: ModalProps) => {
+  const style = { '--scrollbar-secondary': 'hsl(var(--p) / 1)' } as React.CSSProperties;
   return (
     <ReactPortal wrapperId="modal-root">
       <div className={clsx('modal', isOpen && 'modal-open')}>
-        <div className="modal-box relative">
+        <div className="modal-box relative" style={style}>
           <Button onClick={handleClose} variant="ghost" circle className="absolute right-4 top-4">
             <XCircle size="1.5rem" />
           </Button>

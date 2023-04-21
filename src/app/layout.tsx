@@ -20,7 +20,7 @@ const RootPageLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Preloader user={user} />
-      <html lang="en" data-theme={theme}>
+      <html lang="en" data-theme={theme || Theme.DARK.toLowerCase()}>
         <body className="md:overflow-y-hidden">
           <div id="modal-root"></div>
           {children}

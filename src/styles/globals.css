@@ -44,7 +44,8 @@
   background: #7f7fd5;
   background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
 }
-[data-theme='dark'] .bg-gradient {
+[data-theme='dark'] .bg-gradient,
+.bg-gradient {
   background: #0f2027;
   background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
 }
@@ -155,9 +156,25 @@
   background: linear-gradient(to right, #004e92, #000428);
 }
 
-.glass {
+.glassPanel {
   backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme='dark'] .glassPanel,
+[data-theme='halloween'] .glassPanel,
+[data-theme='forest'] .glassPanel,
+[data-theme='black'] .glassPanel,
+[data-theme='luxury'] .glassPanel,
+[data-theme='dracula']
+  .glassPanel
+  [data-theme='business']
+  .glassPanel
+  [data-theme='night']
+  .glassPanel
+  [data-theme='cofee']
+  .glassPanel {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 [data-nextjs-scroll-focus-boundary] {

@@ -256,7 +256,7 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeF
                 onClick={onGenerateImageClick}>
                 Generate new image
               </Button>
-              <div className="flex gap-1 justify-items-center text-sm text-base-300">
+              <div className="flex gap-1 justify-items-center text-sm text-base-content">
                 This uses
                 <a className="link" href="https://replicate.com/" target="_blank">
                   Replicate
@@ -280,7 +280,7 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeF
         </Button>
       </form>
       {isSubmitting && (
-        <div className="mt-2 flex w-full flex-col items-center gap-1 text-sm text-base-300">
+        <div className="mt-2 flex w-full flex-col items-center gap-1 text-sm text-base-content">
           {`Hold your horses while we ${mode} your recipe`}
           <Progress />
         </div>

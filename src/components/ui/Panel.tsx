@@ -10,10 +10,7 @@ type PanelProps = {
 export const Panel = ({ children, className, as: Component = 'div' }: PanelProps) => {
   return (
     <Component
-      className={clsx(
-        'rounded-box border-2 border-solid border-gray-200 bg-white bg-opacity-40 text-base-content backdrop-blur-lg backdrop-saturate-200',
-        className
-      )}>
+      className={clsx('glassPanel rounded-box border-2 border-solid border-base-100 text-base-content', className)}>
       {children}
     </Component>
   );
