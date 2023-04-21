@@ -1,5 +1,5 @@
 import { VariantProps, cva } from 'class-variance-authority';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
 const rangeClasses = cva(['range', ' w-full', 'bg-transparent'], {
@@ -66,11 +66,25 @@ type InputProps = RangeInputBaseProps & {
   min: number;
   max: number;
   step?: number;
+  initialValue?: string | number;
 } & VariantProps<typeof rangeClasses>;
 
-export const Range = ({ variant, color, size, label, altText, id, register, required, name, ...props }: InputProps) => {
+export const Range = ({
+  variant,
+  color,
+  size,
+  label,
+  altText,
+  id,
+  register,
+  required,
+  initialValue,
+  name,
+  ...props
+}: InputProps) => {
   const inputClassname = rangeClasses({ variant, color, size });
   const labelTextClassname = labelClasses({ color, class: 'label-text' });
+  const [currentValue, setCurrentValue] = useState(initialValue);
   const labelTextAltClassname = labelClasses({
     color,
     class: 'label-text-alt',
@@ -80,7 +94,9 @@ export const Range = ({ variant, color, size, label, altText, id, register, requ
     <>
       {label && (
         <label className="label" htmlFor={id}>
-          <span className={labelTextClassname}>{label}</span>
+          <span className={labelTextClassname}>
+            {label} {currentValue}
+          </span>
           {altText && <span className={labelTextAltClassname}>{altText}</span>}
         </label>
       )}
@@ -95,6 +111,10 @@ export const Range = ({ variant, color, size, label, altText, id, register, requ
           required: required ? `Required` : false,
         })}
         {...props}
+        onChange={e => {
+          setCurrentValue(e.target.value);
+          register(name).onChange(e);
+        }}
         className={inputClassname}
       />
       {props.step && (

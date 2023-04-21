@@ -151,8 +151,10 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeF
             <Range
               register={register}
               required
+              color="secondary"
               id="portions"
               name="portions"
+              initialValue={defaultValues?.portions}
               min={1}
               max={10}
               step={1}
@@ -165,8 +167,10 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeF
             <Range
               register={register}
               required
+              color="secondary"
               id="kcal"
               name="kcal"
+              initialValue={defaultValues?.kcal}
               min={50}
               max={1000}
               step={50}
@@ -179,13 +183,15 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeF
             <Range
               register={register}
               required
+              color="secondary"
               id="preparationTime"
               name="preparationTime"
+              initialValue={defaultValues?.preparationTime}
               min={10}
               max={120}
               step={10}
               placeholder="30min"
-              label="Prep time (min)"
+              label="Prep time(min)"
             />
             {errors.preparationTime && <ErrorMessage>{errors.preparationTime.message}</ErrorMessage>}
           </div>
@@ -194,7 +200,7 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeF
           <div className="flex flex-col gap-4 items-center my-2">
             <div className="relative w-full aspect-video">
               <Image
-                className="object-cover rounded-box ring"
+                className="object-cover rounded-box border-2 border-accent border-solid"
                 src={formValues.image ?? '/recipe-image-placeholder.jpg'}
                 sizes="100vw"
                 fill
