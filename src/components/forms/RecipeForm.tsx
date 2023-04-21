@@ -191,10 +191,10 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeF
           </div>
         </div>
         {mode !== 'create' && (
-          <div className="flex flex-col gap-2 items-center">
+          <div className="flex flex-col gap-4 items-center my-2">
             <div className="relative w-full aspect-video">
               <Image
-                className="object-cover rounded-lg"
+                className="object-cover rounded-box ring"
                 src={formValues.image ?? '/recipe-image-placeholder.jpg'}
                 sizes="100vw"
                 fill
