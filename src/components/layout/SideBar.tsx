@@ -11,7 +11,7 @@ const links: LinkIconProps<string>[] = [
 
 export const SideBarSkeleton = () => {
   return (
-    <div className="relative flex h-full animate-pulse rounded-2xl md:flex-wrap">
+    <div className="relative flex h-full animate-pulse rounded-box md:flex-wrap">
       {links.map(link => (
         <IconLink {...link} key={link.href} className="pointer-events-none" />
       ))}
@@ -23,7 +23,7 @@ export const Sidebar = async () => {
   const user = await getUser();
 
   return (
-    <div className="relative flex h-full rounded-2xl md:flex-wrap">
+    <div className="relative flex h-full rounded-box md:flex-wrap">
       {links.map(link => (
         <IconLink {...link} key={link.href} />
       ))}
