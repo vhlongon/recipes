@@ -66,6 +66,15 @@ export const generateRecipe = async (recipeInput: RecipeInput) => {
   });
 };
 
+type RecipeImageInput = Pick<Recipe, 'description' | 'ingredients'>;
+
+export const generateRecipeImage = async (recipeInput: RecipeImageInput) => {
+  return fetchData('/api/generate-recipe-image', {
+    method: 'POST',
+    body: recipeInput,
+  });
+};
+
 export const updateRecipe = async (recipeInput: RecipeInput & { id: string }) => {
   return fetchData('/api/update-recipe', {
     method: 'PATCH',

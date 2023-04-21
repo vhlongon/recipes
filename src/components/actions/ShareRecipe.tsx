@@ -11,7 +11,7 @@ type ShareProps = {
 };
 export const ShareRecipe = ({ title, url, description, hashtags }: ShareProps) => {
   const pathname = usePathname();
-  const originUrl = window.location.origin;
+  const originUrl = typeof window !== 'undefined' && window.location.origin;
   const shareUrl = url || `${originUrl}${pathname}`;
 
   return (
