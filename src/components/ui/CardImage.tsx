@@ -32,6 +32,8 @@ export const CardImage = ({
     <figure className="relative aspect-video w-full overflow-hidden">
       <Image
         placeholder={placeholder}
+        loading="eager"
+        priority
         src={src}
         fill={isFill}
         width={width}
