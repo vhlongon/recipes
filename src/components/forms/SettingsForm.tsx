@@ -26,7 +26,6 @@ export const SettingsForm = ({ defaultValues, onSubmit, onSuccess }: SettingsFor
   const {
     register,
     handleSubmit,
-    reset,
     clearErrors,
     formState: { errors, isDirty },
   } = useForm<SettingsFormData>({
@@ -38,7 +37,6 @@ export const SettingsForm = ({ defaultValues, onSubmit, onSuccess }: SettingsFor
       setIsSubmitting(true);
 
       await onSubmit(data);
-      reset();
       clearErrors();
       onSuccess?.();
     } catch (error: unknown) {

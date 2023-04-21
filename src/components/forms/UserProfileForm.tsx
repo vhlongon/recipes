@@ -35,7 +35,6 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
   const {
     register,
     handleSubmit,
-    reset,
     clearErrors,
     formState: { errors, isDirty },
   } = useForm<FormData>({
@@ -56,7 +55,6 @@ export const UserProfileForm = ({ defaultValues, onSubmit, onSuccess }: RecipeFo
 
       await onSubmit(input);
       setUser(input);
-      reset();
       clearErrors();
       onSuccess?.();
     } catch (error: unknown) {
