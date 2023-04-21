@@ -9,9 +9,10 @@
   }
 }
 
+/* overwrites react-tag-input styled */
 .rti--container {
   background: hsl(var(--b1) / 1) !important;
-  --rti-radius: var(--rounded-btn, 0.5rem);
+  --rti-radius: var(--rounded-btn, 0.5rem) !important;
 }
 
 :root {
