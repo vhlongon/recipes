@@ -161,22 +161,6 @@
   background-color: rgba(255, 255, 255, 0.4);
 }
 
-[data-theme='dark'] .glassPanel,
-[data-theme='halloween'] .glassPanel,
-[data-theme='forest'] .glassPanel,
-[data-theme='black'] .glassPanel,
-[data-theme='luxury'] .glassPanel,
-[data-theme='dracula']
-  .glassPanel
-  [data-theme='business']
-  .glassPanel
-  [data-theme='night']
-  .glassPanel
-  [data-theme='cofee']
-  .glassPanel {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
 [data-nextjs-scroll-focus-boundary] {
   display: contents;
 }

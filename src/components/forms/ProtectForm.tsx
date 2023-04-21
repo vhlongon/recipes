@@ -50,7 +50,7 @@ export const ProtectForm = () => {
       <p className="mb-2 text-sm">Provide password to access the app</p>
 
       <div className="my-2 flex w-full justify-center">
-        <ProfileImage src={'/logo2.png'} alt="Logo" variant="hexagon" size="xl" />
+        <ProfileImage src={'/logo4.png'} alt="Logo" variant="hexagon" size="xl" />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
