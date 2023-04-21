@@ -1,16 +1,17 @@
 'use client';
 
+import { getErrorMessage } from '@/lib/utils';
 import { Recipe, RecipeType } from '@prisma/client';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../ui/Button';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Input } from '../ui/Input';
+import { Progress } from '../ui/Progress';
+import { Range } from '../ui/Range';
 import { Select } from '../ui/Select';
 import { TagInput } from '../ui/TagInput';
-import { Progress } from '../ui/Progress';
-import { useRouter } from 'next/navigation';
-import { getErrorMessage } from '@/lib/utils';
 
 type Inputs = {
   title: string;
@@ -20,35 +21,37 @@ type Inputs = {
   kcal: string;
   preparationTime: string;
   description: string;
+  image: string;
 };
 
 type RecipeFormProps = {
   defaultValues?: Inputs;
-  onSubmit: (data: FormData) => Promise<void>;
-  onSucess?: () => void;
+  onSubmit: (data: RecipeFormData) => Promise<void>;
+  onSuccess?: () => void;
   mode: 'create' | 'edit';
 };
 
-export type FormData = Pick<
+export type RecipeFormData = Pick<
   Recipe,
-  'title' | 'description' | 'type' | 'ingredients' | 'portions' | 'kcal' | 'preparationTime'
+  'title' | 'description' | 'type' | 'ingredients' | 'portions' | 'kcal' | 'preparationTime' | 'image'
 >;
 
-export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFormProps) => {
+export const RecipeForm = ({ defaultValues, onSubmit, onSuccess, mode }: RecipeFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
 
   const {
     register,
     handleSubmit,
-    reset,
     control,
     clearErrors,
     formState: { errors, isDirty },
+    getValues,
   } = useForm<Inputs>({
     defaultValues,
   });
+
+  const formValues = getValues();
 
   const submiHandler: SubmitHandler<Inputs> = async data => {
     const input = {
@@ -59,15 +62,14 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFo
       portions: Number(data.portions),
       kcal: Number(data.kcal),
       preparationTime: Number(data.preparationTime),
+      image: data.image,
     };
 
     try {
       setIsSubmitting(true);
       await onSubmit(input);
-      reset();
       clearErrors();
-      onSucess?.();
-      router.refresh();
+      onSuccess?.();
     } catch (error: unknown) {
       setError(getErrorMessage(error) || 'Something went wrong trying to update recipe');
     } finally {
@@ -146,48 +148,64 @@ export const RecipeForm = ({ defaultValues, onSubmit, onSucess, mode }: RecipeFo
         </div>
         <div className="mt-6 flex w-full justify-between gap-4">
           <div>
-            <Input
+            <Range
               register={register}
               required
               id="portions"
               name="portions"
-              type="number"
-              min="1"
-              max="10"
+              min={1}
+              max={10}
+              step={1}
               placeholder="2"
               label="portions"
             />
             {errors.portions && <ErrorMessage>{errors.portions.message}</ErrorMessage>}
           </div>
           <div>
-            <Input
+            <Range
               register={register}
               required
               id="kcal"
               name="kcal"
-              type="number"
-              min="80"
-              max="1000"
+              min={50}
+              max={1000}
+              step={50}
               placeholder="300"
               label="kcal"
             />
             {errors.kcal && <ErrorMessage>{errors.kcal.message}</ErrorMessage>}
           </div>
           <div>
-            <Input
+            <Range
               register={register}
               required
               id="preparationTime"
               name="preparationTime"
-              type="number"
-              min="5"
-              max="120"
+              min={10}
+              max={120}
+              step={10}
               placeholder="30min"
-              label="Prep time"
+              label="Prep time (min)"
             />
             {errors.preparationTime && <ErrorMessage>{errors.preparationTime.message}</ErrorMessage>}
           </div>
         </div>
+        {mode !== 'create' && (
+          <div className="flex flex-col gap-2 items-center">
+            <div className="relative w-full aspect-video">
+              <Image
+                className="object-cover rounded-lg"
+                src={formValues.image ?? '/recipe-image-placeholder.jpg'}
+                sizes="100vw"
+                fill
+                alt={defaultValues?.title ?? 'recipe'}
+              />
+            </div>
+            <Button className="max-w-xs" type="button" variant="accent" outline size="xs">
+              Generate new image
+            </Button>
+          </div>
+        )}
         <Button
           type="submit"
           variant="primary"

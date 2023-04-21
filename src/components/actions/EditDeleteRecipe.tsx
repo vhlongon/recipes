@@ -5,7 +5,7 @@ import { getErrorMessage } from '@/lib/utils';
 import { Recipe } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { FormData, RecipeForm } from '../forms/RecipeForm';
+import { RecipeFormData, RecipeForm } from '../forms/RecipeForm';
 import { Button } from '../ui/Button';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Modal } from '../ui/Modal';
@@ -33,6 +33,7 @@ export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
     portions: recipe.portions.toString(),
     kcal: recipe.kcal.toString(),
     preparationTime: recipe.preparationTime.toString(),
+    image: recipe.image ?? '',
   };
 
   const onSuccess = () => {
@@ -52,7 +53,7 @@ export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
     }
   };
 
-  const onRecipeUpdate = async (formData: FormData) => {
+  const onRecipeUpdate = async (formData: RecipeFormData) => {
     await updateRecipe({ id: recipe.id, ...formData });
   };
 
@@ -60,7 +61,7 @@ export const EditDeleteRecipe = ({ recipe }: EditDeleteRecipeProps) => {
     <div>
       <Modal isOpen={isOpen} handleClose={closeModal}>
         {action === 'edit' ? (
-          <RecipeForm mode="edit" onSubmit={onRecipeUpdate} defaultValues={defaultValues} onSucess={onSuccess} />
+          <RecipeForm mode="edit" onSubmit={onRecipeUpdate} defaultValues={defaultValues} onSuccess={onSuccess} />
         ) : (
           <div className="flex flex-col items-center justify-center gap-4">
             <p className="text-center text-xl text-gray-600">Are you sure you want to delete this recipe?</p>

@@ -1,9 +1,10 @@
 'use client';
 
 import { createRecipe, generateRecipe } from '@/lib/api';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { PlusCircle } from 'react-feather';
-import { FormData, RecipeForm } from '../forms/RecipeForm';
+import { RecipeForm, RecipeFormData } from '../forms/RecipeForm';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 
@@ -14,6 +15,7 @@ type CreateRecipeProps = {
 export const CreateRecipe = ({ className }: CreateRecipeProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showChild, setShowChild] = useState(false);
+  const router = useRouter();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -25,9 +27,10 @@ export const CreateRecipe = ({ className }: CreateRecipeProps) => {
 
   const onSuccess = () => {
     closeModal();
+    router.refresh();
   };
 
-  const onSubmit = async (formData: FormData) => {
+  const onSubmit = async (formData: RecipeFormData) => {
     const { data } = await generateRecipe(formData);
     await createRecipe(data);
   };
@@ -47,7 +50,7 @@ export const CreateRecipe = ({ className }: CreateRecipeProps) => {
         <PlusCircle />
       </Button>
       <Modal isOpen={isModalOpen} handleClose={closeModal}>
-        <RecipeForm mode="create" onSubmit={onSubmit} onSucess={onSuccess} />
+        <RecipeForm mode="create" onSubmit={onSubmit} onSuccess={onSuccess} />
       </Modal>
     </div>
   );
