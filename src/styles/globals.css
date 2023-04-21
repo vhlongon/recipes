@@ -31,7 +31,7 @@
 
 *::-webkit-scrollbar-track {
   background: var(--scrollbar-primary);
-  border-radius: 5px;
+  border-radius: var(--rounded-btn, 0.5rem);
 }
 
 *::-webkit-scrollbar-thumb {
