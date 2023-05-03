@@ -7,7 +7,7 @@ import { register, signin } from '@/lib/api';
 import { getErrorMessage } from '@/lib/utils';
 import { useUserSlice } from '@/store/stateHooks';
 import Link from 'next/link';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '../ui/ErrorMessage';
@@ -59,8 +59,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
       setUser(res.data.user);
 
-      router.push('/home');
-      redirect('/home');
+      router.replace('/home');
     } catch (error: unknown) {
       setError(getErrorMessage(error) || 'Something went wrong trying to authenticate user');
     } finally {
