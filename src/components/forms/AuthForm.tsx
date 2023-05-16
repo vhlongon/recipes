@@ -61,7 +61,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         setUser(res.data.user);
         router.push('/home');
         setIsSubmitting(false);
-      }, 3000);
+      }, 2000);
     } catch (error: unknown) {
       setError(getErrorMessage(error) || 'Something went wrong trying to authenticate user');
       setIsSubmitting(false);
