@@ -10,8 +10,14 @@ export default async function middleware(request: NextRequest) {
   // protect all routes behind a password page
   const hashInCookies = request.cookies.get(process.env.PROTECT_COOKIE_NAME)?.value ?? '';
   const isAuthorized = isValidProtectPassword(hashInCookies);
+  const isPublicFile = PUBLIC_FILE.test(request.nextUrl.pathname);
+  const pathname = request.nextUrl.pathname;
+  const isRoot = pathname === '/';
+  const isPathWhiteListed = whiteListPaths.some(path => pathname.startsWith(path));
 
-  if (request.nextUrl.pathname === '/') {
+  console.log({ pathname, isAuthorized, isRoot, isPathWhiteListed });
+
+  if (isRoot || isPublicFile) {
     return NextResponse.next();
   }
 
@@ -20,10 +26,7 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(request.nextUrl);
   }
 
-  const { pathname } = request.nextUrl;
-  const isPathWhiteListed = whiteListPaths.some(path => pathname.startsWith(path)) || PUBLIC_FILE.test(pathname);
-
-  if (isPathWhiteListed) {
+  if (isPathWhiteListed || isRoot || isPublicFile) {
     return NextResponse.next();
   }
 
@@ -45,14 +48,5 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: ['/((?!api|_next/static|favicon.ico|_next/image).*)'],
 };

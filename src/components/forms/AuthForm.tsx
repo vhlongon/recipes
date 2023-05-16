@@ -57,12 +57,13 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
       const res = mode === 'register' ? await register(data) : await signin(data);
 
-      setUser(res.data.user);
-
-      router.replace('/home');
+      setTimeout(() => {
+        setUser(res.data.user);
+        router.push('/home');
+        setIsSubmitting(false);
+      }, 3000);
     } catch (error: unknown) {
       setError(getErrorMessage(error) || 'Something went wrong trying to authenticate user');
-    } finally {
       setIsSubmitting(false);
     }
   };
